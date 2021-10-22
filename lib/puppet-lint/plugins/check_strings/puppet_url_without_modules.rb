@@ -8,7 +8,7 @@ PuppetLint.new_check(:puppet_url) do
     tokens.select { |token|
       (token.type == :SSTRING || token.type == :STRING || token.type == :DQPRE) && token.value.start_with?('puppet://')
     }.reject { |token|
-      (token.value[%r{puppet://.*?/modules/(?=\w+/\w+).*}] || token.value[%r{puppet://.*?/(?!modules)\w+/.*}]) unless token.value[%r{puppet://.*?/(.+)}, 1].nil?
+      (token.value[%r{puppet://.*?/(?!modules)\w+/.*}]) unless token.value[%r{puppet://.*?/(.+)}, 1].nil?
     }.each do |token|
       notify(
         :warning,
