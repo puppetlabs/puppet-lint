@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe 'puppet_url_without_modules' do
-  let(:msg) { 'puppet:// URL without modules/ found' }
+describe 'puppet_url' do
+  let(:msg) { 'invalid puppet:// URL found' }
 
-  context 'puppet:// url with modules' do
-    let(:code) { "'puppet:///modules/foo'" }
+  context 'puppet:// url with mountpoint' do
+    let(:code) { "'puppet:///mountpoint/foo'" }
 
     it 'should not detect any problems' do
       expect(problems).to have(0).problems
@@ -12,8 +12,20 @@ describe 'puppet_url_without_modules' do
   end
 
   context 'with fix disabled' do
-    context 'puppet:// url without modules' do
+    context 'puppet:// url without mountpoint' do
       let(:code) { "'puppet:///foo'" }
+
+      it 'should only detect a single problem' do
+        expect(problems).to have(1).problem
+      end
+
+      it 'should create a warning' do
+        expect(problems).to contain_warning(msg).on_line(1).in_column(1)
+      end
+    end
+
+    context 'puppet:// url without module name' do
+      let(:code) { "'puppet://modules/foo'" }
 
       it 'should only detect a single problem' do
         expect(problems).to have(1).problem
@@ -34,7 +46,7 @@ describe 'puppet_url_without_modules' do
       PuppetLint.configuration.fix = false
     end
 
-    context 'puppet:// url without modules' do
+    context 'puppet:// url without mountpoint' do
       let(:code) { "'puppet:///foo'" }
 
       it 'should only detect a single problem' do
@@ -45,8 +57,24 @@ describe 'puppet_url_without_modules' do
         expect(problems).to contain_fixed(msg).on_line(1).in_column(1)
       end
 
-      it 'should insert modules into the path' do
-        expect(manifest).to eq("'puppet:///modules/foo'")
+      it 'should insert mountpoint into the path' do
+        expect(manifest).to eq("'puppet:///mountpoint/foo'")
+      end
+    end
+
+    context 'puppet:// url without module name' do
+      let(:code) { "'puppet://modules/foo'" }
+
+      it 'should only detect a single problem' do
+        expect(problems).to have(1).problem
+      end
+
+      it 'should fix the manifest' do
+        expect(problems).to contain_fixed(msg).on_line(1).in_column(1)
+      end
+
+      it 'should insert mountpoint into the path' do
+        expect(manifest).to eq("'puppet:///modules/foo/bar'")
       end
     end
   end
