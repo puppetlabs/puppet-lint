@@ -19,7 +19,7 @@ PuppetLint.new_check(:file_mode) do
         value_token = param_token.next_code_token.next_code_token
 
         break if IGNORE_TYPES.include?(value_token.type)
-        break if value_token.value =~ MODE_RE
+        break if value_token.value.match?(MODE_RE)
 
         notify(
           :warning,
@@ -33,7 +33,7 @@ PuppetLint.new_check(:file_mode) do
   end
 
   def fix(problem)
-    raise PuppetLint::NoFix unless problem[:token].value =~ %r{\A[0-7]{3}\Z}
+    raise PuppetLint::NoFix unless problem[:token].value.match?(%r{\A[0-7]{3}\Z})
 
     problem[:token].type = :SSTRING
     problem[:token].value = "0#{problem[:token].value}"

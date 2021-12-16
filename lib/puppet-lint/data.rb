@@ -68,10 +68,10 @@ class PuppetLint::Data
       token.next_token = current_token.next_token
       token.prev_token = current_token
 
-      current_token.next_token.prev_token = token unless current_token.next_token.nil?
+      current_token.next_token&.prev_token = token
 
       unless formatting_tokens.include?(token.type)
-        current_token.next_token.prev_code_token = token unless current_token.next_token.nil?
+        current_token.next_token&.prev_code_token = token
         next_nf_idx = tokens[index..-1].index { |r| !formatting_tokens.include?(r.type) }
         unless next_nf_idx.nil?
           next_nf_token = tokens[index + next_nf_idx]
@@ -101,11 +101,11 @@ class PuppetLint::Data
 
     # Public: Removes a token
     def delete(token)
-      token.next_token.prev_token = token.prev_token unless token.next_token.nil?
-      token.prev_token.next_token = token.next_token unless token.prev_token.nil?
+      token.next_token&.prev_token = token.prev_token
+      token.prev_token&.next_token = token.next_token
       unless formatting_tokens.include?(token.type)
-        token.prev_code_token.next_code_token = token.next_code_token unless token.prev_code_token.nil?
-        token.next_code_token.prev_code_token = token.prev_code_token unless token.next_code_token.nil?
+        token.prev_code_token&.next_code_token = token.next_code_token
+        token.next_code_token&.prev_code_token = token.prev_code_token
       end
 
       tokens.delete(token)
@@ -174,7 +174,7 @@ class PuppetLint::Data
           rel_start_idx = tokens[marker..-1].index(colon_token)
           break if rel_start_idx.nil?
           start_idx = rel_start_idx + marker
-          end_token = colon_token.next_token_of([:SEMIC, :RBRACE])
+          end_token = colon_token.next_token_of(%i[SEMIC RBRACE])
           rel_end_idx = tokens[start_idx..-1].index(end_token)
           raise PuppetLint::SyntaxError, colon_token if rel_end_idx.nil?
           marker = rel_end_idx + start_idx
@@ -344,7 +344,7 @@ class PuppetLint::Data
           next unless token.type == :NAME
           next unless token_idx.zero? ||
                       (token_idx == 1 && tokens[0].type == :WHITESPACE) ||
-                      [:NEWLINE, :INDENT].include?(token.prev_token.type) ||
+                      %i[NEWLINE INDENT].include?(token.prev_token.type) ||
                       # function in a function
                       (token.prev_code_token && token.prev_code_token.type == :LPAREN)
 
@@ -428,7 +428,7 @@ class PuppetLint::Data
         tokens.each_with_index do |token, token_idx|
           next unless token.type == :LBRACE
           next unless token.prev_code_token
-          next unless [:EQUALS, :ISEQUAL, :FARROW, :LPAREN].include?(token.prev_code_token.type)
+          next unless %i[EQUALS ISEQUAL FARROW LPAREN].include?(token.prev_code_token.type)
 
           level = 0
           real_idx = 0
@@ -437,7 +437,7 @@ class PuppetLint::Data
 
             level += 1 if cur_token.type == :LBRACE
             level -= 1 if cur_token.type == :RBRACE
-            break if level < 0
+            break if level.negative?
           end
 
           hashes << {
@@ -561,7 +561,7 @@ class PuppetLint::Data
 
         comment_words = token.value.strip.split(%r{\s+})
         comment_words.each_with_index do |word, i|
-          if word =~ %r{\Alint\:(ignore|endignore)}
+          if word.match?(%r{\Alint\:(ignore|endignore)})
             comment_data << word
           else
             # Once we reach the first non-controlcomment word, assume the rest

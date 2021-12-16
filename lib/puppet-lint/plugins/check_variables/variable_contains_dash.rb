@@ -9,7 +9,7 @@ PuppetLint.new_check(:variable_contains_dash) do
     tokens.select { |r|
       VARIABLE_DASH_TYPES.include?(r.type)
     }.each do |token|
-      next unless token.value.gsub(%r{\[.+?\]}, '') =~ %r{-}
+      next unless token.value.gsub(%r{\[.+?\]}, '').match?(%r{-})
 
       notify(
         :warning,

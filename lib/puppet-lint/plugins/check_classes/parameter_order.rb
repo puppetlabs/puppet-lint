@@ -55,7 +55,7 @@ PuppetLint.new_check(:parameter_order) do
     data_type = token.prev_token_of(:TYPE, :skip_blocks => true)
     return false if data_type && data_type.value == 'Optional'
 
-    if token.next_code_token.nil? || [:COMMA, :RPAREN].include?(token.next_code_token.type)
+    if token.next_code_token.nil? || %i[COMMA RPAREN].include?(token.next_code_token.type)
       return !(token.prev_code_token && token.prev_code_token.type == :EQUALS)
     end
 

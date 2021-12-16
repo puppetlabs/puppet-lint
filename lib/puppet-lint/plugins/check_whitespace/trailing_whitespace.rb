@@ -5,7 +5,7 @@
 PuppetLint.new_check(:trailing_whitespace) do
   def check
     tokens.select { |token|
-      [:WHITESPACE, :INDENT].include?(token.type)
+      %i[WHITESPACE INDENT].include?(token.type)
     }.select { |token|
       token.next_token.nil? || token.next_token.type == :NEWLINE
     }.each do |token|
@@ -25,7 +25,7 @@ PuppetLint.new_check(:trailing_whitespace) do
     prev_token = problem[:token].prev_token
     next_token = problem[:token].next_token
     prev_token.next_token = next_token
-    next_token.prev_token = prev_token unless next_token.nil?
+    next_token&.prev_token = prev_token
     tokens.delete(problem[:token])
   end
 end

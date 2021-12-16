@@ -34,6 +34,6 @@ PuppetLint.new_check(:arrow_on_right_operand_line) do
     # Remove trailing whitespace after left operand (if it exists)
     return unless left_operand_token.next_token.type == :WHITESPACE
     trailing_whitespace_token = left_operand_token.next_token
-    remove_token(trailing_whitespace_token) if [:NEWLINE, :WHITESPACE].include?(trailing_whitespace_token.next_token.type)
+    remove_token(trailing_whitespace_token) if %i[NEWLINE WHITESPACE].include?(trailing_whitespace_token.next_token.type)
   end
 end

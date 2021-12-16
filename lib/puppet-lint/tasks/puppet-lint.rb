@@ -50,7 +50,7 @@ class PuppetLint
     def define(args, &task_block)
       desc 'Run puppet-lint'
 
-      task_block.call(*[self, args].slice(0, task_block.arity)) if task_block
+      task_block&.call(*[self, args].slice(0, task_block.arity))
 
       # clear any (auto-)pre-existing task
       Rake::Task[@name].clear if Rake::Task.task_defined?(@name)

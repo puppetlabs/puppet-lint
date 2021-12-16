@@ -9,7 +9,7 @@ PuppetLint.new_check(:variable_is_lowercase) do
     tokens.select { |r|
       VARIABLE_LOWERCASE_TYPES.include?(r.type)
     }.each do |token|
-      next unless token.value.gsub(%r{\[.+?\]}, '') =~ %r{[A-Z]}
+      next unless token.value.gsub(%r{\[.+?\]}, '').match?(%r{[A-Z]})
 
       notify(
         :warning,

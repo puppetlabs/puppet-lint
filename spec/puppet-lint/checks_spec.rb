@@ -84,7 +84,7 @@ describe PuppetLint::Checks do
     end
 
     context 'when there are checks enabled' do
-      let(:enabled_checks) { [:arrow_alignment, :hard_tabs] }
+      let(:enabled_checks) { %i[arrow_alignment hard_tabs] }
       let(:enabled_check_classes) { enabled_checks.map { |r| PuppetLint.configuration.check_object[r] } }
       let(:disabled_checks) { PuppetLint.configuration.checks - enabled_checks }
       let(:disabled_check_classes) { disabled_checks.map { |r| PuppetLint.configuration.check_object[r] } }
@@ -194,7 +194,7 @@ describe PuppetLint::Checks do
   describe '#enabled_checks' do
     subject(:enabled_checks) { instance.enabled_checks }
 
-    let(:expected_enabled_checks) { [:arrow_alignment, :trailing_whitespace] }
+    let(:expected_enabled_checks) { %i[arrow_alignment trailing_whitespace] }
 
     before do
       PuppetLint.configuration.checks.each do |check|

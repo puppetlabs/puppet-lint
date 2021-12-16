@@ -41,6 +41,6 @@ rescue LoadError
   $stderr.puts 'Rubocop is not available for this version of Ruby.'
 end
 
-task :ci => [:test, :release_test]
+task :ci => %i[test release_test]
 
 # vim: syntax=ruby

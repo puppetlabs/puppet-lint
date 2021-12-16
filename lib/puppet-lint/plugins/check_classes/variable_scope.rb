@@ -41,13 +41,11 @@ PuppetLint.new_check(:variable_scope) do
       referenced_variables = Set[]
       object_tokens = idx[:tokens]
 
-      unless idx[:param_tokens].nil?
-        idx[:param_tokens].each do |token|
-          next unless token.type == :VARIABLE
-          next unless POST_VAR_TOKENS.include?(token.next_code_token.type)
+      idx[:param_tokens]&.each do |token|
+        next unless token.type == :VARIABLE
+        next unless POST_VAR_TOKENS.include?(token.next_code_token.type)
 
-          variables_in_scope << token.value
-        end
+        variables_in_scope << token.value
       end
 
       future_parser_scopes = {}
@@ -124,9 +122,9 @@ PuppetLint.new_check(:variable_scope) do
         end
 
         next if token.value.include?('::')
-        next if token.value =~ %r{^(facts|trusted)\[.+\]}
+        next if token.value.match?(%r{^(facts|trusted)\[.+\]})
         next if variables_in_scope.include?(token.value.gsub(%r{\[.+\]\Z}, ''))
-        next if token.value =~ %r{\A\d+\Z}
+        next if token.value.match?(%r{\A\d+\Z})
 
         notify(
           :warning,

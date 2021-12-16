@@ -32,7 +32,7 @@ PuppetLint.new_check(:ensure_first_param) do
 
     raise PuppetLint::NoFix if ensure_param_name_token.nil?
 
-    ensure_param_comma_token = ensure_param_name_token.next_token_of([:COMMA, :SEMIC])
+    ensure_param_comma_token = ensure_param_name_token.next_token_of(%i[COMMA SEMIC])
 
     if first_param_name_token.nil? || first_param_comma_token.nil? || ensure_param_comma_token.nil?
       raise PuppetLint::NoFix

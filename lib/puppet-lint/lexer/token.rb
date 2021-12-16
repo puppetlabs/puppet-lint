@@ -111,7 +111,7 @@ class PuppetLint
       end
 
       def string_suffix
-        no_enclose_tokens = Set.new([:UNENC_VARIABLE, :DQMID, :DQPOST, :HEREDOC_MID, :HEREDOC_POST])
+        no_enclose_tokens = Set.new(%i[UNENC_VARIABLE DQMID DQPOST HEREDOC_MID HEREDOC_POST])
         if next_token && no_enclose_tokens.include?(next_token.type)
           ''
         else
@@ -120,7 +120,7 @@ class PuppetLint
       end
 
       def string_prefix
-        no_enclose_tokens = Set.new([:UNENC_VARIABLE, :DQPRE, :DQMID, :HEREDOC_PRE, :HEREDOC_MID])
+        no_enclose_tokens = Set.new(%i[UNENC_VARIABLE DQPRE DQMID HEREDOC_PRE HEREDOC_MID])
         if prev_token && no_enclose_tokens.include?(prev_token.type)
           ''
         else
@@ -169,7 +169,7 @@ class PuppetLint
       # Returns a PuppetLint::Lexer::Token object if a matching token could be
       # found, otherwise nil.
       def find_token_of(direction, type, opts = {})
-        return nil unless [:next, :prev].include?(direction)
+        return nil unless %i[next prev].include?(direction)
 
         opts[:skip_blocks] ||= true
         to_find = Array[*type]

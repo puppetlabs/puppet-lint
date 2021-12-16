@@ -232,7 +232,7 @@ class PuppetLint
                  end
           tokens << new_token(:VARIABLE, var_name, opts)
 
-        elsif chunk =~ %r{\A'.*?'}m
+        elsif chunk.match?(%r{\A'.*?'}m)
           str_content = StringScanner.new(code[i + 1..-1]).scan_until(%r{(\A|[^\\])(\\\\)*'}m)
           length = str_content.size + 1
           tokens << new_token(:SSTRING, str_content[0..-2])
