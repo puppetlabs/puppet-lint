@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
   s.authors = ['Tim Sharpe', 'Puppet, Inc.', 'Community Contributors']
   s.email = ['tim@sharpe.id.au', 'modules-team@puppet.com']
   s.license = 'MIT'
+  s.required_ruby_version = '>= 2.4.0'
 end

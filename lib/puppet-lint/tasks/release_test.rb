@@ -70,11 +70,6 @@ task :release_test do
     exit
   end
 
-  if RUBY_VERSION.start_with?('1')
-    puts 'Unable to run release_tests on Ruby < 2.0'
-    exit
-  end
-
   require 'puppet-lint/tasks/gemfile_rewrite'
 
   modules_to_test = [

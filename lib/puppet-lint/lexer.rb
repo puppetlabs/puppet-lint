@@ -112,7 +112,7 @@ class PuppetLint
     # \v == vertical tab
     # \f == form feed
     # \p{Zs} == ASCII + Unicode non-linebreaking whitespace
-    WHITESPACE_RE = RUBY_VERSION == '1.8.7' ? %r{[\t\v\f ]} : %r{[\t\v\f\p{Zs}]}
+    WHITESPACE_RE = %r{[\t\v\f\p{Zs}]}
 
     LINE_END_RE = %r{(?:\r\n|\r|\n)}
 
