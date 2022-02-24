@@ -35,6 +35,16 @@ class PuppetLint
       define_method("enable_#{check}") do
         settings["#{check}_disabled"] = false
       end
+
+      # Public: Determine if the check supports a configuration parameter
+      define_method("#{check}_supports_config?") do
+        return settings["#{check}_supports_config"] == true
+      end
+
+      # Public: Make the check support a configuration parameter
+      define_method("#{check}_supports_config") do
+        settings["#{check}_supports_config"] = true
+      end
     end
 
     # Public: Catch situations where options are being set for the first time

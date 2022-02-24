@@ -265,6 +265,22 @@ For a complete list of checks, and how to resolve errors on each check, see the 
 * When using top-scope variables, including facts, Puppet modules should explicitly specify the empty namespace.
 * Chaining operators should appear on the same line as the right hand operand.
 
+## Checking class/type documentation
+
+The check "advanced_doc_comments" supports checking the doc comment of a class or defined type based on rules
+defined in a rule file.
+
+The rule file is a JSON file holding an object representing the rules. Every rule can have the following
+parameters:
+
+* **check**: A regular expression that should match the whole doc comment. If it does not, the check fails
+* **condition**: A regular expression that is matched against the class/type source code. If it doesn't match
+  the rule is skipped.
+* **comment-condition**: A regular expression that is matched against the whole doc comment. If it doesn't
+  match the rule is skipped.
+
+See [this file](spec/puppet-lint/plugins/check_documentation/advanced_doc_comments_rules.json) for an example.
+
 ## Reporting bugs or incorrect results
 
 If you find a bug in Puppet Lint or its results, please create an issue in the

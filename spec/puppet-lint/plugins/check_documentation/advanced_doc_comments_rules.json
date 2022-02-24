@@ -1,0 +1,13 @@
+{
+    "summary-exists": {
+        "check": "@summary"
+    },
+    "summary-is-indented": {
+        "comment-condition": "@summary",
+        "check": "@summary\\n  .+"
+    },
+    "params-are-documented": {
+        "condition": "(class|define) [^ ]+ \\([^\\)]+\\)",
+        "check": "@param"
+    }
+}

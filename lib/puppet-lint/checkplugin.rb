@@ -156,7 +156,7 @@ class PuppetLint::CheckPlugin
 
   # Public: Report a problem with the manifest being checked.
   #
-  # kind    - The Symbol problem type (:warning or :error).
+  # kind    - The Symbol problem type (:warning or :error<).
   # problem - A Hash containing the attributes of the problem
   #   :message - The String message describing the problem.
   #   :line    - The Integer line number of the location of the problem.
@@ -179,5 +179,26 @@ class PuppetLint::CheckPlugin
     end
 
     @problems << problem
+  end
+
+  # Find the comment token above the given start token. Return nothing if not found
+  def find_comment_token(start_token)
+    prev_token = start_token.prev_token
+    found_comment = false
+    comment_token = nil
+    scanning_newlines = true
+    starting_newlines = 0
+    while !prev_token.nil? && (WHITESPACE_TOKENS + COMMENT_TOKENS).include?(prev_token.type)
+      scanning_newlines = false if COMMENT_TOKENS.include?(prev_token.type)
+      starting_newlines += 1 if prev_token.type == :NEWLINE
+      return if scanning_newlines && starting_newlines > 1
+      found_comment = true if !found_comment && COMMENT_TOKENS.include?(prev_token.type)
+      comment_token = prev_token if found_comment && COMMENT_TOKENS.include?(prev_token.type)
+      break if found_comment && !(WHITESPACE_TOKENS + COMMENT_TOKENS).include?(prev_token.type)
+      prev_token = prev_token.prev_token
+    end
+
+    return if comment_token.nil?
+    comment_token
   end
 end

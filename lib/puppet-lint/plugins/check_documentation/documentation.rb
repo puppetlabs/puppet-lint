@@ -28,19 +28,4 @@ PuppetLint.new_check(:documentation) do
       )
     end
   end
-
-  def find_comment_token(start_token)
-    newlines = 0
-
-    prev_token = start_token.prev_token
-    while !prev_token.nil? && WHITESPACE_TOKENS.include?(prev_token.type)
-      newlines += 1 if prev_token.type == :NEWLINE
-      break if newlines > 1
-      prev_token = prev_token.prev_token
-    end
-
-    return if prev_token.nil?
-
-    prev_token if COMMENT_TOKENS.include?(prev_token.type)
-  end
 end

@@ -125,10 +125,19 @@ class PuppetLint::OptParser
           PuppetLint.configuration.send("disable_#{check}")
         end
 
-        next if PuppetLint.configuration.send("#{check}_enabled?")
+        unless PuppetLint.configuration.send("#{check}_enabled?")
+          opts.on("--#{check}-check", "Enable the #{check} check.") do
+            PuppetLint.configuration.send("enable_#{check}")
+          end
+        end
 
-        opts.on("--#{check}-check", "Enable the #{check} check.") do
-          PuppetLint.configuration.send("enable_#{check}")
+        next unless PuppetLint.configuration.send("#{check}_supports_config?")
+
+        opts.on("--#{check}-config FILE", "Additional configuration for the #{check} check.") do |value|
+          if PuppetLint.configuration.check_config.nil?
+            PuppetLint.configuration.check_config = Hash.new()
+          end
+          PuppetLint.configuration.check_config[check] = value
         end
       end
     end
