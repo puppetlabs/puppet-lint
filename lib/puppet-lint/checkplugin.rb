@@ -156,7 +156,7 @@ class PuppetLint::CheckPlugin
 
   # Public: Report a problem with the manifest being checked.
   #
-  # kind    - The Symbol problem type (:warning or :error<).
+  # kind    - The Symbol problem type (:warning or :error).
   # problem - A Hash containing the attributes of the problem
   #   :message - The String message describing the problem.
   #   :line    - The Integer line number of the location of the problem.
