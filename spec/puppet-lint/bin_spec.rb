@@ -397,6 +397,41 @@ describe PuppetLint::Bin do
     end
   end
 
+  context 'when displaying results as SARIF' do
+    let(:args) do
+      [
+        '--sarif',
+        'spec/fixtures/test/manifests/warning.pp',
+      ]
+    end
+
+    its(:exitstatus) { is_expected.to eq(0) }
+
+    its(:stdout) do
+      is_expected.to match(%r{"ruleId": "parameter_order"})
+      is_expected.to match(%r{"uri": "warning.pp"})
+    end
+  end
+
+  context 'when displaying results for multiple targets as SARIF' do
+    let(:args) do
+      [
+        '--sarif',
+        'spec/fixtures/test/manifests/fail.pp',
+        'spec/fixtures/test/manifests/warning.pp',
+      ]
+    end
+
+    its(:exitstatus) { is_expected.to eq(1) }
+
+    its(:stdout) do
+      is_expected.to match(%r{"ruleId": "autoloader_layout"})
+      is_expected.to match(%r{"uri": "fail.pp"})
+      is_expected.to match(%r{"ruleId": "parameter_order"})
+      is_expected.to match(%r{"uri": "warning.pp"})
+    end
+  end
+
   context 'when hiding ignored problems' do
     let(:args) do
       [
