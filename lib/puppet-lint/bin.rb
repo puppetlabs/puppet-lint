@@ -73,14 +73,12 @@ class PuppetLint::Bin
       ignore_paths = PuppetLint.configuration.ignore_paths
       all_problems = []
 
-      puts '[' if PuppetLint.configuration.json
       path.each do |f|
         next if ignore_paths.any? { |p| File.fnmatch(p, f) }
         l = PuppetLint.new
         l.file = f
         l.run
         all_problems << l.print_problems
-        puts ',' if f != path.last && PuppetLint.configuration.json
 
         if l.errors? || (l.warnings? && PuppetLint.configuration.fail_on_warnings)
           return_val = 1
@@ -91,8 +89,8 @@ class PuppetLint::Bin
           fd.write(l.manifest)
         end
       end
-      puts ']' if PuppetLint.configuration.json
 
+      puts JSON.pretty_generate(all_problems) if PuppetLint.configuration.json
       report_sarif(all_problems, full_base_path, full_base_path_uri) if PuppetLint.configuration.sarif
 
       return return_val
@@ -110,7 +108,7 @@ class PuppetLint::Bin
   #
   # Returns nothing.
   def report_sarif(problems, base_path, base_path_uri)
-    sarif_file = File.read(File.join(File.dirname(File.expand_path(__FILE__)), 'report/sarif.json'))
+    sarif_file = File.read(File.join(__dir__, 'report', 'sarif.json'))
     sarif = JSON.parse(sarif_file)
     sarif['runs'][0]['originalUriBaseIds']['ROOTPATH']['uri'] = base_path_uri
     rules = sarif['runs'][0]['tool']['driver']['rules'] = []
