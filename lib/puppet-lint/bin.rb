@@ -60,6 +60,9 @@ class PuppetLint::Bin
                            else
                              'file:///' + full_base_path
                            end
+
+      full_base_path_uri += '/' unless full_base_path_uri.end_with?('/')
+
       path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR) if File::ALT_SEPARATOR
       path = if File.directory?(path)
                Dir.glob("#{path}/**/*.pp")
