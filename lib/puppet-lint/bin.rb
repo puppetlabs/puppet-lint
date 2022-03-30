@@ -93,8 +93,16 @@ class PuppetLint::Bin
         end
       end
 
-      puts JSON.pretty_generate(all_problems) if PuppetLint.configuration.json
       report_sarif(all_problems, full_base_path, full_base_path_uri) if PuppetLint.configuration.sarif
+
+      if PuppetLint.configuration.json
+        all_problems.each do |problems|
+          problems.each do |problem|
+            [:description, :help_uri].each { |key| problem.delete(key) }
+          end
+        end
+        puts JSON.pretty_generate(all_problems)
+      end
 
       return return_val
     rescue PuppetLint::NoCodeError
@@ -111,7 +119,7 @@ class PuppetLint::Bin
   #
   # Returns nothing.
   def report_sarif(problems, base_path, base_path_uri)
-    sarif_file = File.read(File.join(__dir__, 'report', 'sarif.json'))
+    sarif_file = File.read(File.join(__dir__, 'report', 'sarif_template.json'))
     sarif = JSON.parse(sarif_file)
     sarif['runs'][0]['originalUriBaseIds']['ROOTPATH']['uri'] = base_path_uri
     rules = sarif['runs'][0]['tool']['driver']['rules'] = []
@@ -121,7 +129,14 @@ class PuppetLint::Bin
         relative_path = Pathname.new(message[:fullpath]).relative_path_from(base_path)
         rules = sarif['runs'][0]['tool']['driver']['rules']
         rule_exists = rules.any? { |r| r['id'] == message[:check] }
-        rules << { 'id' => message[:check] } unless rule_exists
+        unless rule_exists
+          new_rule = { 'id' => message[:check] }
+          new_rule['fullDescription'] = { 'text' => message[:description] } unless message[:description].nil?
+          new_rule['fullDescription'] = { 'text' => 'Check for any syntax error and record an error of each instance found.' } if new_rule['fullDescription'].nil? && message[:check] == :syntax
+          new_rule['defaultConfiguration'] = { 'level' => message[:KIND].downcase } if %w[error warning].include?(message[:KIND].downcase)
+          new_rule['helpUri'] = message[:help_uri] unless message[:help_uri].nil?
+          rules << new_rule
+        end
         rule_index = rules.count - 1
         result = {
           'ruleId' => message[:check],
@@ -129,7 +144,6 @@ class PuppetLint::Bin
           'message' => { 'text' => message[:message] },
           'locations' => [{ 'physicalLocation' => { 'artifactLocation' => { 'uri' => relative_path, 'uriBaseId' => 'ROOTPATH' }, 'region' => { 'startLine' => message[:line], 'startColumn' => message[:column] } } }],
         }
-        result['level'] = message[:KIND].downcase if %w[error warning].include?(message[:KIND].downcase)
         results << result
       end
     end

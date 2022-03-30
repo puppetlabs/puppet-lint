@@ -18,6 +18,9 @@
               "fullDescription":{
                 "text":""
               },
+              "defaultConfiguration":{
+                "level":"warning"
+              },
               "help":{
                 "text":""
               }
