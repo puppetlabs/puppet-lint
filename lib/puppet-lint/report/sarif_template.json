@@ -40,7 +40,7 @@
             {
               "physicalLocation":{
                 "artifactLocation":{
-                  "uri":"fail.pp",
+                  "uri":"puppet-lint/spec/fixtures/test/manifests/fail.pp",
                   "uriBaseId":"ROOTPATH"
                 },
                 "region":{
@@ -55,7 +55,7 @@
       "columnKind":"utf16CodeUnits",
       "originalUriBaseIds":{
         "ROOTPATH":{
-          "uri":"file:///home/user/repos/puppet-lint/spec/fixtures/test/manifests/"
+          "uri":"file:///home/user/repos/"
         }
       }
     }
