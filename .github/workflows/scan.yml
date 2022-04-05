@@ -1,0 +1,36 @@
+name: puppet-lint scan
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+
+  security:
+
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+
+    runs-on: ${{ matrix.operating-system }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: clj-holmes (Clojure)
+        uses: clj-holmes/clj-holmes-action@main
+        with:
+          output-type: 'sarif'
+          output-file: 'results.sarif'
+          fail-on-result: 'false'
+
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: results.sarif
