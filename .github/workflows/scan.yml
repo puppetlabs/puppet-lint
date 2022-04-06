@@ -29,7 +29,7 @@ jobs:
 
       - name: Scan
         continue-on-error: true
-        run: bin/puppet-lint spec/fixtures/test/manifests/fail.pp --sarif > results.sarif
+        run: bin/puppet-lint . --sarif > results.sarif
 
       #- name: puppet-lint
       #  uses: shaopeng-gh/puppet-lint-action@main
