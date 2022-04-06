@@ -36,12 +36,12 @@ jobs:
       #  with:
       #    output-file: 'results.sarif'
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          path: results.sarif
-
       - name: Upload SARIF to GitHub
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: results.sarif
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: results.sarif
