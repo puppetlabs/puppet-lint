@@ -24,9 +24,6 @@ jobs:
           ruby-version: 2.7
           bundler-cache: true
 
-      - name: list
-        run: ls
-
       - name: Scan
         continue-on-error: true
         run: bin/puppet-lint . --sarif > results.sarif
@@ -36,12 +33,12 @@ jobs:
       #  with:
       #    output-file: 'results.sarif'
 
-      - name: Upload SARIF to GitHub
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: results.sarif
-
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           path: results.sarif
+
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
