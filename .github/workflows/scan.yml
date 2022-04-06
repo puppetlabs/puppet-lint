@@ -28,7 +28,7 @@ jobs:
         run: ls
 
       - name: Scan
-        run: ~/home/runner/work/puppet-lint/puppet-lint/bin/puppet-lint . > results.sarif
+        run: bin/puppet-lint spec/fixtures/test/manifests/fail.pp --sarif > results.sarif
 
       #- name: puppet-lint
       #  uses: shaopeng-gh/puppet-lint-action@main
