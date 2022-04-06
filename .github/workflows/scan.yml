@@ -28,6 +28,7 @@ jobs:
         run: ls
 
       - name: Scan
+        continue-on-error: true
         run: bin/puppet-lint spec/fixtures/test/manifests/fail.pp --sarif > results.sarif
 
       #- name: puppet-lint
