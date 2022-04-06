@@ -24,8 +24,11 @@ jobs:
           ruby-version: 2.7
           bundler-cache: true
 
+      - name: list
+        run: ls
+
       - name: Scan
-        run: /puppet-lint/bin/puppet-lint . > results.sarif
+        run: ~/home/runner/work/puppet-lint/puppet-lint/bin/puppet-lint . > results.sarif
 
       #- name: puppet-lint
       #  uses: shaopeng-gh/puppet-lint-action@main
