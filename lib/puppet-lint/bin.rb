@@ -126,7 +126,7 @@ class PuppetLint::Bin
     results = sarif['runs'][0]['results'] = []
     problems.each do |messages|
       messages.each do |message|
-        relative_path = Pathname.new(message[:fullpath]).relative_path_from(base_path)
+        relative_path = Pathname.new(message[:fullpath]).relative_path_from(Pathname.new(base_path))
         rules = sarif['runs'][0]['tool']['driver']['rules']
         rule_exists = rules.any? { |r| r['id'] == message[:check] }
         unless rule_exists
