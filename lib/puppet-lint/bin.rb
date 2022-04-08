@@ -93,12 +93,12 @@ class PuppetLint::Bin
         end
       end
 
-      report_sarif(all_problems, full_base_path, full_base_path_uri) if PuppetLint.configuration.sarif
-
-      if PuppetLint.configuration.json
+      if PuppetLint.configuration.sarif
+        report_sarif(all_problems, full_base_path, full_base_path_uri)
+      elsif PuppetLint.configuration.json
         all_problems.each do |problems|
           problems.each do |problem|
-            [:description, :help_uri].each { |key| problem.delete(key) }
+            problem.delete_if { |key, _| [:description, :help_uri].include?(key) }
           end
         end
         puts JSON.pretty_generate(all_problems)
