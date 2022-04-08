@@ -28,14 +28,6 @@ jobs:
         continue-on-error: true
         run: bin/puppet-lint . --sarif > results.sarif
 
-      - name: Clean
-        run: sed -i '/^WARNING/d' results.sarif
-
-      #- name: puppet-lint
-      #  uses: shaopeng-gh/puppet-lint-action@main
-      #  with:
-      #    output-file: 'results.sarif'
-
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
