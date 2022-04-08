@@ -18,19 +18,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: clj-holmes (Clojure)
-        uses: clj-holmes/clj-holmes-action@main
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          output-type: 'sarif'
-          output-file: 'results.sarif'
-          fail-on-result: 'false'
+          ruby-version: 2.7
+          bundler-cache: true
 
-      - name: Upload SARIF to GitHub
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: results.sarif
+      - name: Scan
+        continue-on-error: true
+        run: bin/puppet-lint . --sarif > results.sarif
+
+      - name: Clean
+        run: sed -i '/^WARNING/d' results.sarif
+
+      #- name: puppet-lint
+      #  uses: shaopeng-gh/puppet-lint-action@main
+      #  with:
+      #    output-file: 'results.sarif'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           path: results.sarif
+
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
