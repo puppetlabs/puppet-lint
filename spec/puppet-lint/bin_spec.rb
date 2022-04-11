@@ -503,7 +503,7 @@ describe PuppetLint::Bin do
     end
 
     its(:exitstatus) { is_expected.to eq(0) }
-    its(:stdout) { is_expected.to match(%r{WARNING: lint:endignore comment with no opening lint:ignore:<check> comment found on line 1}) }
+    its(:stderr) { is_expected.to match(%r{WARNING: lint:endignore comment with no opening lint:ignore:<check> comment found on line 1}) }
   end
 
   context 'when a lint:ignore control comment block is not terminated properly' do
@@ -513,7 +513,7 @@ describe PuppetLint::Bin do
       ]
     end
 
-    its(:stdout) { is_expected.to match(%r{WARNING: lint:ignore:140chars comment on line 2 with no closing lint:endignore comment}) }
+    its(:stderr) { is_expected.to match(%r{WARNING: lint:ignore:140chars comment on line 2 with no closing lint:endignore comment}) }
   end
 
   context 'when fixing a file with \n line endings' do
