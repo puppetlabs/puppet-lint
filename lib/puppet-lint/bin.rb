@@ -137,7 +137,7 @@ class PuppetLint::Bin
           new_rule['helpUri'] = message[:help_uri] unless message[:help_uri].nil?
           rules << new_rule
         end
-        rule_index = rules.count - 1
+        rule_index = rules.index { |r| r['id'] == message[:check] }
         result = {
           'ruleId' => message[:check],
           'ruleIndex' => rule_index,
