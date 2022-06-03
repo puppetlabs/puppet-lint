@@ -95,7 +95,6 @@ Check the plugin's URL for more information on use of its check(s).
 
 ---
 
-
 ### reference syntax
 
 > Check that resource references do not contain whitespace between resource reference and opening bracket and title does not start with capital letter.
@@ -215,7 +214,6 @@ Check the plugin's URL for more information on use of its check(s).
 
 ---
 
-
 ### template_file_extension
 
 > Ensure all file names used in `template` and `epp` functions end with the string '.erb' or '.epp' respectively.
@@ -244,4 +242,34 @@ Check the plugin's URL for more information on use of its check(s).
 
 | **URL**     | <https://github.com/kuleuven/puppet-lint-manifest_whitespace-check> |
 | **Install** | gem install puppet-lint-manifest_whitespace-check                   |
+{: .table .table-condensed }
+
+---
+
+### module_reference
+
+> An extensive, opinionated puppet lint check for valid module reference comments
+
+| **URL**     | https://github.com/dodevops/puppet-lint-module_reference-check |
+| **Install** | `gem install puppet-lint-module_reference-check`               |
+{: .table .table-condensed }
+
+---
+
+### param_comment
+
+> An extensive, opinionated puppet lint check for valid parameter comments
+
+| **URL** | https://github.com/dodevops/puppet-lint-param_comment-check |
+| **Install** | `gem install puppet-lint-param_comment-check`           |
+{: .table .table-condensed }
+
+---
+
+### summary_comment
+
+> Ensure all classes and defined types contain a `@summary` tag and an indented summary in the next line
+
+| **URL**     | https://github.com/dodevops/puppet-lint-summary_comment-check |
+| **Install** | `gem install puppet-lint-summary_comment-check`               |
 {: .table .table-condensed }
