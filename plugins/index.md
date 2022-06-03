@@ -95,6 +95,7 @@ Check the plugin's URL for more information on use of its check(s).
 
 ---
 
+
 ### reference syntax
 
 > Check that resource references do not contain whitespace between resource reference and opening bracket and title does not start with capital letter.
@@ -213,6 +214,7 @@ Check the plugin's URL for more information on use of its check(s).
 {: .table .table-condensed }
 
 ---
+
 
 ### template_file_extension
 
