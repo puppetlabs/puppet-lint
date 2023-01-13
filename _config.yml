@@ -3,5 +3,7 @@ highlighter: rouge
 exclude: ["vendor"]
 markdown: kramdown
 
+baseurl: /puppet-lint
+
 redcarpet:
   extensions: ["table"]

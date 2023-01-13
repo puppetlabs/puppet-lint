@@ -11,17 +11,17 @@ how to resolve it.
 
 ### Spacing, Indentation & Whitespace
 
- * ["two-space soft tabs not used"](/checks/2sp_soft_tabs/)
- * ["tab character found"](/checks/hard_tabs/)
- * ["trailing whitespace found"](/checks/trailing_whitespace/)
- * ["line has more than 80 characters"](/checks/80chars/)
- * ["line has more than 140 characters"](/checks/140chars/)
- * ["=> is not properly aligned"](/checks/arrow_alignment/)
+ * ["two-space soft tabs not used"]({{ site.baseurl }}/checks/2sp_soft_tabs/)
+ * ["tab character found"]({{ site.baseurl }}/checks/hard_tabs/)
+ * ["trailing whitespace found"]({{ site.baseurl }}/checks/trailing_whitespace/)
+ * ["line has more than 80 characters"]({{ site.baseurl }}/checks/80chars/)
+ * ["line has more than 140 characters"]({{ site.baseurl }}/checks/140chars/)
+ * ["=> is not properly aligned"]({{ site.baseurl }}/checks/arrow_alignment/)
 
 ### Comments
 
- * ["// comment found"](/checks/slash_comments/)
- * ["/\* \*/ comment found"](/checks/star_comments/)
+ * ["// comment found"]({{ site.baseurl }}/checks/slash_comments/)
+ * ["/\* \*/ comment found"]({{ site.baseurl }}/checks/star_comments/)
 
 ### Quoting
 
