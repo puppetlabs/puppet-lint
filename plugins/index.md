@@ -19,7 +19,7 @@ Check the plugin's URL for more information on use of its check(s).
 
 > Checks to ensure that your manifest files end with a trailing newline.
 
-| **URL**     | <https://github.com/rodjek/puppet-lint-trailing_newline-check> |
+| **URL**     | <https://github.com/puppetlabs/puppet-lint-trailing_newline-check> |
 | **Install** | `gem install puppet-lint-trailing_newline-check`               |
 {: .table .table-condensed }
 

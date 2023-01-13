@@ -54,7 +54,7 @@ at some options. When you find one you're happy with (the MIT license is highly 
 Gem::Specification.new do |spec|
   spec.name        = 'puppet-lint-trailing_newline-check'
   spec.version     = '1.0.0'
-  spec.homepage    = 'https://github.com/rodjek/puppet-lint-trailing_newline-check'
+  spec.homepage    = 'https://github.com/puppetlabs/puppet-lint-trailing_newline-check'
   spec.license     = 'MIT'
   spec.author      = 'Tim Sharpe'
   spec.email       = 'tim@sharpe.id.au'
@@ -206,7 +206,7 @@ ran bundler (e.g. the value of `--path` if you specified one).
 : This file contains the fully resolved dependency information from bundler and
 is generally not committed when writing libraries.
 
-At this point, your code should look like [this.](https://github.com/rodjek/puppet-lint-tutorial-check/tree/step-1)
+At this point, your code should look like [this.](https://github.com/puppetlabs/puppet-lint-tutorial-check/tree/step-1)
 
 ## Finding the problems in the manifest
 Now that all the setup work is done, you can start actually writing some code.
@@ -380,7 +380,7 @@ Finished in 0.00146 seconds
 3 examples, 3 failures
 {% endhighlight %}
 
-At this point, your code should look like [this.](https://github.com/rodjek/puppet-lint-tutorial-check/tree/step-2)
+At this point, your code should look like [this.](https://github.com/puppetlabs/puppet-lint-tutorial-check/tree/step-2)
 
 ### Write the logic
 
@@ -476,7 +476,7 @@ Finished in 0.00246 seconds
 3 examples, 0 failures
 {% endhighlight %}
 
-At this point, your code should look like [this.](https://github.com/rodjek/puppet-lint-tutorial-check/tree/step-3)
+At this point, your code should look like [this.](https://github.com/puppetlabs/puppet-lint-tutorial-check/tree/step-3)
 
 ## Fixing the problems in the manifest
 
@@ -564,7 +564,7 @@ Finished in 0.00529 seconds (files took 0.08811 seconds to load)
 8 examples, 2 failures
 {% endhighlight %}
 
-At this point, your code should look like [this.](https://github.com/rodjek/puppet-lint-tutorial-check/tree/step-4)
+At this point, your code should look like [this.](https://github.com/puppetlabs/puppet-lint-tutorial-check/tree/step-4)
 
 ### Write the logic
 
@@ -597,7 +597,7 @@ Finished in 0.00391 seconds (files took 0.08846 seconds to load)
 8 examples, 0 failures
 {% endhighlight %}
 
-At this point, your code should look like [this.](https://github.com/rodjek/puppet-lint-tutorial-check/tree/step-5)
+At this point, your code should look like [this.](https://github.com/puppetlabs/puppet-lint-tutorial-check/tree/step-5)
 
 ## Publish it!
 
@@ -605,10 +605,10 @@ At this point, your code should look like [this.](https://github.com/rodjek/pupp
  * Build them gem (`gem build puppet-lint-<your check>-check.gemspec`) and push
    it up to RubyGems (`gem push`).
  * Create a pull request on the [puppet-lint community plugins
-   page](https://github.com/rodjek/puppet-lint/tree/gh-pages/plugins/index.md)
+   page](https://github.com/puppetlabs/puppet-lint/tree/gh-pages/plugins/index.md)
    to list your plugin so others can find it.
 
 ## Further reading
 
-For more information, check out the [API reference](/developer/api/) and
-[Token reference](/developer/tokens/).
+For more information, check out the [API reference](/puppet-lint/developer/api/) and
+[Token reference](/puppet-lint/developer/tokens/).
