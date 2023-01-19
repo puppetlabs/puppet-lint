@@ -175,7 +175,7 @@ class PuppetLint
 
       next unless message[:kind] == :fixed || [message[:kind], :all].include?(configuration.error_level)
 
-      if configuration.json || configuration.sarif
+      if configuration.json || configuration.sarif || configuration.codeclimate
         message['context'] = get_context(message) if configuration.with_context
         json << message
       else

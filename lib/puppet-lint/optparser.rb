@@ -102,6 +102,10 @@ class PuppetLint::OptParser
         PuppetLint.configuration.sarif = true
       end
 
+      opts.on('--codeclimate', 'Log output in code climate compatible format') do
+        PuppetLint.configuration.codeclimate = true
+      end
+
       opts.on('--list-checks', 'List available check names.') do
         PuppetLint.configuration.list_checks = true
       end

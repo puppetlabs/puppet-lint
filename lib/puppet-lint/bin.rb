@@ -1,6 +1,7 @@
 require 'pathname'
 require 'uri'
 require 'puppet-lint/optparser'
+require 'digest'
 
 # Internal: The logic of the puppet-lint bin script, contained in a class for
 # ease of testing.
@@ -95,6 +96,8 @@ class PuppetLint::Bin
 
       if PuppetLint.configuration.sarif
         report_sarif(all_problems, full_base_path, full_base_path_uri)
+      elsif PuppetLint.configuration.codeclimate
+        report_codeclimate(all_problems)
       elsif PuppetLint.configuration.json
         all_problems.each do |problems|
           problems.each do |problem|
@@ -149,5 +152,49 @@ class PuppetLint::Bin
       end
     end
     puts JSON.pretty_generate(sarif)
+  end
+
+  # Internal: Print the reported problems in code climate format to stdout.
+  #
+  # problems - An Array of problem Hashes as returned by
+  #            PuppetLint::Checks#run.
+  #
+  # Returns nothing.
+  def report_codeclimate(problems)
+    report = []
+    problems.each do |messages|
+      messages.each do |message|
+        case message[:kind].downcase
+        when :warning
+          severity = 'minor'
+        when :error
+          severity = 'major'
+        else
+          next
+        end
+
+        issue = {
+          type: :issue,
+          check_name: message[:check],
+          description: message[:message],
+          categories: [:Style],
+          severity: severity,
+          location: {
+            path: message[:path],
+            lines: {
+              begin: message[:line],
+              end: message[:line],
+            }
+          },
+          fingerprint: Digest::MD5.hexdigest(Marshal.dump(message))
+        }
+
+        if message.key?(:description) && message.key?(:help_uri)
+          issue[:content] = "#{message[:description].chomp('.')}. See [this page](#{message[:help_uri]}) for more information about the `#{message[:check]}` check."
+        end
+        report << issue
+      end
+    end
+    puts JSON.pretty_generate(report)
   end
 end

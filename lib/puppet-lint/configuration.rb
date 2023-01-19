@@ -150,6 +150,7 @@ class PuppetLint::Configuration
     self.fix = false
     self.json = false
     self.sarif = false
+    self.codeclimate = false
     self.show_ignored = false
     self.ignore_paths = ['vendor/**/*.pp']
     self.github_actions = ENV.key?('GITHUB_ACTION')
