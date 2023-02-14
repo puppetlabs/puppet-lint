@@ -610,5 +610,5 @@ At this point, your code should look like [this.](https://github.com/puppetlabs/
 
 ## Further reading
 
-For more information, check out the [API reference](/puppet-lint/developer/api/) and
-[Token reference](/puppet-lint/developer/tokens/).
+For more information, check out the [API reference]({{ site.baseurl }}/developer/api/) and
+[Token reference]({{ site.baseurl }}/developer/tokens/).

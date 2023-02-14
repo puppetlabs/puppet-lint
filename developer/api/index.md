@@ -27,7 +27,7 @@ any of the methods listed in the "What you can use" section below to inspect
 the manifest.
 
 For a more complete example of writing a `check` method please
-read the [tutorial](/puppet-lint/developer/tutorial/).
+read the [tutorial]({{ site.baseurl }}/developer/tutorial/).
 
 ### fix
 
@@ -41,7 +41,7 @@ the `tokens` Array.  If you need to back out of the `fix` method for whatever
 reason, raise a `PuppetLint::NoFix` exception to skip over the problem.
 
 For a more complete example of writing a `fix` method please read the
-[tutorial](/puppet-lint/developer/tutorial/).
+[tutorial]({{ site.baseurl }}/developer/tutorial/).
 
 ## What you can use
 
@@ -51,11 +51,11 @@ information in your `check` and `fix` methods.
 ### tokens
 
 Returns the tokenised manifest as an Array of
-[`PuppetLint::Lexer::Token`](/puppet-lint/developer/tokens/) objects.
+[`PuppetLint::Lexer::Token`]({{ site.baseurl }}/developer/tokens/) objects.
 
 ### title_tokens
 
-Returns an Array of [`PuppetLint::Lexer::Token`](/puppet-lint/developer/tokens/) objects
+Returns an Array of [`PuppetLint::Lexer::Token`]({{ site.baseurl }}/developer/tokens/) objects
 that represent resource titles.
 
 ### resource_indexes
@@ -69,10 +69,10 @@ within the tokenised manifest.  Each Hash has the following Symbol keys:
    to the last token of the resource
  * **:tokens -** A subset of the `tokens` Array, from the `:start` to `:end`
    positions.
- * **:type -** The [`PuppetLint::Lexer::Token`](/puppet-lint/developer/tokens/) object for
+ * **:type -** The [`PuppetLint::Lexer::Token`]({{ site.baseurl }}/developer/tokens/) object for
    resource type (e.g. `file`, `exec`, etc).
  * **:param_tokens -** An Array of
-   [`PuppetLint::Lexer::Token`](/puppet-lint/developer/tokens/) objects for the parameter
+   [`PuppetLint::Lexer::Token`]({{ site.baseurl }}/developer/tokens/) objects for the parameter
    names in the resource declaration.
 
 ### class_indexes
@@ -89,9 +89,9 @@ within the tokenised manifest.  Each Hash has the following Symbol keys:
  * **:param_tokens -** A subset of the `tokens` Array covering the class
    parameters.
  * **:type -** The Symbol `:CLASS`
- * **:name_token -**-The [`PuppetLint::Lexer::Token`](/puppet-lint/developer/tokens/)
+ * **:name_token -**-The [`PuppetLint::Lexer::Token`]({{ site.baseurl }}/developer/tokens/)
    object for the class name.
- * **:inherited_token -** The [`PuppetLint::Lexer::Token`](/puppet-lint/developer/tokens/)
+ * **:inherited_token -** The [`PuppetLint::Lexer::Token`]({{ site.baseurl }}/developer/tokens/)
    object for the name of the class that has been inherited (if applicable).
 
 ### defined_type_indexes
@@ -109,7 +109,7 @@ keys:
  * **:param_tokens -** A subset of the `tokens` Array covering the defined type
    parameters.
  * **:type -** The Symbol `:DEFINE`
- * **:name_token -**-The [`PuppetLint::Lexer::Token`](/puppet-lint/developer/tokens/)
+ * **:name_token -**-The [`PuppetLint::Lexer::Token`]({{ site.baseurl }}/developer/tokens/)
    object for the defined type name.
 
 ### fullpath
