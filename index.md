@@ -37,5 +37,5 @@ apache/manifests/server.pp - FIXED: variable not enclosed in {} on line 56
 ...
 {% endhighlight %}
 
-Head on over to the [checks page](/checks/) to see a description of each check
+Head on over to the [checks page]({{ site.baseurl }}/checks/) to see a description of each check
 and get some help on how to clear those errors.

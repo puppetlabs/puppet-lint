@@ -605,10 +605,10 @@ At this point, your code should look like [this.](https://github.com/rodjek/pupp
  * Build them gem (`gem build puppet-lint-<your check>-check.gemspec`) and push
    it up to RubyGems (`gem push`).
  * Create a pull request on the [puppet-lint community plugins
-   page](https://github.com/rodjek/puppet-lint/tree/gh-pages/plugins/index.md)
+   page](https://github.com/puppetlabs/puppet-lint/tree/gh-pages/plugins/index.md)
    to list your plugin so others can find it.
 
 ## Further reading
 
-For more information, check out the [API reference](/developer/api/) and
-[Token reference](/developer/tokens/).
+For more information, check out the [API reference]({{ site.baseurl }}/developer/api/) and
+[Token reference]({{ site.baseurl }}/developer/tokens/).
