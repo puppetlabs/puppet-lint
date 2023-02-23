@@ -3,7 +3,7 @@ require 'rubocop/rake_task'
 require 'github_changelog_generator/task'
 require 'puppet-lint/version'
 require 'rspec/core/rake_task'
-require 'puppetlabs_spec_helper/tasks/fixtures'
+require 'cucumber/rake/task'
 
 begin
   require 'github_changelog_generator/task'
@@ -39,7 +39,8 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.exclude_pattern = 'spec/acceptance/**/*_spec.rb'
 end
 
-desc 'Run acceptance tests'
-task :acceptance do
-  Rake::Task['litmus:acceptance:localhost'].invoke
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "--format pretty" # Any valid command line option can go here.
 end
+
+task default: [:spec, :features]
