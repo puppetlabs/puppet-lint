@@ -34,6 +34,14 @@ describe 'legacy_facts' do
       end
     end
 
+    context "fact variable using legacy $::facts['osfamily']" do
+      let(:code) { "$::facts['osfamily']" }
+
+      it 'onlies detect a single problem' do
+        expect(problems).to have(1).problem
+      end
+    end
+
     context 'fact variable using legacy $::osfamily' do
       let(:code) { '$::osfamily' }
 
