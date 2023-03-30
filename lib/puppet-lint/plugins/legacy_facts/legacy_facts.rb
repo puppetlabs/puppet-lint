@@ -19,7 +19,7 @@ PuppetLint.new_check(:legacy_facts) do
   # enumerated like the EASY_FACTS below.
   #
   # For example a server might have two block devices named 'sda' and 'sdb' so
-  # there would be a $blockdeivce_sda_vendor and $blockdeivce_sdb_vendor fact
+  # there would be a $blockdevice_sda_vendor and $blockdevice_sdb_vendor fact
   # for each device. Or it could have 26 block devices going all the way up to
   # 'sdz'. There is no way to know what the possibilities are so we have to use
   # a regex to match them.
@@ -34,74 +34,74 @@ PuppetLint.new_check(:legacy_facts) do
   # These facts have a one to one correlation between a legacy fact and a new
   # structured fact.
   EASY_FACTS = {
-    'architecture'                => "facts['os']['architecture']",
-    'augeasversion'               => "facts['augeas']['version']",
-    'bios_release_date'           => "facts['dmi']['bios']['release_date']",
-    'bios_vendor'                 => "facts['dmi']['bios']['vendor']",
-    'bios_version'                => "facts['dmi']['bios']['version']",
-    'boardassettag'               => "facts['dmi']['board']['asset_tag']",
-    'boardmanufacturer'           => "facts['dmi']['board']['manufacturer']",
-    'boardproductname'            => "facts['dmi']['board']['product']",
-    'boardserialnumber'           => "facts['dmi']['board']['serial_number']",
-    'chassisassettag'             => "facts['dmi']['chassis']['asset_tag']",
-    'chassistype'                 => "facts['dmi']['chassis']['type']",
-    'domain'                      => "facts['networking']['domain']",
-    'fqdn'                        => "facts['networking']['fqdn']",
-    'gid'                         => "facts['identity']['group']",
-    'hardwareisa'                 => "facts['processors']['isa']",
-    'hardwaremodel'               => "facts['os']['hardware']",
-    'hostname'                    => "facts['networking']['hostname']",
-    'id'                          => "facts['identity']['user']",
-    'ipaddress'                   => "facts['networking']['ip']",
-    'ipaddress6'                  => "facts['networking']['ip6']",
-    'lsbdistcodename'             => "facts['os']['distro']['codename']",
-    'lsbdistdescription'          => "facts['os']['distro']['description']",
-    'lsbdistid'                   => "facts['os']['distro']['id']",
-    'lsbdistrelease'              => "facts['os']['distro']['release']['full']",
-    'lsbmajdistrelease'           => "facts['os']['distro']['release']['major']",
-    'lsbminordistrelease'         => "facts['os']['distro']['release']['minor']",
-    'lsbrelease'                  => "facts['os']['distro']['release']['specification']",
-    'macaddress'                  => "facts['networking']['mac']",
-    'macosx_buildversion'         => "facts['os']['macosx']['build']",
-    'macosx_productname'          => "facts['os']['macosx']['product']",
-    'macosx_productversion'       => "facts['os']['macosx']['version']['full']",
-    'macosx_productversion_major' => "facts['os']['macosx']['version']['major']",
-    'macosx_productversion_minor' => "facts['os']['macosx']['version']['minor']",
-    'manufacturer'                => "facts['dmi']['manufacturer']",
-    'memoryfree'                  => "facts['memory']['system']['available']",
-    'memorysize'                  => "facts['memory']['system']['total']",
-    'netmask'                     => "facts['networking']['netmask']",
-    'netmask6'                    => "facts['networking']['netmask6']",
-    'network'                     => "facts['networking']['network']",
-    'network6'                    => "facts['networking']['network6']",
-    'operatingsystem'             => "facts['os']['name']",
-    'operatingsystemmajrelease'   => "facts['os']['release']['major']",
-    'operatingsystemrelease'      => "facts['os']['release']['full']",
-    'osfamily'                    => "facts['os']['family']",
-    'physicalprocessorcount'      => "facts['processors']['physicalcount']",
-    'processorcount'              => "facts['processors']['count']",
-    'productname'                 => "facts['dmi']['product']['name']",
-    'rubyplatform'                => "facts['ruby']['platform']",
-    'rubysitedir'                 => "facts['ruby']['sitedir']",
-    'rubyversion'                 => "facts['ruby']['version']",
-    'selinux'                     => "facts['os']['selinux']['enabled']",
-    'selinux_config_mode'         => "facts['os']['selinux']['config_mode']",
-    'selinux_config_policy'       => "facts['os']['selinux']['config_policy']",
-    'selinux_current_mode'        => "facts['os']['selinux']['current_mode']",
-    'selinux_enforced'            => "facts['os']['selinux']['enforced']",
-    'selinux_policyversion'       => "facts['os']['selinux']['policy_version']",
-    'serialnumber'                => "facts['dmi']['product']['serial_number']",
-    'swapencrypted'               => "facts['memory']['swap']['encrypted']",
-    'swapfree'                    => "facts['memory']['swap']['available']",
-    'swapsize'                    => "facts['memory']['swap']['total']",
-    'system32'                    => "facts['os']['windows']['system32']",
-    'uptime'                      => "facts['system_uptime']['uptime']",
-    'uptime_days'                 => "facts['system_uptime']['days']",
-    'uptime_hours'                => "facts['system_uptime']['hours']",
-    'uptime_seconds'              => "facts['system_uptime']['seconds']",
-    'uuid'                        => "facts['dmi']['product']['uuid']",
-    'xendomains'                  => "facts['xen']['domains']",
-    'zonename'                    => "facts['solaris_zones']['current']",
+    'architecture'                => "os']['architecture",
+    'augeasversion'               => "augeas']['version",
+    'bios_release_date'           => "dmi']['bios']['release_date",
+    'bios_vendor'                 => "dmi']['bios']['vendor",
+    'bios_version'                => "dmi']['bios']['version",
+    'boardassettag'               => "dmi']['board']['asset_tag",
+    'boardmanufacturer'           => "dmi']['board']['manufacturer",
+    'boardproductname'            => "dmi']['board']['product",
+    'boardserialnumber'           => "dmi']['board']['serial_number",
+    'chassisassettag'             => "dmi']['chassis']['asset_tag",
+    'chassistype'                 => "dmi']['chassis']['type",
+    'domain'                      => "networking']['domain",
+    'fqdn'                        => "networking']['fqdn",
+    'gid'                         => "identity']['group",
+    'hardwareisa'                 => "processors']['isa",
+    'hardwaremodel'               => "os']['hardware",
+    'hostname'                    => "networking']['hostname",
+    'id'                          => "identity']['user",
+    'ipaddress'                   => "networking']['ip",
+    'ipaddress6'                  => "networking']['ip6",
+    'lsbdistcodename'             => "os']['distro']['codename",
+    'lsbdistdescription'          => "os']['distro']['description",
+    'lsbdistid'                   => "os']['distro']['id",
+    'lsbdistrelease'              => "os']['distro']['release']['full",
+    'lsbmajdistrelease'           => "os']['distro']['release']['major",
+    'lsbminordistrelease'         => "os']['distro']['release']['minor",
+    'lsbrelease'                  => "os']['distro']['release']['specification",
+    'macaddress'                  => "networking']['mac",
+    'macosx_buildversion'         => "os']['macosx']['build",
+    'macosx_productname'          => "os']['macosx']['product",
+    'macosx_productversion'       => "os']['macosx']['version']['full",
+    'macosx_productversion_major' => "os']['macosx']['version']['major",
+    'macosx_productversion_minor' => "os']['macosx']['version']['minor",
+    'manufacturer'                => "dmi']['manufacturer",
+    'memoryfree'                  => "memory']['system']['available",
+    'memorysize'                  => "memory']['system']['total",
+    'netmask'                     => "networking']['netmask",
+    'netmask6'                    => "networking']['netmask6",
+    'network'                     => "networking']['network",
+    'network6'                    => "networking']['network6",
+    'operatingsystem'             => "os']['name",
+    'operatingsystemmajrelease'   => "os']['release']['major",
+    'operatingsystemrelease'      => "os']['release']['full",
+    'osfamily'                    => "os']['family",
+    'physicalprocessorcount'      => "processors']['physicalcount",
+    'processorcount'              => "processors']['count",
+    'productname'                 => "dmi']['product']['name",
+    'rubyplatform'                => "ruby']['platform",
+    'rubysitedir'                 => "ruby']['sitedir",
+    'rubyversion'                 => "ruby']['version",
+    'selinux'                     => "os']['selinux']['enabled",
+    'selinux_config_mode'         => "os']['selinux']['config_mode",
+    'selinux_config_policy'       => "os']['selinux']['config_policy",
+    'selinux_current_mode'        => "os']['selinux']['current_mode",
+    'selinux_enforced'            => "os']['selinux']['enforced",
+    'selinux_policyversion'       => "os']['selinux']['policy_version",
+    'serialnumber'                => "dmi']['product']['serial_number",
+    'swapencrypted'               => "memory']['swap']['encrypted",
+    'swapfree'                    => "memory']['swap']['available",
+    'swapsize'                    => "memory']['swap']['total",
+    'system32'                    => "os']['windows']['system32",
+    'uptime'                      => "system_uptime']['uptime",
+    'uptime_days'                 => "system_uptime']['days",
+    'uptime_hours'                => "system_uptime']['hours",
+    'uptime_seconds'              => "system_uptime']['seconds",
+    'uuid'                        => "dmi']['product']['uuid",
+    'xendomains'                  => "xen']['domains",
+    'zonename'                    => "solaris_zones']['current",
   }.freeze
 
   # A list of valid hash key token types
@@ -176,19 +176,19 @@ PuppetLint.new_check(:legacy_facts) do
       problem[:token].value = EASY_FACTS[fact_name]
     elsif fact_name.match(Regexp.union(REGEX_FACTS))
       if (m = fact_name.match(%r{^blockdevice_(?<devicename>.*)_(?<attribute>model|size|vendor)$}))
-        problem[:token].value = "facts['disks']['" << m['devicename'] << "']['" << m['attribute'] << "']"
+        problem[:token].value = "disks']['" << m['devicename'] << "']['" << m['attribute']
       elsif (m = fact_name.match(%r{^(?<attribute>ipaddress|ipaddress6|macaddress|mtu|netmask|netmask6|network|network6)_(?<interface>.*)$}))
-        problem[:token].value = "facts['networking']['interfaces']['" << m['interface'] << "']['" << m['attribute'].sub('address', '') << "']"
+        problem[:token].value = "networking']['interfaces']['" << m['interface'] << "']['" << m['attribute'].sub('address', '')
       elsif (m = fact_name.match(%r{^processor(?<id>[0-9]+)$}))
-        problem[:token].value = "facts['processors']['models'][" << m['id'] << ']'
+        problem[:token].value = "processors']['models']['" << m['id']
       elsif (m = fact_name.match(%r{^sp_(?<name>.*)$}))
-        problem[:token].value = "facts['system_profiler']['" << m['name'] << "']"
+        problem[:token].value = "system_profiler']['" << m['name']
       elsif (m = fact_name.match(%r{^ssh(?<algorithm>dsa|ecdsa|ed25519|rsa)key$}))
-        problem[:token].value = "facts['ssh']['" << m['algorithm'] << "']['key']"
+        problem[:token].value = "ssh']['" << m['algorithm'] << "']['key"
       elsif (m = fact_name.match(%r{^ldom_(?<name>.*)$}))
-        problem[:token].value = "facts['ldom']['" << m['name'] << "']"
+        problem[:token].value = "ldom']['" << m['name']
       elsif (m = fact_name.match(%r{^zone_(?<name>.*)_(?<attribute>brand|iptype|name|uuid|id|path|status)$}))
-        problem[:token].value = "facts['solaris_zones']['zones']['" << m['name'] << "']['" << m['attribute'] << "']"
+        problem[:token].value = "solaris_zones']['zones']['" << m['name'] << "']['" << m['attribute']
       end
     end
   end
