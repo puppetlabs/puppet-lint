@@ -274,6 +274,7 @@ For a complete list of checks, and how to resolve errors on each check, see the 
 * If a resource declaration includes an `ensure` attribute, it should be the first attribute specified.
 * Symbolic links should be declared by using an ensure value of `link` and explicitly specifying a value for the `target` attribute.
 * File modes should be represented as a 4-digit string enclosed in single quotes or use symbolic file modes.
+* If a value is a value from an enumerable set of options, such as `present` and `absent`, it should not be enclosed in quotes at all.
 
 ### Conditionals
 
