@@ -13,7 +13,7 @@ describe 'arrow_on_right_operand_line' do
         end
 
         it 'does not detect any problems' do
-          expect(problems).to have(0).problems
+          expect(problems).to be_empty
         end
       end
 
@@ -26,7 +26,7 @@ describe 'arrow_on_right_operand_line' do
         end
 
         it 'detects a problem' do
-          expect(problems).to have(1).problem
+          expect(problems.size).to eq(1)
         end
 
         it 'creates a warning' do
@@ -68,7 +68,7 @@ describe 'arrow_on_right_operand_line' do
         end
 
         it 'does not detect any problems' do
-          expect(problems).to have(0).problems
+          expect(problems).to be_empty
         end
       end
 
@@ -84,7 +84,7 @@ describe 'arrow_on_right_operand_line' do
         end
 
         it 'detects a problem' do
-          expect(problems).to have(1).problem
+          expect(problems.size).to eq(1)
         end
 
         it 'creates a warning' do
@@ -129,7 +129,7 @@ describe 'arrow_on_right_operand_line' do
         end
 
         it 'detects a problem' do
-          expect(problems).to have(1).problem
+          expect(problems.size).to eq(1)
         end
 
         it 'creates a warning' do

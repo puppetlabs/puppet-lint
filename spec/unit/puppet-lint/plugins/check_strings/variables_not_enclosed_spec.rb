@@ -8,7 +8,7 @@ describe 'variables_not_enclosed' do
       let(:code) { '" $gronk"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -20,7 +20,7 @@ describe 'variables_not_enclosed' do
       let(:code) { ("'groovy'\n" * 20) + '" $gronk"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -42,7 +42,7 @@ describe 'variables_not_enclosed' do
       let(:code) { '" $gronk"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -58,7 +58,7 @@ describe 'variables_not_enclosed' do
       let(:code) { ("'groovy'\n" * 20) + '" $gronk"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -74,7 +74,7 @@ describe 'variables_not_enclosed' do
       let(:code) { '"$foo-$bar"' }
 
       it 'only detects two problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'fixes the manifest' do
@@ -91,7 +91,7 @@ describe 'variables_not_enclosed' do
       let(:code) { %("$foo['bar'][2]something") }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -107,7 +107,7 @@ describe 'variables_not_enclosed' do
       let(:code) { '"$hostname-keystore"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do

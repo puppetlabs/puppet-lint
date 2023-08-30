@@ -13,7 +13,7 @@ describe 'quoted_booleans', type: :lint do
     end
 
     it 'detects three problems' do
-      expect(problems).to have(3).problems
+      expect(problems.size).to eq(3)
     end
 
     it 'has two warnings' do
@@ -36,7 +36,7 @@ describe 'quoted_booleans', type: :lint do
     end
 
     it 'detects three problems' do
-      expect(problems).to have(3).problems
+      expect(problems.size).to eq(3)
     end
 
     it 'has two warnings' do
@@ -62,7 +62,7 @@ describe 'quoted_booleans', type: :lint do
     end
 
     it 'detects four problems' do
-      expect(problems).to have(4).problems
+      expect(problems.size).to eq(4)
     end
 
     it 'has two warnings' do
@@ -89,7 +89,7 @@ describe 'quoted_booleans', type: :lint do
     end
 
     it 'detects four problems' do
-      expect(problems).to have(4).problems
+      expect(problems.size).to eq(4)
     end
 
     it 'has two warnings' do
@@ -107,7 +107,7 @@ describe 'quoted_booleans', type: :lint do
     let(:code) { '"true" # lint:ignore:quoted_booleans lint:ignore:double_quoted_string a reason' }
 
     it 'detects 1 problems' do
-      expect(problems).to have(1).problems
+      expect(problems.size).to eq(1)
     end
 
     it 'has one ignored problems' do
@@ -129,7 +129,7 @@ describe 'quoted_booleans', type: :lint do
     end
 
     it 'detects 2 problems' do
-      expect(problems).to have(2).problems
+      expect(problems.size).to eq(2)
     end
 
     it 'ignores both problems' do

@@ -8,7 +8,7 @@ describe 'double_quoted_strings' do
       let(:code) { "exec { \"/usr/bin/wget -O - '${source}' | /usr/bin/apt-key add -\": }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -16,7 +16,7 @@ describe 'double_quoted_strings' do
       let(:code) { "\"aoeu\" '${foo}'" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -28,7 +28,7 @@ describe 'double_quoted_strings' do
       let(:code) { "'grep \"status=sent\" /var/log/mail.log'" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -36,7 +36,7 @@ describe 'double_quoted_strings' do
       let(:code) { "service { 'foo': } # \"bar\"" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -44,7 +44,7 @@ describe 'double_quoted_strings' do
       let(:code) { %("foo\n") }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -65,7 +65,7 @@ describe 'double_quoted_strings' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -73,7 +73,7 @@ describe 'double_quoted_strings' do
       let(:code) { "class { 'foo': boolFlag => \"true\" }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -85,7 +85,7 @@ describe 'double_quoted_strings' do
       let(:code) { "class { 'foo': boolFlag => \"false\" }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -108,7 +108,7 @@ describe 'double_quoted_strings' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -116,7 +116,7 @@ describe 'double_quoted_strings' do
       let(:code) { %( $ztring = "this string contains \l random escape" ) }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -128,7 +128,7 @@ describe 'double_quoted_strings' do
       let(:code) { "\"this 'string' 'has' lots of 'quotes'\"" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -136,7 +136,7 @@ describe 'double_quoted_strings' do
       let(:code) { %(notify { "'foo'": }) }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
   end
@@ -154,7 +154,7 @@ describe 'double_quoted_strings' do
       let(:code) { "exec { \"/usr/bin/wget -O - '${source}' | /usr/bin/apt-key add -\": }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
 
       it 'does not modify the manifest' do
@@ -166,7 +166,7 @@ describe 'double_quoted_strings' do
       let(:code) { "\"sed -i 's/^;*[[:space:]]*${name}[[:space:]]*=.*$/${name} = ${value}/g' file\"" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
 
       it 'does not modify the manifest' do
@@ -178,7 +178,7 @@ describe 'double_quoted_strings' do
       let(:code) { "\"aoeu\" '${foo}'" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -194,7 +194,7 @@ describe 'double_quoted_strings' do
       let(:code) { "\"this 'string' 'has' lots of 'quotes'\"" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
 
       it 'does not modify the manifest' do

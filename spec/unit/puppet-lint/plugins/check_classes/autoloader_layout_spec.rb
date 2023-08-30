@@ -6,7 +6,7 @@ describe 'autoloader_layout' do
     let(:path) { 'foo/manifests/bar.pp' }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -15,7 +15,7 @@ describe 'autoloader_layout' do
     let(:path) { 'foo/manifests/bar/baz.pp' }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -24,7 +24,7 @@ describe 'autoloader_layout' do
     let(:path) { 'foo/manifests/init.pp' }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -34,7 +34,7 @@ describe 'autoloader_layout' do
     let(:msg) { 'foo::bar not in autoload module layout' }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do
@@ -56,7 +56,7 @@ describe 'autoloader_layout' do
     let(:path) { 'bar/manifests/init.pp' }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -65,7 +65,7 @@ describe 'autoloader_layout' do
     let(:path) { 'puppet-foo/manifests/init.pp' }
 
     it 'detects a single problem' do
-      expect(problems).to have(1).problems
+      expect(problems.size).to eq(1)
     end
   end
 
@@ -82,7 +82,7 @@ describe 'autoloader_layout' do
     let(:path) { 'puppet-foo/manifests/bar.pp' }
 
     it 'detects a single problem' do
-      expect(problems).to have(1).problems
+      expect(problems.size).to eq(1)
     end
   end
 
@@ -99,7 +99,7 @@ describe 'autoloader_layout' do
     let(:path) { 'puppet-foo/manifests/init.pp' }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 end

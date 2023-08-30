@@ -19,7 +19,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -37,7 +37,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -55,7 +55,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -76,7 +76,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -111,7 +111,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -129,7 +129,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects four problems' do
-        expect(problems).to have(4).problems
+        expect(problems.size).to eq(4)
       end
 
       it 'creates four warnings' do
@@ -154,7 +154,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects four problems' do
-        expect(problems).to have(4).problems
+        expect(problems.size).to eq(4)
       end
 
       it 'creates four warnings' do
@@ -181,7 +181,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects three problems' do
-        expect(problems).to have(3).problems
+        expect(problems.size).to eq(3)
       end
 
       it 'creates three warnings' do
@@ -206,7 +206,7 @@ describe 'arrow_alignment' do
       end
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -233,7 +233,7 @@ describe 'arrow_alignment' do
       end
 
       it 'only detects a single problem' do
-        expect(problems).to have(4).problem
+        expect(problems.size).to eq(4)
       end
 
       it 'creates a warning' do
@@ -253,7 +253,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -268,7 +268,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -282,7 +282,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -296,7 +296,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -311,7 +311,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'creates 2 warnings' do
@@ -332,7 +332,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -347,7 +347,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'creates 2 warnings' do
@@ -367,7 +367,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -384,7 +384,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -401,7 +401,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects one problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates one warning' do
@@ -423,7 +423,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -441,7 +441,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'creates 2 warnings' do
@@ -470,7 +470,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -489,7 +489,7 @@ describe 'arrow_alignment' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
   end
@@ -529,7 +529,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects four problems' do
-        expect(problems).to have(4).problems
+        expect(problems.size).to eq(4)
       end
 
       it 'fixes the manifest' do
@@ -574,7 +574,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects three problems' do
-        expect(problems).to have(3).problems
+        expect(problems.size).to eq(3)
       end
 
       it 'fixes the manifest' do
@@ -616,7 +616,7 @@ describe 'arrow_alignment' do
       end
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -648,7 +648,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'creates 2 warnings' do
@@ -681,7 +681,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 1 problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the problem' do
@@ -714,7 +714,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'fixes 2 problems' do
@@ -748,7 +748,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 2 problems' do
-        expect(problems).to have(3).problems
+        expect(problems.size).to eq(3)
       end
 
       it 'fixes 2 problems' do
@@ -788,7 +788,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'fixes 2 problems' do
@@ -839,7 +839,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 1 problem' do
-        expect(problems).to have(1).problems
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes 1 problem' do
@@ -897,7 +897,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 5 problems' do
-        expect(problems).to have(5).problems
+        expect(problems.size).to eq(5)
       end
 
       it 'fixes 5 problems' do
@@ -949,7 +949,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects 8 problems' do
-        expect(problems).to have(8).problems
+        expect(problems.size).to eq(8)
       end
 
       it 'fixes 8 problems' do
@@ -993,7 +993,7 @@ describe 'arrow_alignment' do
       end
 
       it 'detects a problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the problems' do

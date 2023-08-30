@@ -7,7 +7,7 @@ describe 'variable_is_lowercase' do
     let(:code) { '$fooBar' }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates a warning' do
@@ -19,7 +19,7 @@ describe 'variable_is_lowercase' do
     let(:code) { '$foobar' }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -27,7 +27,7 @@ describe 'variable_is_lowercase' do
     let(:code) { %("${Integer(fact('memory.system.total_bytes'))}") }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -35,7 +35,7 @@ describe 'variable_is_lowercase' do
     let(:code) { '"${fooBar}"' }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates a warning' do
@@ -47,7 +47,7 @@ describe 'variable_is_lowercase' do
     let(:code) { '"${foobar}"' }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 end

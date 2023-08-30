@@ -7,7 +7,7 @@ describe 'names_containing_uppercase' do
     let(:class_msg) { "defined type 'FooBar' contains illegal uppercase" }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do
@@ -21,7 +21,7 @@ describe 'names_containing_uppercase' do
     let(:class_msg) { "class 'FooBar' contains illegal uppercase" }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do
@@ -35,7 +35,7 @@ describe 'names_containing_uppercase' do
     let(:class_msg) { "class 'Foo::BarFoo' contains illegal uppercase" }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do

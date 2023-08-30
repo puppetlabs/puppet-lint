@@ -8,7 +8,7 @@ describe 'documentation' do
     let(:code) { 'class test {}' }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates a warning' do
@@ -25,7 +25,7 @@ describe 'documentation' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -39,7 +39,7 @@ describe 'documentation' do
     end
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates a warning' do
@@ -51,7 +51,7 @@ describe 'documentation' do
     let(:code) { 'define test {}' }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates a warning' do
@@ -68,7 +68,7 @@ describe 'documentation' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 end

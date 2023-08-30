@@ -7,7 +7,7 @@ describe 'single_quote_string_with_variables' do
     let(:code) { "\"aoeu\" '${foo}'" }
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do
@@ -26,7 +26,7 @@ describe 'single_quote_string_with_variables' do
       END
     end
 
-    it { expect(problems).to have(0).problem }
+    it { expect(problems.size).to eq(0) }
   end
 
   context 'single quoted inline epp with dollar signs has no problems' do
@@ -40,6 +40,6 @@ describe 'single_quote_string_with_variables' do
       END
     end
 
-    it { expect(problems).to have(0).problem }
+    it { expect(problems.size).to eq(0) }
   end
 end

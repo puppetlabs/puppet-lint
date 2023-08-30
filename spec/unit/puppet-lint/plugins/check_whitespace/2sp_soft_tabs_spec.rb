@@ -13,7 +13,7 @@ describe '2sp_soft_tabs' do
     end
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do

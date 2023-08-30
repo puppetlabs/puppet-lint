@@ -13,7 +13,7 @@ describe 'variable_scope' do
     end
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates a warning' do
@@ -31,7 +31,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -46,7 +46,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -65,7 +65,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -80,7 +80,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -94,7 +94,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -108,7 +108,7 @@ describe 'variable_scope' do
     end
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates a warning' do
@@ -126,7 +126,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -143,7 +143,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -159,7 +159,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -181,7 +181,7 @@ describe 'variable_scope' do
     end
 
     it 'only detects two problems' do
-      expect(problems).to have(2).problem
+      expect(problems.size).to eq(2)
     end
 
     it 'creates two warnings' do
@@ -213,7 +213,7 @@ describe 'variable_scope' do
     end
 
     it 'only detects three problems' do
-      expect(problems).to have(3).problem
+      expect(problems.size).to eq(3)
     end
 
     it 'creates three warnings' do
@@ -234,7 +234,7 @@ describe 'variable_scope' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
   end
@@ -251,7 +251,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -265,7 +265,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -279,7 +279,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -294,7 +294,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -309,7 +309,7 @@ describe 'variable_scope' do
     end
 
     it 'only detects one problem' do
-      expect(problems).to have(1).problems
+      expect(problems.size).to eq(1)
     end
 
     it 'creates one warning' do
@@ -327,7 +327,7 @@ describe 'variable_scope' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 end

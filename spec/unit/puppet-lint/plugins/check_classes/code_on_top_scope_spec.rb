@@ -40,9 +40,10 @@ describe 'code_on_top_scope' do
       END
     end
 
+    it { expect(problems.size).to eq(4) }
+
     its(:problems) do
       is_expected.to contain_warning('code outside of class or define block - include')
-      is_expected.to have(4).problems
     end
   end
 end

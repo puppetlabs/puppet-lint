@@ -16,7 +16,7 @@ describe 'duplicate_params' do
     end
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do
@@ -37,7 +37,7 @@ describe 'duplicate_params' do
     end
 
     it 'does not detect any errors' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -54,7 +54,7 @@ describe 'duplicate_params' do
     end
 
     it 'only detects a single error' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do
@@ -77,7 +77,7 @@ describe 'duplicate_params' do
     end
 
     it 'only detects a single problem' do
-      expect(problems).to have(1).problem
+      expect(problems.size).to eq(1)
     end
 
     it 'creates an error' do
@@ -96,7 +96,7 @@ describe 'duplicate_params' do
     end
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -104,7 +104,7 @@ describe 'duplicate_params' do
     let(:code) { '}:' }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 end

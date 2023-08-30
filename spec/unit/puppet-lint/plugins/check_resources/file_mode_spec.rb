@@ -8,7 +8,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => '777' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -20,7 +20,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => '0777' }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -28,7 +28,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => $file_mode }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -36,7 +36,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => 'u=rw,og=r' }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -44,7 +44,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => undef }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -52,7 +52,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => 'undef' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -64,7 +64,7 @@ describe 'file_mode' do
       let(:code) { "file { '/etc/passwd': audit => [ owner, mode ], }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -72,7 +72,7 @@ describe 'file_mode' do
       let(:code) { "concat { 'foo': mode => '777' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -84,7 +84,7 @@ describe 'file_mode' do
       let(:code) { "concat { 'foo': mode => '0777' }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -92,7 +92,7 @@ describe 'file_mode' do
       let(:code) { "concat { 'foo': mode => $concat_mode }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -100,7 +100,7 @@ describe 'file_mode' do
       let(:code) { "concat { 'foo': mode => 'u=rw,og=r' }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -108,7 +108,7 @@ describe 'file_mode' do
       let(:code) { "concat { 'foo': mode => undef }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -116,7 +116,7 @@ describe 'file_mode' do
       let(:code) { "concat { 'foo': mode => 'undef' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -128,7 +128,7 @@ describe 'file_mode' do
       let(:code) { "concat { '/etc/passwd': audit => [ owner, mode ], }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -136,7 +136,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => lookup('bar'), }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -156,7 +156,7 @@ describe 'file_mode' do
       end
 
       it 'detects 3 problems' do
-        expect(problems).to have(3).problems
+        expect(problems.size).to eq(3)
       end
 
       it 'creates three warnings' do
@@ -180,7 +180,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => '777' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -196,7 +196,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => 'undef' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -212,7 +212,7 @@ describe 'file_mode' do
       let(:code) { "concat { 'foo': mode => '777' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -228,7 +228,7 @@ describe 'file_mode' do
       let(:code) { "concat { 'foo': mode => 'undef' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -244,7 +244,7 @@ describe 'file_mode' do
       let(:code) { "file { 'foo': mode => lookup('bar'), }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
 
       it 'does not change the manifest' do
@@ -282,7 +282,7 @@ describe 'file_mode' do
       end
 
       it 'detects 3 problems' do
-        expect(problems).to have(3).problems
+        expect(problems.size).to eq(3)
       end
 
       it 'fixes 3 problems' do
