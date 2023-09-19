@@ -1,5 +1,9 @@
 # Puppet Lint
 
+[![Code Owners](https://img.shields.io/badge/owners-DevX--team-blue)](https://github.com/puppetlabs/pdk/blob/main/CODEOWNERS)
+![ci](https://github.com/puppetlabs/puppet-lint/actions/workflows/ci.yml/badge.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/puppetlabs/puppet-lint)
+
 Puppet Lint tests Puppet code against the recommended [Puppet language style
 guide](http://puppet.com/docs/puppet/latest/style_guide.html). Puppet Lint validates only code style; it does not validate syntax. To test syntax, use Puppet's `puppet parser validate` command.
 
