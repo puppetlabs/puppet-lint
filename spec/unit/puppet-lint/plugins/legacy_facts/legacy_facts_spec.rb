@@ -467,5 +467,13 @@ describe 'legacy_facts' do
         expect(manifest).to eq("\"${facts['os']['distro']['release']['specification']}\"")
       end
     end
+
+    context 'variable ending in the word fact' do
+      let(:code) { "$interface_facts['netmask']" }
+
+      it 'does not detect any problems' do
+        expect(problems).to have(0).problem
+      end
+    end
   end
 end
