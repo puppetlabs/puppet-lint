@@ -9,9 +9,7 @@ guide](http://puppet.com/docs/puppet/latest/style_guide.html). Puppet Lint valid
 
 ## Compatibility warning
 
-Version 3.0.0 and above will no longer support Puppet 6 environments.
-
-In cases where Puppet Lint is required in an environment with Puppet 6, we recommend pinning to version 2.5.2.
+This tool is only supported on Puppet 7 & 8 environments. In cases where Puppet Lint is required in an environment with Puppet 6, we recommend pinning to version 2.5.2.
 
 ## Installation
 
@@ -296,6 +294,18 @@ For a complete list of checks, and how to resolve errors on each check, see the 
 If you find a bug in Puppet Lint or its results, please create an issue in the
 [repo issues tracker](https://github.com/puppetlabs/puppet-lint/issues/). Bonus
 points will be awarded if you also include a patch that fixes the issue.
+
+## Development
+
+Acceptance tests for this tool leverage [puppet_litmus](https://github.com/puppetlabs/puppet_litmus).
+To run the acceptance tests follow the instructions [here](https://github.com/puppetlabs/puppet_litmus/wiki/Tutorial:-use-Litmus-to-execute-acceptance-tests-with-a-sample-module-(MoTD)#install-the-necessary-gems-for-the-module).
+You can also find a tutorial and walkthrough of using Litmus and the PDK on [YouTube](https://www.youtube.com/watch?v=FYfR7ZEGHoE).
+
+If you run into an issue with this tool or would like to request a feature you can [raise a PR](https://github.com/puppetlabs/puppet-lint/pulls) with your suggested changes. Alternatively, you can [raise a Github issue](https://github.com/puppetlabs/puppet-lint/issues) with a feature request or to report any bugs.
+Every other Tuesday the DevX team holds [office hours](https://puppet.com/community/office-hours) in the [Puppet Community Slack](http://slack.puppet.com/), where you can ask questions about this and any other supported tools.
+This session runs at 15:00 (GMT) for about an hour.
+
+If you have problems getting this tool up and running, please [contact Support](http://puppetlabs.com/services/customer-support).
 
 ## Thank you
 
