@@ -7,7 +7,7 @@ describe 'puppet_url_without_modules' do
     let(:code) { "'puppet:///modules/foo'" }
 
     it 'does not detect any problems' do
-      expect(problems).to have(0).problems
+      expect(problems).to be_empty
     end
   end
 
@@ -16,7 +16,7 @@ describe 'puppet_url_without_modules' do
       let(:code) { "'puppet:///foo'" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -38,7 +38,7 @@ describe 'puppet_url_without_modules' do
       let(:code) { "'puppet:///foo'" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -55,7 +55,7 @@ describe 'puppet_url_without_modules' do
     let(:code) { File.read('spec/fixtures/test/manifests/url_interpolation.pp') }
 
     it 'detects several problems' do
-      expect(problems).to have(4).problem
+      expect(problems.size).to eq(4)
     end
   end
 end

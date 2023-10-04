@@ -8,7 +8,7 @@ describe 'slash_comments' do
       let(:code) { '// foo' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -30,7 +30,7 @@ describe 'slash_comments' do
       let(:code) { '// foo' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do

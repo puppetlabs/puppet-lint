@@ -8,7 +8,7 @@ describe 'quoted_booleans' do
       let(:code) { "class { 'foo': boolFlag => 'false' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -20,7 +20,7 @@ describe 'quoted_booleans' do
       let(:code) { "class { 'foo': boolFlag => 'true' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -32,7 +32,7 @@ describe 'quoted_booleans' do
       let(:code) { "class { 'foo': boolFlag => \"true\" }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -44,7 +44,7 @@ describe 'quoted_booleans' do
       let(:code) { "class { 'foo': boolFlag => \"false\" }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -66,7 +66,7 @@ describe 'quoted_booleans' do
       let(:code) { "class { 'foo': boolFlag => 'false' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -82,7 +82,7 @@ describe 'quoted_booleans' do
       let(:code) { "class { 'foo': boolFlag => 'true' }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -98,7 +98,7 @@ describe 'quoted_booleans' do
       let(:code) { "class { 'foo': boolFlag => \"true\" }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -114,7 +114,7 @@ describe 'quoted_booleans' do
       let(:code) { "class { 'foo': boolFlag => \"false\" }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do

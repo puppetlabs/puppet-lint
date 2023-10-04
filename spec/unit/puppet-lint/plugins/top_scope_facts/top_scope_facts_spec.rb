@@ -8,7 +8,7 @@ describe 'top_scope_facts' do
       let(:code) { "$facts['operatingsystem']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -16,7 +16,7 @@ describe 'top_scope_facts' do
       let(:code) { '$foo::bar' }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -24,7 +24,7 @@ describe 'top_scope_facts' do
       let(:code) { "$::facts['os']['family']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -32,7 +32,7 @@ describe 'top_scope_facts' do
       let(:code) { "$::trusted['certname']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -40,7 +40,7 @@ describe 'top_scope_facts' do
       let(:code) { '$::fqdn' }
 
       it 'does not detect a single problem' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -48,14 +48,14 @@ describe 'top_scope_facts' do
       let(:code) { '$::profile::foo::bar' }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
 
       context 'inside double quotes' do
         let(:code) { '"$::profile::foo::bar"' }
 
         it 'does not detect any problems' do
-          expect(problems).to have(0).problem
+          expect(problems).to be_empty
         end
       end
 
@@ -63,7 +63,7 @@ describe 'top_scope_facts' do
         let(:code) { '"${::profile::foo::bar}"' }
 
         it 'does not detect any problems' do
-          expect(problems).to have(0).problem
+          expect(problems).to be_empty
         end
       end
     end
@@ -82,7 +82,7 @@ describe 'top_scope_facts' do
       let(:code) { "$facts['operatingsystem']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -90,7 +90,7 @@ describe 'top_scope_facts' do
       let(:code) { '$foo::bar' }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -98,7 +98,7 @@ describe 'top_scope_facts' do
       let(:code) { "$::facts['os']['family']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -106,7 +106,7 @@ describe 'top_scope_facts' do
       let(:code) { "$::trusted['certname']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -119,7 +119,7 @@ describe 'top_scope_facts' do
         let(:code) { "$facts['operatingsystem']" }
 
         it 'does not detect any problems' do
-          expect(problems).to have(0).problem
+          expect(problems).to be_empty
         end
       end
 
@@ -127,7 +127,7 @@ describe 'top_scope_facts' do
         let(:code) { "$trusted['certname']" }
 
         it 'does not detect any problems' do
-          expect(problems).to have(0).problem
+          expect(problems).to be_empty
         end
       end
 
@@ -135,15 +135,15 @@ describe 'top_scope_facts' do
         let(:code) { '$::location' }
 
         it 'does not detect any problems' do
-          expect(problems).to have(0).problem
+          expect(problems).to be_empty
         end
       end
 
       context 'non-allowlisted top scope variable $::application' do
         let(:code) { '$::application' }
 
-        it 'does not detect any problems' do
-          expect(problems).to have(1).problem
+        it 'detects a problem' do
+          expect(problems).to contain_fixed('top scope fact instead of facts hash').on_line(1).in_column(1)
         end
       end
     end

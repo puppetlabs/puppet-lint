@@ -8,7 +8,7 @@ describe 'unquoted_node_name' do
       let(:code) { 'node foo { }' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -20,7 +20,7 @@ describe 'unquoted_node_name' do
       let(:code) { 'node default { }' }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -28,7 +28,7 @@ describe 'unquoted_node_name' do
       let(:code) { "node 'foo' { }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -36,7 +36,7 @@ describe 'unquoted_node_name' do
       let(:code) { 'node /foo/ { }' }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -44,7 +44,7 @@ describe 'unquoted_node_name' do
       let(:code) { 'node foo, bar, baz { }' }
 
       it 'detects 3 problems' do
-        expect(problems).to have(3).problems
+        expect(problems.size).to eq(3)
       end
 
       it 'creates 3 warnings' do
@@ -58,7 +58,7 @@ describe 'unquoted_node_name' do
       let(:code) { "node foo, 'bar', baz { }" }
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'creates 2 warnings' do
@@ -71,7 +71,7 @@ describe 'unquoted_node_name' do
       let(:code) { 'node foo { } node bar { }' }
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'creates 2 warnings' do
@@ -84,7 +84,7 @@ describe 'unquoted_node_name' do
       let(:code) { 'node foo' }
 
       it 'detects a problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates 1 error' do
@@ -106,7 +106,7 @@ describe 'unquoted_node_name' do
       let(:code) { 'node foo { }' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -123,7 +123,7 @@ describe 'unquoted_node_name' do
       let(:fixed) { "node 'foo', 'bar', 'baz' { }" }
 
       it 'detects 3 problems' do
-        expect(problems).to have(3).problems
+        expect(problems.size).to eq(3)
       end
 
       it 'fixes the 3 problems' do
@@ -142,7 +142,7 @@ describe 'unquoted_node_name' do
       let(:fixed) { "node 'foo', 'bar', 'baz' { }" }
 
       it 'detects 2 problems' do
-        expect(problems).to have(2).problems
+        expect(problems.size).to eq(2)
       end
 
       it 'fixes the 2 problems' do

@@ -8,7 +8,7 @@ describe 'only_variable_string' do
       let(:code) { '"${foo}"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -20,7 +20,7 @@ describe 'only_variable_string' do
       let(:code) { '"${foo[0]}"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -32,7 +32,7 @@ describe 'only_variable_string' do
       let(:code) { '"${foo[0][aoeuaoeu][bar][999]}"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -69,7 +69,7 @@ describe 'only_variable_string' do
       let(:code) { '"${foo}"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -85,7 +85,7 @@ describe 'only_variable_string' do
       let(:code) { '"${foo[0]}"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -101,7 +101,7 @@ describe 'only_variable_string' do
       let(:code) { '"${foo[0][aoeuaoeu][bar][999]}"' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do

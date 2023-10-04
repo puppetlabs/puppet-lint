@@ -8,7 +8,7 @@ describe 'trailing_whitespace' do
       let(:code) { 'foo ' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates an error' do
@@ -26,7 +26,7 @@ describe 'trailing_whitespace' do
       end
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates an error' do
@@ -48,7 +48,7 @@ describe 'trailing_whitespace' do
       let(:code) { 'foo ' }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -64,7 +64,7 @@ describe 'trailing_whitespace' do
       let(:code) { "foo    \nbar" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the manifest' do
@@ -94,7 +94,7 @@ describe 'trailing_whitespace' do
       end
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates an error' do
@@ -110,7 +110,7 @@ describe 'trailing_whitespace' do
       let(:code) { " \n " }
 
       it 'detects problems with both empty lines' do
-        expect(problems).to have(2).problem
+        expect(problems.size).to eq(2)
       end
 
       it 'fixes the manifest' do

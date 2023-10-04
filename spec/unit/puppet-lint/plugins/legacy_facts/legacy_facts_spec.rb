@@ -6,7 +6,7 @@ describe 'legacy_facts' do
       let(:code) { "$facts['os']['family']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -14,7 +14,7 @@ describe 'legacy_facts' do
       let(:code) { "$facts['ssh']['rsa']['key']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -22,7 +22,7 @@ describe 'legacy_facts' do
       let(:code) { '$osfamily' }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -30,7 +30,7 @@ describe 'legacy_facts' do
       let(:code) { "$facts['osfamily']" }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -38,7 +38,7 @@ describe 'legacy_facts' do
       let(:code) { '$::osfamily' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -46,7 +46,7 @@ describe 'legacy_facts' do
       let(:code) { '$::blockdevice_sda_model' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -54,7 +54,7 @@ describe 'legacy_facts' do
       let(:code) { "$facts['ipaddress6_em2']" }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -62,7 +62,7 @@ describe 'legacy_facts' do
       let(:code) { '$::zone_foobar_uuid' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -70,7 +70,7 @@ describe 'legacy_facts' do
       let(:code) { '$::processor314' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -78,7 +78,7 @@ describe 'legacy_facts' do
       let(:code) { '$::sp_l3_cache' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -86,7 +86,7 @@ describe 'legacy_facts' do
       let(:code) { '$::sshrsakey' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -94,7 +94,7 @@ describe 'legacy_facts' do
       let(:code) { '"start ${::osfamily} end"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -102,7 +102,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::osfamily"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -110,7 +110,7 @@ describe 'legacy_facts' do
       let(:code) { %("${facts['osfamily']}") }
 
       it 'detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -118,7 +118,7 @@ describe 'legacy_facts' do
       let(:code) { "$::facts['osfamily']" }
 
       it 'detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
 
@@ -126,7 +126,7 @@ describe 'legacy_facts' do
       let(:code) { '$::facts[osfamily]' }
 
       it 'detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
     end
   end
@@ -144,7 +144,7 @@ describe 'legacy_facts' do
       let(:code) { "$facts['os']['family']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -152,7 +152,7 @@ describe 'legacy_facts' do
       let(:code) { "$facts['ssh']['rsa']['key']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -160,7 +160,7 @@ describe 'legacy_facts' do
       let(:code) { '$osfamily' }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -169,7 +169,7 @@ describe 'legacy_facts' do
       let(:msg) { "legacy fact 'osfamily'" }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the problem' do
@@ -185,7 +185,7 @@ describe 'legacy_facts' do
       let(:code) { "$::facts['os']['family']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems).to be_empty
       end
     end
 
@@ -194,7 +194,7 @@ describe 'legacy_facts' do
       let(:msg) { "legacy fact 'osfamily'" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the problem' do
@@ -211,7 +211,7 @@ describe 'legacy_facts' do
       let(:msg) { "legacy fact 'osfamily'" }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the problem' do
@@ -228,7 +228,7 @@ describe 'legacy_facts' do
       let(:msg) { "legacy fact 'sshrsakey'" }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the problem' do
@@ -244,7 +244,7 @@ describe 'legacy_facts' do
       let(:code) { '$::memoryfree_mb' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'continues to use the legacy fact' do
@@ -256,7 +256,7 @@ describe 'legacy_facts' do
       let(:code) { '$::blockdevice_sda_model' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -268,7 +268,7 @@ describe 'legacy_facts' do
       let(:code) { "$facts['ipaddress6_em2']" }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -280,7 +280,7 @@ describe 'legacy_facts' do
       let(:code) { '$::zone_foobar_uuid' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -292,7 +292,7 @@ describe 'legacy_facts' do
       let(:code) { '$::processor314' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -304,7 +304,7 @@ describe 'legacy_facts' do
       let(:code) { '$::sp_l3_cache' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -316,7 +316,7 @@ describe 'legacy_facts' do
       let(:code) { '$::sshrsakey' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -328,7 +328,7 @@ describe 'legacy_facts' do
       let(:code) { '"start ${::osfamily} end"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -340,7 +340,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::osfamily"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -352,7 +352,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::gid"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -364,7 +364,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::id"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -376,7 +376,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::lsbdistcodename"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -388,7 +388,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::lsbdistdescription"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -400,7 +400,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::lsbdistid"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -412,7 +412,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::lsbdistrelease"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -424,7 +424,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::lsbmajdistrelease"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -436,7 +436,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::lsbminordistrelease"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -448,7 +448,7 @@ describe 'legacy_facts' do
       let(:code) { '"$::lsbrelease"' }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do
@@ -460,7 +460,7 @@ describe 'legacy_facts' do
       let(:code) { "\"${facts['lsbrelease']}\"" }
 
       it 'onlies detect a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'uses the facts hash' do

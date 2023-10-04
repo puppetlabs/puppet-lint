@@ -8,7 +8,7 @@ describe 'ensure_first_param' do
       let(:code) { "file { 'foo': ensure => present }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -22,7 +22,7 @@ describe 'ensure_first_param' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -37,7 +37,7 @@ describe 'ensure_first_param' do
       end
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -56,7 +56,7 @@ describe 'ensure_first_param' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -77,7 +77,7 @@ describe 'ensure_first_param' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -93,7 +93,7 @@ describe 'ensure_first_param' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
   end
@@ -111,7 +111,7 @@ describe 'ensure_first_param' do
       let(:code) { "file { 'foo': ensure => present }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -125,7 +125,7 @@ describe 'ensure_first_param' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -149,7 +149,7 @@ describe 'ensure_first_param' do
       end
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'creates a warning' do
@@ -172,7 +172,7 @@ describe 'ensure_first_param' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -193,7 +193,7 @@ describe 'ensure_first_param' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -229,7 +229,7 @@ describe 'ensure_first_param' do
       end
 
       it 'detects a problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       it 'fixes the problem' do

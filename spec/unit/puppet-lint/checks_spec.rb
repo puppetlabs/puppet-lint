@@ -31,7 +31,7 @@ describe PuppetLint::Checks do
         end
 
         it 'creates a syntax error problem for the file' do
-          expect(instance.problems).to have(1).problem
+          expect(instance.problems.size).to eq(1)
           expect(instance.problems.first).to include(
             kind: :error,
             check: :syntax,
@@ -53,7 +53,7 @@ describe PuppetLint::Checks do
         end
 
         it 'creates a syntax error problem for the file' do
-          expect(instance.problems).to have(1).problem
+          expect(instance.problems.size).to eq(1)
           expect(instance.problems.first).to include(
             kind: :error,
             check: :syntax,

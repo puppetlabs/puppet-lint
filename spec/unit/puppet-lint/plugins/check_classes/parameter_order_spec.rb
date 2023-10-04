@@ -8,7 +8,7 @@ describe 'parameter_order' do
       let(:code) { "#{type} foo($bar, $baz='gronk') { }" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -16,7 +16,7 @@ describe 'parameter_order' do
       let(:code) { "#{type} foo($bar=extlookup($name)) {}" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -24,7 +24,7 @@ describe 'parameter_order' do
       let(:code) { "#{type} foo($bar='baz', $gronk) { }" }
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       col = ((type == 'class') ? 23 : 24)
@@ -42,7 +42,7 @@ describe 'parameter_order' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -55,7 +55,7 @@ describe 'parameter_order' do
       end
 
       it 'only detects a single problem' do
-        expect(problems).to have(1).problem
+        expect(problems.size).to eq(1)
       end
 
       col = ((type == 'class') ? 35 : 36)
@@ -76,7 +76,7 @@ describe 'parameter_order' do
       end
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problems
+        expect(problems).to be_empty
       end
     end
 
@@ -98,7 +98,7 @@ describe 'parameter_order' do
         END
       end
 
-      it { expect(problems).to have(0).problem }
+      it { expect(problems.size).to eq(0) }
     end
 
     context "#{type} parameter w/a hash containing a variable followed by an optional parameter" do
@@ -132,7 +132,7 @@ describe 'parameter_order' do
         END
       end
 
-      it { expect(problems).to have(0).problem }
+      it { expect(problems.size).to eq(0) }
     end
 
     context "#{type} parameter with array operation" do
@@ -150,7 +150,7 @@ describe 'parameter_order' do
         END
       end
 
-      it { expect(problems).to have(0).problems }
+      it { expect(problems).to be_empty }
     end
 
     context "#{type} parameters of Optional type are just regular parameters" do
@@ -163,7 +163,7 @@ describe 'parameter_order' do
         END
       end
 
-      it { expect(problems).to have(1).problems }
+      it { expect(problems.size).to eq(1) }
     end
 
     [['Custom::Type1', 'Custom::Type2'], ['Custom::Type1', 'String'], ['String', 'Custom::Type2']].each_with_index do |testtypes, i| # rubocop:disable Performance/CollectionLiteralInLoop
@@ -177,7 +177,7 @@ describe 'parameter_order' do
           END
         end
 
-        it { expect(problems).to have(0).problems }
+        it { expect(problems).to be_empty }
       end
 
       context "#{type} parameters of custom type - two values - #{i}" do
@@ -190,7 +190,7 @@ describe 'parameter_order' do
           END
         end
 
-        it { expect(problems).to have(0).problems }
+        it { expect(problems).to be_empty }
       end
 
       context "#{type} parameters of custom type - one value, wrong order - #{i}" do
@@ -203,7 +203,7 @@ describe 'parameter_order' do
           END
         end
 
-        it { expect(problems).to have(1).problems }
+        it { expect(problems.size).to eq(1) }
       end
 
       context "#{type} parameters of custom type - one value, right order - #{i}" do
@@ -216,7 +216,7 @@ describe 'parameter_order' do
           END
         end
 
-        it { expect(problems).to have(0).problems }
+        it { expect(problems).to be_empty }
       end
     end
   end

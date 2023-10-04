@@ -78,12 +78,13 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a :STRING token' do
-        expect(tokens).to have(1).token
-        expect(tokens[0]).to have_attributes(
-          type: :STRING,
-          value: '',
-          line: 1,
-          column: 1,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :STRING,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
         )
       end
 
@@ -102,24 +103,25 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string with an interpolated variable' do
-        expect(tokens).to have(3).tokens
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'foo',
-          line: 1,
-          column: 4,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQPOST,
-          value: 'bar',
-          line: 1,
-          column: 7,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'foo',
+            line: 1,
+            column: 4,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: 'bar',
+            line: 1,
+            column: 7,
+          ),
         )
       end
 
@@ -138,24 +140,25 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string with an interpolated variable' do
-        expect(tokens).to have(3).tokens
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: 'foo',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'bar',
-          line: 1,
-          column: 7,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQPOST,
-          value: 'baz',
-          line: 1,
-          column: 10,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: 'foo',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'bar',
+            line: 1,
+            column: 7,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: 'baz',
+            line: 1,
+            column: 10,
+          ),
         )
       end
 
@@ -176,37 +179,37 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string with the interpolated variables' do
-        expect(tokens).to have(5).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: 'foo',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'bar',
-          line: 1,
-          column: 7,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQMID,
-          value: 'baz',
-          line: 1,
-          column: 10,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :VARIABLE,
-          value: 'gronk',
-          line: 1,
-          column: 16,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :DQPOST,
-          value: 'meh',
-          line: 1,
-          column: 21,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: 'foo',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'bar',
+            line: 1,
+            column: 7,
+          ),
+          have_attributes(
+            type: :DQMID,
+            value: 'baz',
+            line: 1,
+            column: 10,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'gronk',
+            line: 1,
+            column: 16,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: 'meh',
+            line: 1,
+            column: 21,
+          ),
         )
       end
 
@@ -225,25 +228,25 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(3).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'foo',
-          line: 1,
-          column: 4,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 7,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'foo',
+            line: 1,
+            column: 4,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 7,
+          ),
         )
       end
 
@@ -264,25 +267,25 @@ describe PuppetLint::Lexer do
           end
 
           it 'creates a tokenised string' do
-            expect(tokens).to have(3).tokens
-
-            expect(tokens[0]).to have_attributes(
-              type: :DQPRE,
-              value: '',
-              line: 1,
-              column: 1,
-            )
-            expect(tokens[1]).to have_attributes(
-              type: :VARIABLE,
-              value: keyword,
-              line: 1,
-              column: 4,
-            )
-            expect(tokens[2]).to have_attributes(
-              type: :DQPOST,
-              value: '',
-              line: 1,
-              column: keyword.size + 4,
+            expect(tokens).to contain_exactly(
+              have_attributes(
+                type: :DQPRE,
+                value: '',
+                line: 1,
+                column: 1,
+              ),
+              have_attributes(
+                type: :VARIABLE,
+                value: keyword,
+                line: 1,
+                column: 4,
+              ),
+              have_attributes(
+                type: :DQPOST,
+                value: '',
+                line: 1,
+                column: keyword.size + 4,
+              ),
             )
           end
 
@@ -303,25 +306,25 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(3).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'bar',
-          line: 1,
-          column: 4,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 8,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'bar',
+            line: 1,
+            column: 4,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 8,
+          ),
         )
       end
 
@@ -340,61 +343,61 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(9).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'foo',
-          line: 1,
-          column: 4,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :LBRACK,
-          value: '[',
-          line: 1,
-          column: 7,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :NAME,
-          value: 'bar',
-          line: 1,
-          column: 8,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :RBRACK,
-          value: ']',
-          line: 1,
-          column: 11,
-        )
-        expect(tokens[5]).to have_attributes(
-          type: :LBRACK,
-          value: '[',
-          line: 1,
-          column: 12,
-        )
-        expect(tokens[6]).to have_attributes(
-          type: :NAME,
-          value: 'baz',
-          line: 1,
-          column: 13,
-        )
-        expect(tokens[7]).to have_attributes(
-          type: :RBRACK,
-          value: ']',
-          line: 1,
-          column: 16,
-        )
-        expect(tokens[8]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 17,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'foo',
+            line: 1,
+            column: 4,
+          ),
+          have_attributes(
+            type: :LBRACK,
+            value: '[',
+            line: 1,
+            column: 7,
+          ),
+          have_attributes(
+            type: :NAME,
+            value: 'bar',
+            line: 1,
+            column: 8,
+          ),
+          have_attributes(
+            type: :RBRACK,
+            value: ']',
+            line: 1,
+            column: 11,
+          ),
+          have_attributes(
+            type: :LBRACK,
+            value: '[',
+            line: 1,
+            column: 12,
+          ),
+          have_attributes(
+            type: :NAME,
+            value: 'baz',
+            line: 1,
+            column: 13,
+          ),
+          have_attributes(
+            type: :RBRACK,
+            value: ']',
+            line: 1,
+            column: 16,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 17,
+          ),
         )
       end
 
@@ -415,37 +418,37 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(5).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'foo',
-          line: 1,
-          column: 4,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQMID,
-          value: '',
-          line: 1,
-          column: 7,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :VARIABLE,
-          value: 'bar',
-          line: 1,
-          column: 10,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 13,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'foo',
+            line: 1,
+            column: 4,
+          ),
+          have_attributes(
+            type: :DQMID,
+            value: '',
+            line: 1,
+            column: 7,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'bar',
+            line: 1,
+            column: 10,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 13,
+          ),
         )
       end
 
@@ -464,25 +467,25 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(3).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :UNENC_VARIABLE,
-          value: 'foo',
-          line: 1,
-          column: 2,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 6,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :UNENC_VARIABLE,
+            value: 'foo',
+            line: 1,
+            column: 2,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 6,
+          ),
         )
       end
 
@@ -501,25 +504,25 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(3).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: 'string with ',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :SSTRING,
-          value: 'a nested single quoted string',
-          line: 1,
-          column: 16,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQPOST,
-          value: ' inside it',
-          line: 1,
-          column: 47,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: 'string with ',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :SSTRING,
+            value: 'a nested single quoted string',
+            line: 1,
+            column: 16,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: ' inside it',
+            line: 1,
+            column: 47,
+          ),
         )
       end
 
@@ -538,61 +541,61 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(9).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: 'string with ',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :LPAREN,
-          value: '(',
-          line: 1,
-          column: 16,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :NUMBER,
-          value: '3',
-          line: 1,
-          column: 17,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :PLUS,
-          value: '+',
-          line: 1,
-          column: 18,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :NUMBER,
-          value: '5',
-          line: 1,
-          column: 19,
-        )
-        expect(tokens[5]).to have_attributes(
-          type: :RPAREN,
-          value: ')',
-          line: 1,
-          column: 20,
-        )
-        expect(tokens[6]).to have_attributes(
-          type: :DIV,
-          value: '/',
-          line: 1,
-          column: 21,
-        )
-        expect(tokens[7]).to have_attributes(
-          type: :NUMBER,
-          value: '4',
-          line: 1,
-          column: 22,
-        )
-        expect(tokens[8]).to have_attributes(
-          type: :DQPOST,
-          value: ' nested math',
-          line: 1,
-          column: 23,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: 'string with ',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :LPAREN,
+            value: '(',
+            line: 1,
+            column: 16,
+          ),
+          have_attributes(
+            type: :NUMBER,
+            value: '3',
+            line: 1,
+            column: 17,
+          ),
+          have_attributes(
+            type: :PLUS,
+            value: '+',
+            line: 1,
+            column: 18,
+          ),
+          have_attributes(
+            type: :NUMBER,
+            value: '5',
+            line: 1,
+            column: 19,
+          ),
+          have_attributes(
+            type: :RPAREN,
+            value: ')',
+            line: 1,
+            column: 20,
+          ),
+          have_attributes(
+            type: :DIV,
+            value: '/',
+            line: 1,
+            column: 21,
+          ),
+          have_attributes(
+            type: :NUMBER,
+            value: '4',
+            line: 1,
+            column: 22,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: ' nested math',
+            line: 1,
+            column: 23,
+          ),
         )
       end
 
@@ -611,55 +614,55 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(8).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: 'string with ',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :LBRACK,
-          value: '[',
-          line: 1,
-          column: 16,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :SSTRING,
-          value: 'an array ',
-          line: 1,
-          column: 17,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :COMMA,
-          value: ',',
-          line: 1,
-          column: 28,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :WHITESPACE,
-          value: ' ',
-          line: 1,
-          column: 29,
-        )
-        expect(tokens[5]).to have_attributes(
-          type: :VARIABLE,
-          value: 'v2',
-          line: 1,
-          column: 30,
-        )
-        expect(tokens[6]).to have_attributes(
-          type: :RBRACK,
-          value: ']',
-          line: 1,
-          column: 33,
-        )
-        expect(tokens[7]).to have_attributes(
-          type: :DQPOST,
-          value: ' in it',
-          line: 1,
-          column: 34,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: 'string with ',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :LBRACK,
+            value: '[',
+            line: 1,
+            column: 16,
+          ),
+          have_attributes(
+            type: :SSTRING,
+            value: 'an array ',
+            line: 1,
+            column: 17,
+          ),
+          have_attributes(
+            type: :COMMA,
+            value: ',',
+            line: 1,
+            column: 28,
+          ),
+          have_attributes(
+            type: :WHITESPACE,
+            value: ' ',
+            line: 1,
+            column: 29,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'v2',
+            line: 1,
+            column: 30,
+          ),
+          have_attributes(
+            type: :RBRACK,
+            value: ']',
+            line: 1,
+            column: 33,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: ' in it',
+            line: 1,
+            column: 34,
+          ),
         )
       end
 
@@ -680,37 +683,37 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(5).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :UNENC_VARIABLE,
-          value: 'foo',
-          line: 1,
-          column: 2,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQMID,
-          value: '',
-          line: 1,
-          column: 6,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :UNENC_VARIABLE,
-          value: 'bar',
-          line: 1,
-          column: 6,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 10,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :UNENC_VARIABLE,
+            value: 'foo',
+            line: 1,
+            column: 2,
+          ),
+          have_attributes(
+            type: :DQMID,
+            value: '',
+            line: 1,
+            column: 6,
+          ),
+          have_attributes(
+            type: :UNENC_VARIABLE,
+            value: 'bar',
+            line: 1,
+            column: 6,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 10,
+          ),
         )
       end
 
@@ -729,25 +732,25 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(3).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: 'foo',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :UNENC_VARIABLE,
-          value: 'bar',
-          line: 1,
-          column: 5,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQPOST,
-          value: '$',
-          line: 1,
-          column: 9,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: 'foo',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :UNENC_VARIABLE,
+            value: 'bar',
+            line: 1,
+            column: 5,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '$',
+            line: 1,
+            column: 9,
+          ),
         )
       end
 
@@ -768,97 +771,97 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(15).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'key',
-          line: 1,
-          column: 4,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DQMID,
-          value: ' ',
-          line: 1,
-          column: 7,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :FUNCTION_NAME,
-          value: 'flatten',
-          line: 1,
-          column: 11,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :LPAREN,
-          value: '(',
-          line: 1,
-          column: 18,
-        )
-        expect(tokens[5]).to have_attributes(
-          type: :LBRACK,
-          value: '[',
-          line: 1,
-          column: 19,
-        )
-        expect(tokens[6]).to have_attributes(
-          type: :VARIABLE,
-          value: 'value',
-          line: 1,
-          column: 20,
-        )
-        expect(tokens[7]).to have_attributes(
-          type: :RBRACK,
-          value: ']',
-          line: 1,
-          column: 26,
-        )
-        expect(tokens[8]).to have_attributes(
-          type: :RPAREN,
-          value: ')',
-          line: 1,
-          column: 27,
-        )
-        expect(tokens[9]).to have_attributes(
-          type: :DOT,
-          value: '.',
-          line: 1,
-          column: 28,
-        )
-        expect(tokens[10]).to have_attributes(
-          type: :FUNCTION_NAME,
-          value: 'join',
-          line: 1,
-          column: 29,
-        )
-        expect(tokens[11]).to have_attributes(
-          type: :LPAREN,
-          value: '(',
-          line: 1,
-          column: 33,
-        )
-        expect(tokens[12]).to have_attributes(
-          type: :STRING,
-          value: '\nkey ',
-          line: 1,
-          column: 34,
-        )
-        expect(tokens[13]).to have_attributes(
-          type: :RPAREN,
-          value: ')',
-          line: 1,
-          column: 42,
-        )
-        expect(tokens[14]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 43,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'key',
+            line: 1,
+            column: 4,
+          ),
+          have_attributes(
+            type: :DQMID,
+            value: ' ',
+            line: 1,
+            column: 7,
+          ),
+          have_attributes(
+            type: :FUNCTION_NAME,
+            value: 'flatten',
+            line: 1,
+            column: 11,
+          ),
+          have_attributes(
+            type: :LPAREN,
+            value: '(',
+            line: 1,
+            column: 18,
+          ),
+          have_attributes(
+            type: :LBRACK,
+            value: '[',
+            line: 1,
+            column: 19,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'value',
+            line: 1,
+            column: 20,
+          ),
+          have_attributes(
+            type: :RBRACK,
+            value: ']',
+            line: 1,
+            column: 26,
+          ),
+          have_attributes(
+            type: :RPAREN,
+            value: ')',
+            line: 1,
+            column: 27,
+          ),
+          have_attributes(
+            type: :DOT,
+            value: '.',
+            line: 1,
+            column: 28,
+          ),
+          have_attributes(
+            type: :FUNCTION_NAME,
+            value: 'join',
+            line: 1,
+            column: 29,
+          ),
+          have_attributes(
+            type: :LPAREN,
+            value: '(',
+            line: 1,
+            column: 33,
+          ),
+          have_attributes(
+            type: :STRING,
+            value: '\nkey ',
+            line: 1,
+            column: 34,
+          ),
+          have_attributes(
+            type: :RPAREN,
+            value: ')',
+            line: 1,
+            column: 42,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 43,
+          ),
         )
       end
 
@@ -879,97 +882,97 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(15).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'facts',
-          line: 1,
-          column: 4,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :LBRACK,
-          value: '[',
-          line: 1,
-          column: 9,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :DQPRE,
-          value: 'network_',
-          line: 1,
-          column: 10,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :VARIABLE,
-          value: 'iface',
-          line: 1,
-          column: 21,
-        )
-        expect(tokens[5]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 26,
-        )
-        expect(tokens[6]).to have_attributes(
-          type: :RBRACK,
-          value: ']',
-          line: 1,
-          column: 28,
-        )
-        expect(tokens[7]).to have_attributes(
-          type: :DQMID,
-          value: '/',
-          line: 1,
-          column: 29,
-        )
-        expect(tokens[8]).to have_attributes(
-          type: :VARIABLE,
-          value: 'facts',
-          line: 1,
-          column: 33,
-        )
-        expect(tokens[9]).to have_attributes(
-          type: :LBRACK,
-          value: '[',
-          line: 1,
-          column: 38,
-        )
-        expect(tokens[10]).to have_attributes(
-          type: :DQPRE,
-          value: 'netmask_',
-          line: 1,
-          column: 39,
-        )
-        expect(tokens[11]).to have_attributes(
-          type: :VARIABLE,
-          value: 'iface',
-          line: 1,
-          column: 50,
-        )
-        expect(tokens[12]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 55,
-        )
-        expect(tokens[13]).to have_attributes(
-          type: :RBRACK,
-          value: ']',
-          line: 1,
-          column: 57,
-        )
-        expect(tokens[14]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 58,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'facts',
+            line: 1,
+            column: 4,
+          ),
+          have_attributes(
+            type: :LBRACK,
+            value: '[',
+            line: 1,
+            column: 9,
+          ),
+          have_attributes(
+            type: :DQPRE,
+            value: 'network_',
+            line: 1,
+            column: 10,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'iface',
+            line: 1,
+            column: 21,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 26,
+          ),
+          have_attributes(
+            type: :RBRACK,
+            value: ']',
+            line: 1,
+            column: 28,
+          ),
+          have_attributes(
+            type: :DQMID,
+            value: '/',
+            line: 1,
+            column: 29,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'facts',
+            line: 1,
+            column: 33,
+          ),
+          have_attributes(
+            type: :LBRACK,
+            value: '[',
+            line: 1,
+            column: 38,
+          ),
+          have_attributes(
+            type: :DQPRE,
+            value: 'netmask_',
+            line: 1,
+            column: 39,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'iface',
+            line: 1,
+            column: 50,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 55,
+          ),
+          have_attributes(
+            type: :RBRACK,
+            value: ']',
+            line: 1,
+            column: 57,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 58,
+          ),
         )
       end
 
@@ -988,115 +991,115 @@ describe PuppetLint::Lexer do
       end
 
       it 'creates a tokenised string' do
-        expect(tokens).to have(18).tokens
-
-        expect(tokens[0]).to have_attributes(
-          type: :DQPRE,
-          value: '',
-          line: 1,
-          column: 1,
-        )
-        expect(tokens[1]).to have_attributes(
-          type: :VARIABLE,
-          value: 'foo',
-          line: 1,
-          column: 4,
-        )
-        expect(tokens[2]).to have_attributes(
-          type: :DOT,
-          value: '.',
-          line: 1,
-          column: 8,
-        )
-        expect(tokens[3]).to have_attributes(
-          type: :NAME,
-          value: 'map',
-          line: 1,
-          column: 9,
-        )
-        expect(tokens[4]).to have_attributes(
-          type: :WHITESPACE,
-          value: ' ',
-          line: 1,
-          column: 12,
-        )
-        expect(tokens[5]).to have_attributes(
-          type: :PIPE,
-          value: '|',
-          line: 1,
-          column: 13,
-        )
-        expect(tokens[6]).to have_attributes(
-          type: :VARIABLE,
-          value: 'bar',
-          line: 1,
-          column: 14,
-        )
-        expect(tokens[7]).to have_attributes(
-          type: :PIPE,
-          value: '|',
-          line: 1,
-          column: 18,
-        )
-        expect(tokens[8]).to have_attributes(
-          type: :WHITESPACE,
-          value: ' ',
-          line: 1,
-          column: 19,
-        )
-        expect(tokens[9]).to have_attributes(
-          type: :LBRACE,
-          value: '{',
-          line: 1,
-          column: 20,
-        )
-        expect(tokens[10]).to have_attributes(
-          type: :WHITESPACE,
-          value: ' ',
-          line: 1,
-          column: 21,
-        )
-        expect(tokens[11]).to have_attributes(
-          type: :FUNCTION_NAME,
-          value: 'something',
-          line: 1,
-          column: 22,
-        )
-        expect(tokens[12]).to have_attributes(
-          type: :LPAREN,
-          value: '(',
-          line: 1,
-          column: 31,
-        )
-        expect(tokens[13]).to have_attributes(
-          type: :VARIABLE,
-          value: 'bar',
-          line: 1,
-          column: 32,
-        )
-        expect(tokens[14]).to have_attributes(
-          type: :RPAREN,
-          value: ')',
-          line: 1,
-          column: 36,
-        )
-        expect(tokens[15]).to have_attributes(
-          type: :WHITESPACE,
-          value: ' ',
-          line: 1,
-          column: 37,
-        )
-        expect(tokens[16]).to have_attributes(
-          type: :RBRACE,
-          value: '}',
-          line: 1,
-          column: 38,
-        )
-        expect(tokens[17]).to have_attributes(
-          type: :DQPOST,
-          value: '',
-          line: 1,
-          column: 39,
+        expect(tokens).to contain_exactly(
+          have_attributes(
+            type: :DQPRE,
+            value: '',
+            line: 1,
+            column: 1,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'foo',
+            line: 1,
+            column: 4,
+          ),
+          have_attributes(
+            type: :DOT,
+            value: '.',
+            line: 1,
+            column: 8,
+          ),
+          have_attributes(
+            type: :NAME,
+            value: 'map',
+            line: 1,
+            column: 9,
+          ),
+          have_attributes(
+            type: :WHITESPACE,
+            value: ' ',
+            line: 1,
+            column: 12,
+          ),
+          have_attributes(
+            type: :PIPE,
+            value: '|',
+            line: 1,
+            column: 13,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'bar',
+            line: 1,
+            column: 14,
+          ),
+          have_attributes(
+            type: :PIPE,
+            value: '|',
+            line: 1,
+            column: 18,
+          ),
+          have_attributes(
+            type: :WHITESPACE,
+            value: ' ',
+            line: 1,
+            column: 19,
+          ),
+          have_attributes(
+            type: :LBRACE,
+            value: '{',
+            line: 1,
+            column: 20,
+          ),
+          have_attributes(
+            type: :WHITESPACE,
+            value: ' ',
+            line: 1,
+            column: 21,
+          ),
+          have_attributes(
+            type: :FUNCTION_NAME,
+            value: 'something',
+            line: 1,
+            column: 22,
+          ),
+          have_attributes(
+            type: :LPAREN,
+            value: '(',
+            line: 1,
+            column: 31,
+          ),
+          have_attributes(
+            type: :VARIABLE,
+            value: 'bar',
+            line: 1,
+            column: 32,
+          ),
+          have_attributes(
+            type: :RPAREN,
+            value: ')',
+            line: 1,
+            column: 36,
+          ),
+          have_attributes(
+            type: :WHITESPACE,
+            value: ' ',
+            line: 1,
+            column: 37,
+          ),
+          have_attributes(
+            type: :RBRACE,
+            value: '}',
+            line: 1,
+            column: 38,
+          ),
+          have_attributes(
+            type: :DQPOST,
+            value: '',
+            line: 1,
+            column: 39,
+          ),
         )
       end
 
