@@ -114,7 +114,7 @@ Any flag that can be specified on the command line can also be specified in the 
 --no-hard_tabs-check
 ```
 
-Or to specify a whitelist of allowed checks, include a line like:
+Or to specify an allowlist of allowed checks, include a line like:
 
 ```
 --only-checks=trailing_whitespace,hard_tabs,duplicate_params,double_quoted_strings,unquoted_file_mode,only_variable_string,variables_not_enclosed,single_quote_string_with_variables,variable_contains_dash,ensure_not_symlink_target,unquoted_resource_title,relative_classname_inclusion,file_mode,resource_reference_without_title_capital,leading_zero,arrow_alignment,variable_is_lowercase,ensure_first_param,resource_reference_without_whitespace,file_ensure,trailing_comma,leading_zero

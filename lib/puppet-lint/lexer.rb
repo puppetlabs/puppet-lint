@@ -50,7 +50,7 @@ class PuppetLint::Lexer
 
   # Internal: A Hash whose keys are Strings representing reserved keywords in
   # the Puppet DSL.
-  # From https://github.com/puppetlabs/puppet/blob/master/lib/puppet/pops/parser/lexer2.rb#L116-L137
+  # From https://github.com/puppetlabs/puppet/blob/main/lib/puppet/pops/parser/lexer2.rb#L116-L137
   # or thereabouts
   KEYWORDS = {
     'case' => true,
@@ -78,7 +78,7 @@ class PuppetLint::Lexer
 
   # Internal: A Hash whose keys are Strings representing reserved keywords in
   # the Puppet DSL when Application Management is enabled
-  # From https://github.com/puppetlabs/puppet/blob/master/lib/puppet/pops/parser/lexer2.rb#L142-L159
+  # From https://github.com/puppetlabs/puppet/blob/main/lib/puppet/pops/parser/lexer2.rb#L142-L159
   # or therabouts
   # Currently unused
   APP_MANAGEMENT_TOKENS = {

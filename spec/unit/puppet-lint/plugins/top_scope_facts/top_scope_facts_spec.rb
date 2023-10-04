@@ -131,7 +131,7 @@ describe 'top_scope_facts' do
         end
       end
 
-      context 'whitelisted top scope variable $::location' do
+      context 'allowlisted top scope variable $::location' do
         let(:code) { '$::location' }
 
         it 'does not detect any problems' do
@@ -139,7 +139,7 @@ describe 'top_scope_facts' do
         end
       end
 
-      context 'non-whitelisted top scope variable $::application' do
+      context 'non-allowlisted top scope variable $::application' do
         let(:code) { '$::application' }
 
         it 'does not detect any problems' do

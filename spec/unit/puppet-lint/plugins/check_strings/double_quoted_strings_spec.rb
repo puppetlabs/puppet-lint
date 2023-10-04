@@ -51,9 +51,9 @@ describe 'double_quoted_strings' do
     context 'double quoted string with backslash for continuation' do
       let(:code) do
         <<-END
-          class puppet::master::maintenance (
+          class puppet::server::maintenance (
           ) {
-            cron { 'puppet_master_reports_cleanup':
+            cron { 'puppet_server_reports_cleanup':
               command     => "/usr/bin/find /var/lib/puppet/reports -type f -mtime +15 \
                              -delete && /usr/bin/find /var/lib/puppet/reports -mindepth 1 \
                              -empty -type d -delete",
