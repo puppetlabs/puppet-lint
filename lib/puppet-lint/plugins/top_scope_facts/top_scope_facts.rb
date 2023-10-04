@@ -7,7 +7,7 @@
 # If you have top scope variables that aren't facts you should configure the
 # linter to ignore them.
 #
-# You can whitelist top scope variables to ignore via the Rake task.
+# You can allowlist top scope variables to ignore via the Rake task.
 # You should insert the following line to your Rakefile.
 # `PuppetLint.configuration.top_scope_variables = ['location', 'role']`
 #
@@ -17,7 +17,7 @@ TOP_SCOPE_FACTS_VAR_TYPES = Set[:VARIABLE, :UNENC_VARIABLE]
 
 PuppetLint.new_check(:top_scope_facts) do
   def check
-    whitelist = ['trusted', 'facts', 'architecture', 'augeasversion', 'bios_release_date', 'bios_vendor', 'bios_version',
+    allowlist = ['trusted', 'facts', 'architecture', 'augeasversion', 'bios_release_date', 'bios_vendor', 'bios_version',
                  'boardassettag', 'boardmanufacturer', 'boardproductname', 'boardserialnumber', 'chassisassettag', 'chassistype', 'domain',
                  'fqdn', 'gid', 'hardwareisa', 'hardwaremodel', 'hostname', 'id', 'ipaddress', 'ipaddress6', 'lsbdistcodename',
                  'lsbdistdescription', 'lsbdistid', 'lsbdistrelease', 'lsbmajdistrelease', 'lsbminordistrelease', 'lsbrelease',
@@ -28,10 +28,10 @@ PuppetLint.new_check(:top_scope_facts) do
                  'selinux_config_policy', 'selinux_current_mode', 'selinux_enforced', 'selinux_policyversion', 'serialnumber',
                  'swapencrypted', 'swapfree', 'swapsize', 'system32', 'uptime', 'uptime_days', 'uptime_hours', 'uptime_seconds',
                  'uuid', 'xendomains', 'zonename'] + (PuppetLint.configuration.top_scope_variables || [])
-    whitelist = whitelist.join('|')
+    allowlist = allowlist.join('|')
     tokens.select { |x| TOP_SCOPE_FACTS_VAR_TYPES.include?(x.type) }.each do |token|
       next unless %r{^::}.match?(token.value)
-      next if %r{^::(#{whitelist})\[?}.match?(token.value)
+      next if %r{^::(#{allowlist})\[?}.match?(token.value)
       next if %r{^::[a-z0-9_][a-zA-Z0-9_]+::}.match?(token.value)
 
       notify :warning, {
