@@ -472,7 +472,7 @@ describe 'legacy_facts' do
       let(:code) { "$interface_facts['netmask']" }
 
       it 'does not detect any problems' do
-        expect(problems).to have(0).problem
+        expect(problems.size).to eq(0)
       end
     end
   end
