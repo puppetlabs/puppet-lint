@@ -239,11 +239,11 @@ describe 'variable_scope' do
     end
   end
 
-  context 'support the use of facts and trusted facts for Puppet 3.5 onwards' do
+  context 'support the use of facts and trusted facts' do
     let(:code) do
       <<-END
         class foo() {
-          if $facts['osfamily'] == 'redhat' or $trusted['osfamily'] == 'redhat' {
+          if $facts['os']['family'] == 'redhat' or $trusted['os']['family'] == 'redhat' {
            $redhat = true
           }
         }
