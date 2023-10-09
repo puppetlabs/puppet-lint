@@ -477,7 +477,7 @@ describe 'arrow_alignment' do
     context 'where the top level of the block has no parameters' do
       let(:code) do
         <<-END
-          case $::osfamily {
+          case $facts['os']['family'] {
             'RedHat': {
               $datadir = $::operatingsystem ? {
                 'Amazon' => pick($datadir, 'value'),
