@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v4.2.1](https://github.com/puppetlabs/puppet-lint/tree/v4.2.1) - 2023-10-09
+
+[Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.2.0...v4.2.1)
+
+### Fixed
+
+- legacy_facts: Deal with variables ending in facts [#155](https://github.com/puppetlabs/puppet-lint/pull/155) ([ekohl](https://github.com/ekohl))
+
 ## [v4.2.0](https://github.com/puppetlabs/puppet-lint/tree/v4.2.0) - 2023-08-29
 
 [Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.1.0...v4.2.0)
@@ -95,14 +103,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 [Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/2.5.2...v3.0.0)
 
+### Changed
+- (MAINT) bump ruby version [#50](https://github.com/puppetlabs/puppet-lint/pull/50) ([chelnak](https://github.com/chelnak))
+
 ### Added
 
 - (GH-47) Expose additional indexes [#48](https://github.com/puppetlabs/puppet-lint/pull/48) ([chelnak](https://github.com/chelnak))
 - Add SARIF support [#40](https://github.com/puppetlabs/puppet-lint/pull/40) ([shaopeng-gh](https://github.com/shaopeng-gh))
 - Add GitHub Actions annotations [#34](https://github.com/puppetlabs/puppet-lint/pull/34) ([ekohl](https://github.com/ekohl))
-
-### Changed
-- (MAINT) bump ruby version [#50](https://github.com/puppetlabs/puppet-lint/pull/50) ([chelnak](https://github.com/chelnak))
 
 ### Fixed
 
