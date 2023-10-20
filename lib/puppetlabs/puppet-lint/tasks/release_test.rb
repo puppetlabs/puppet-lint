@@ -75,7 +75,7 @@ task :release_test do
     exit
   end
 
-  require 'puppet-lint/tasks/gemfile_rewrite'
+  require 'puppetlabs/puppet-lint/tasks/gemfile_rewrite'
 
   modules_to_test = [
     'puppetlabs/puppetlabs-apt',

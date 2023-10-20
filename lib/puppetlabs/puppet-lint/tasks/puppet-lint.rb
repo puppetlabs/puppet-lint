@@ -1,16 +1,16 @@
 # rubocop:disable Naming/FileName
 
-require 'puppet-lint'
-require 'puppet-lint/optparser'
+require 'puppetlabs/puppet-lint'
+require 'puppetlabs/puppet-lint/optparser'
 require 'rake'
 require 'rake/tasklib'
-require 'puppet-lint/report/codeclimate'
+require 'puppetlabs/puppet-lint/report/codeclimate'
 
 # Public: A Rake task that can be loaded and used with everything you need.
 #
 # Examples
 #
-#   require 'puppet-lint'
+#   require 'puppetlabs/puppet-lint'
 #   PuppetLint::RakeTask.new
 class PuppetLint::RakeTask < Rake::TaskLib
   include ::Rake::DSL if defined?(::Rake::DSL)

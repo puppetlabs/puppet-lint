@@ -1,7 +1,7 @@
 require 'bundler/gem_tasks'
 require 'rubocop/rake_task'
 require 'github_changelog_generator/task'
-require 'puppet-lint/version'
+require 'puppetlabs/puppet-lint/version'
 require 'rspec/core/rake_task'
 require 'puppetlabs_spec_helper/tasks/fixtures'
 

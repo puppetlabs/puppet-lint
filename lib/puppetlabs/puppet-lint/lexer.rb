@@ -1,7 +1,7 @@
 require 'strscan'
 require 'set'
-require 'puppet-lint/lexer/token'
-require 'puppet-lint/lexer/string_slurper'
+require 'puppetlabs/puppet-lint/lexer/token'
+require 'puppetlabs/puppet-lint/lexer/string_slurper'
 
 # Internal: A generic error thrown by the lexer when it encounters something
 # it can't handle.

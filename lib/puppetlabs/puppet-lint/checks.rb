@@ -1,4 +1,4 @@
-require 'puppet-lint/checkplugin'
+require 'puppetlabs/puppet-lint/checkplugin'
 
 # Internal: Various methods that orchestrate the actions of the puppet-lint
 # check plugins.

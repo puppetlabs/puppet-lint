@@ -134,7 +134,7 @@ When reading from a configuration file those quotes would be passed on to the op
 
 ## Testing with Puppet Lint as a Rake task
 
-To test your entire Puppet manifest directory, add `require 'puppet-lint/tasks/puppet-lint'` to your Rakefile and then run:
+To test your entire Puppet manifest directory, add `require 'puppetlabs/puppet-lint/tasks/puppet-lint'` to your Rakefile and then run:
 
 ```
 rake lint

@@ -4,14 +4,14 @@
 
 require 'set'
 require 'json'
-require 'puppet-lint/version'
-require 'puppet-lint/lexer'
-require 'puppet-lint/configuration'
-require 'puppet-lint/data'
-require 'puppet-lint/checks'
-require 'puppet-lint/report/github'
-require 'puppet-lint/bin'
-require 'puppet-lint/monkeypatches'
+require 'puppetlabs/puppet-lint/version'
+require 'puppetlabs/puppet-lint/lexer'
+require 'puppetlabs/puppet-lint/configuration'
+require 'puppetlabs/puppet-lint/data'
+require 'puppetlabs/puppet-lint/checks'
+require 'puppetlabs/puppet-lint/report/github'
+require 'puppetlabs/puppet-lint/bin'
+require 'puppetlabs/puppet-lint/monkeypatches'
 
 class PuppetLint::NoCodeError < StandardError; end
 
@@ -263,4 +263,4 @@ end
 # Default configuration options
 PuppetLint.configuration.defaults
 
-require 'puppet-lint/plugins'
+require 'puppetlabs/puppet-lint/plugins'

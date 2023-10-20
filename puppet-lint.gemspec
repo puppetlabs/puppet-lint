@@ -1,5 +1,5 @@
 $LOAD_PATH.push(File.expand_path('lib', __dir__))
-require 'puppet-lint/version'
+require 'puppetlabs/puppet-lint/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'puppetlabs-puppet-lint'

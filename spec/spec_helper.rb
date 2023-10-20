@@ -10,7 +10,7 @@ if ENV['COVERAGE'] == 'yes' && RUBY_VERSION.start_with?('2.7.')
   end
 end
 
-require 'puppet-lint'
+require 'puppetlabs/puppet-lint'
 require 'rspec/its'
 begin
   require 'rspec/json_expectations'
