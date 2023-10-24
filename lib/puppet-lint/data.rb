@@ -1,24 +1,30 @@
 require 'singleton'
 require 'set'
 
-# Public: A singleton class storing all the information about the manifest
-# being analysed.
+# A singleton class storing all the information about the manifest being
+# analysed.
+#
+# @api public
 class PuppetLint::Data
   include Singleton
 
   class << self
-    # Internal: Get/Set the full expanded path to the manifest file being
-    # checked.
+    # Get/Set the full expanded path to the manifest file being checked.
+    #
+    # @api private
     attr_reader :path, :fullpath, :filename
 
-    # Internal: Get/Set the raw manifest data, split by \n.
+    # Get/Set the raw manifest data, split by \n.
+    #
+    # @api private
     attr_accessor :manifest_lines
 
-    # Internal: Store the tokenised manifest.
+    # Store the tokenised manifest.
     #
-    # tokens - The Array of PuppetLint::Lexer::Token objects to store.
+    # @param [Array[PuppetLint::Lexer::Token]] tokens The Array of PuppetLint::Lexer::Token objects to store.
+    # @return [nil]
     #
-    # Returns nothing.
+    # @api private
     def tokens=(tokens)
       @tokens = tokens
       @title_tokens = nil
@@ -32,14 +38,17 @@ class PuppetLint::Data
       @defaults_indexes = nil
     end
 
+    # @api private
     def ruby1?
       @ruby1 = RbConfig::CONFIG['MAJOR'] == '1' if @ruby1.nil?
       @ruby1
     end
 
-    # Public: Get the tokenised manifest.
+    # Get the tokenised manifest.
     #
-    # Returns an Array of PuppetLint::Lexer::Token objects.
+    # @return [Array[PuppetLint::Lexer::Token]]
+    #
+    # @api public
     def tokens
       calling_method = if ruby1?
                          begin
@@ -62,7 +71,12 @@ class PuppetLint::Data
       end
     end
 
-    # Public: Add new token.
+    # Add new token.
+    #
+    # @param [Integer] index
+    # @param [PuppetLint::Lexer::Token] token
+    #
+    # @api public
     def insert(index, token)
       current_token = tokens[index - 1]
       token.next_token = current_token.next_token
@@ -97,7 +111,11 @@ class PuppetLint::Data
       tokens.insert(index, token)
     end
 
-    # Public: Removes a token
+    # Remove a token
+    #
+    # @param [PuppetLint::Lexer::Token] token
+    #
+    # @api public
     def delete(token)
       token.next_token.prev_token = token.prev_token unless token.next_token.nil?
       token.prev_token.next_token = token.next_token unless token.prev_token.nil?
@@ -109,12 +127,13 @@ class PuppetLint::Data
       tokens.delete(token)
     end
 
-    # Internal: Store the path to the manifest file and populate fullpath and
-    # filename.
+    # Store the path to the manifest file and populate fullpath and filename.
     #
-    # val - The path to the file as a String.
+    # @param [String] val The path to the file
     #
-    # Returns nothing.
+    # @return [nil]
+    #
+    # @api private
     def path=(val)
       @path = val
       if val.nil?
@@ -126,9 +145,11 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Retrieve a list of tokens that represent resource titles
+    # Retrieve a list of tokens that represent resource titles
     #
-    # Returns an Array of PuppetLint::Lexer::Token objects.
+    # @return [Array[PuppetLint::Lexer::Token]]
+    #
+    # @api private
     def title_tokens
       @title_tokens ||= begin
         result = []
@@ -153,10 +174,11 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Determine if the given token contains a CLASSREF in
-    # the token chain..
+    # Determine if the given token contains a CLASSREF in the token chain..
     #
-    # Returns a Boolean.
+    # @param [PuppetLint::Lexer::Token] token
+    #
+    # @api private
     def classref?(token)
       current_token = token
       while (current_token = current_token.prev_code_token)
@@ -165,15 +187,15 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Calculate the positions of all resource declarations within the
+    # Calculate the positions of all resource declarations within the
     # tokenised manifest. These positions only point to the content of the
     # resource declarations, they do not include resource types or titles.
     #
-    # Returns an Array of Hashes, each containing:
-    #   :start - An Integer position in the `tokens` Array pointing to the
-    #            first Token of a resource declaration.
-    #   :end   - An Integer position in the `tokens` Array pointing to the last
-    #            Token of a resource declaration.
+    # @return [Array[Hash[Symbol, Integer]]] each hash contains :start and
+    #   :end pointing to the first and last {PuppetLint::Lexer::Token} of a
+    #   resource declaration
+    #
+    # @api private
     def resource_indexes
       @resource_indexes ||= begin
         marker = 0
@@ -204,12 +226,15 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Find the Token representing the type of a resource definition.
+    # Find the Token representing the type of a resource definition.
     #
-    # index - The Integer pointing to the start of the resource in the `tokens`
-    #         array.
+    # @param [Integer] index
+    #   The Integer pointing to the start of the resource in the `tokens`
+    #   array.
     #
-    # Returns a Token object.
+    # @return [PuppetLint::Lexer::Token]
+    #
+    # @api private
     def find_resource_type_token(index)
       lbrace_idx = tokens[0..index].rindex do |token|
         token.type == :LBRACE && token.prev_code_token.type != :QMARK
@@ -220,13 +245,15 @@ class PuppetLint::Data
       tokens[lbrace_idx].prev_code_token
     end
 
-    # Internal: Find all the Token objects representing the parameter names in
+    # Find all the Token objects representing the parameter names in
     # a resource definition.
     #
-    # resource_tokens - An Array of Token objects that comprise the resource
-    #                   definition.
+    # @param [Array[PuppetLint::Lexer::Token]] resource_tokens
+    #   An Array of Token objects that comprise the resource definition.
     #
-    # Returns an Array of Token objects.
+    # @return [Array[PuppetLint::Lexer::Token]]
+    #
+    # @api private
     def find_resource_param_tokens(resource_tokens)
       param_tokens = []
 
@@ -243,8 +270,8 @@ class PuppetLint::Data
       param_tokens
     end
 
-    # Internal: Calculate the positions of all class definitions within the
-    # `tokens` Array.
+    # Calculate the positions of all class definitions within the `tokens`
+    # Array.
     #
     # Returns an Array of Hashes, each containing:
     #   :start  - An Integer position in the `tokens` Array pointing to the
@@ -253,25 +280,13 @@ class PuppetLint::Data
     #             Token of a class definition.
     #   :tokens - An Array consisting of all the Token objects that make up the
     #             class definition.
+    #
+    # @api private
     def class_indexes
       @class_indexes ||= definition_indexes(:CLASS)
     end
 
-    # Internal: Calculate the positions of all defined type definitions within
-    # the `tokens` Array.
-    #
-    # Returns an Array of Hashes, each containing:
-    #   :start  - An Integer position in the `tokens` Array pointing to the
-    #             first Token of a defined type definition.
-    #   :end    - An Integer position in the `tokens` Array pointing to the last
-    #             Token of a defined type definition.
-    #   :tokens - An Array consisting of all the Token objects that make up the
-    #             defined type.
-    def defined_type_indexes
-      @defined_type_indexes ||= definition_indexes(:DEFINE)
-    end
-
-    # Internal: Calculate the positions of all node definitions within the
+    # Calculate the positions of all defined type definitions within the
     # `tokens` Array.
     #
     # Returns an Array of Hashes, each containing:
@@ -281,12 +296,30 @@ class PuppetLint::Data
     #             Token of a defined type definition.
     #   :tokens - An Array consisting of all the Token objects that make up the
     #             defined type.
+    #
+    # @api private
+    def defined_type_indexes
+      @defined_type_indexes ||= definition_indexes(:DEFINE)
+    end
+
+    # Calculate the positions of all node definitions within the `tokens`
+    # Array.
+    #
+    # Returns an Array of Hashes, each containing:
+    #   :start  - An Integer position in the `tokens` Array pointing to the
+    #             first Token of a defined type definition.
+    #   :end    - An Integer position in the `tokens` Array pointing to the last
+    #             Token of a defined type definition.
+    #   :tokens - An Array consisting of all the Token objects that make up the
+    #             defined type.
+    #
+    # @api private
     def node_indexes
       @node_indexes ||= definition_indexes(:NODE)
     end
 
-    # Internal: Calculate the positions of all the specified defintion types
-    # within the `tokens` Array.
+    # Calculate the positions of all the specified defintion types within the
+    # `tokens` Array.
     #
     # Returns an Array of Hashes, each containing:
     #   :start  - An Integer position in the `tokens` Array pointing to the
@@ -295,6 +328,8 @@ class PuppetLint::Data
     #             Token of a definition.
     #   :tokens - An Array consisting of all the Token objects that make up the
     #             definition.
+    #
+    # @api private
     def definition_indexes(type)
       result = []
       tokens.each_with_index do |token, i|
@@ -336,8 +371,7 @@ class PuppetLint::Data
       result
     end
 
-    # Internal: Calculate the positions of all function calls within
-    # `tokens` Array.
+    # Calculate the positions of all function calls within `tokens` Array.
     #
     # Returns an Array of Hashes, each containing:
     #   :start  - An Integer position in the `tokens` Array pointing to the
@@ -346,6 +380,8 @@ class PuppetLint::Data
     #             Token of a function call
     #   :tokens - An Array consisting of all the Token objects that make up the
     #             function call.
+    #
+    # @api private
     def function_indexes
       @function_indexes ||= begin
         functions = []
@@ -385,8 +421,7 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Calculate the positions of all array values within
-    # `tokens` Array.
+    # Calculate the positions of all array values within `tokens` Array.
     #
     # Returns an Array of Hashes, each containing:
     #   :start  - An Integer position in the `tokens` Array pointing to the
@@ -395,6 +430,8 @@ class PuppetLint::Data
     #             Token of an array value
     #   :tokens - An Array consisting of all the Token objects that make up the
     #             array value.
+    #
+    # @api private
     def array_indexes
       @array_indexes ||= begin
         arrays = []
@@ -421,8 +458,7 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Calculate the positions of all hash values within
-    # `tokens` Array.
+    # Calculate the positions of all hash values within `tokens` Array.
     #
     # Returns an Array of Hashes, each containing:
     #   :start  - An Integer position in the `tokens` Array pointing to the
@@ -431,6 +467,8 @@ class PuppetLint::Data
     #             Token of an hash value
     #   :tokens - An Array consisting of all the Token objects that make up the
     #             hash value.
+    #
+    # @api private
     def hash_indexes
       @hash_indexes ||= begin
         hashes = []
@@ -459,7 +497,7 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Calculate the positions of all defaults declarations within
+    # Calculate the positions of all defaults declarations within
     # `tokens` Array.
     #
     # Returns an Array of Hashes, each containing:
@@ -469,6 +507,8 @@ class PuppetLint::Data
     #             Token of the defaults declaration
     #   :tokens - An Array consisting of all the Token objects that make up the
     #             defaults declaration.
+    #
+    # @api private
     def defaults_indexes
       @defaults_indexes ||= begin
         defaults = []
@@ -493,14 +533,17 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Finds all the tokens that make up the defined type or class
+    # Finds all the tokens that make up the defined type or class
     # definition parameters.
     #
-    # these_tokens - An Array of PuppetLint::Lexer::Token objects that make up
-    #                the defined type or class definition.
+    # @param [Array[PuppetLint::Lexer::Token]] these_tokens
+    #   An Array of PuppetLint::Lexer::Token objects that make up the defined
+    #   type or class definition.
     #
-    # Returns an Array of PuppetLint::Lexer::Token objects or nil if it takes
-    # no parameters.
+    # @return [Array[PuppetLint::Lexer::Token], nil] objects or nil if it takes
+    #   no parameters.
+    #
+    # @api private
     def param_tokens(these_tokens)
       depth = 0
       lparen_idx = nil
@@ -529,28 +572,34 @@ class PuppetLint::Data
       end
     end
 
-    # Internal: Retrieves a list of token types that are considered to be
+    # Retrieves a list of token types that are considered to be
     # formatting tokens (whitespace, newlines, etc).
     #
-    # Returns an Array of Symbols.
+    # @return [Array[Symbol]]
+    #
+    # @api private
     def formatting_tokens
       @formatting_tokens ||= PuppetLint::Lexer::FORMATTING_TOKENS
     end
 
-    # Internal: Retrieves a Hash of Sets. Each key is a check name Symbol and
+    # Retrieves a Hash of Sets. Each key is a check name Symbol and
     # the Set of Integers returned lists all the lines that the check results
     # should be ignored on.
     #
-    # Returns a Hash of Sets of Integers.
+    # @return [Hash[Symbol, Set[Integer]]]
+    #
+    # @api private
     def ignore_overrides
       @ignore_overrides ||= {}
     end
 
-    # Internal: Parses all COMMENT, MLCOMMENT and SLASH_COMMENT tokens looking
+    # Parses all COMMENT, MLCOMMENT and SLASH_COMMENT tokens looking
     # for control comments (comments that enable or disable checks). Builds the
     # contents of the `ignore_overrides` hash.
     #
-    # Returns nothing.
+    # @return [nil]
+    #
+    # @api private
     def parse_control_comments
       @ignore_overrides.each_key { |check| @ignore_overrides[check].clear }
 
