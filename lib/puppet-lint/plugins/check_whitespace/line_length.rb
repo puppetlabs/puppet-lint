@@ -9,7 +9,7 @@ class PuppetLint::LineLengthCheck
   # @param content [String] The content of the current line.
   # @param character_count [Integer] The maximum number of characters allowed
   #
-  # @return problem [Array] An array containing a description of the problem.
+  # @return [Array] An array containing a description of the problem.
   # Can be passed directly to notify..
   def self.check(line_number, content, character_count)
     return if content.include? '://'
