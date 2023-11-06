@@ -16,21 +16,21 @@ This tool is only supported on Puppet 7 & 8 environments. In cases where Puppet 
 Install the Puppet Lint gem by running:
 
 ```
-gem install puppet-lint
+gem install puppetlabs-lint
 ```
 
 ## Testing with Puppet Lint
 
-To test manifests for correct Puppet style, run the `puppet-lint` command with the path to the files you want to test.
+To test manifests for correct Puppet style, run the `puppetlabs-lint` command with the path to the files you want to test.
 
 For example:
 
 ```
-puppet-lint ~/modules/puppetlabs-java/manifests/init.pp
+puppetlabs-lint ~/modules/puppetlabs-java/manifests/init.pp
 ```
 
 ```
-puppet-lint ~/modules/puppetlabs-mysql/manifests
+puppetlabs-lint ~/modules/puppetlabs-mysql/manifests
 ```
 
 ### Fix issues automatically
@@ -38,7 +38,7 @@ puppet-lint ~/modules/puppetlabs-mysql/manifests
 To instruct Lint to automatically fix any issues that it detects, use the `--fix` flag:
 
 ```
-puppet-lint --fix /modules
+puppetlabs-lint --fix /modules
 ```
 
 ### Modify which checks to run
@@ -54,13 +54,13 @@ To list all available checks along with basic usage documentation, use the `--li
 To run only specific checks, use the `--only-checks` option, with a comma-separated list of arguments specifying which checks to make:
 
 ```
-puppet-lint --only-checks trailing_whitespace,140chars modules/
+puppetlabs-lint --only-checks trailing_whitespace,140chars modules/
 ```
 
 To avoid enormous patch sets when using the `--fix` flag, use the `--only-checks` option to limit which checks Puppet Lint makes:
 
 ```
-puppet-lint --only-checks trailing_whitespace --fix modules/
+puppetlabs-lint --only-checks trailing_whitespace --fix modules/
 ```
 
 ### Disable Lint checks
@@ -69,10 +69,10 @@ You can disable specific Lint checks on the command line, disable them permanent
 
 #### Disable checks on the command line
 
-To disable any of the checks when running the `puppet-lint` command, add a `--no-<check_name>-check` flag to the command. For example, to skip the 140-character check, run:
+To disable any of the checks when running the `puppetlabs-lint` command, add a `--no-<check_name>-check` flag to the command. For example, to skip the 140-character check, run:
 
 ```
-puppet-lint --no-140chars-check modules/
+puppetlabs-lint --no-140chars-check modules/
 ```
 
 #### Disable checks within Puppet code
@@ -123,7 +123,7 @@ Or to specify an allowlist of allowed checks, include a line like:
 Please note that there is an important difference between reading options from the command line and reading options from a configuration file: In the former case the shell interprets one level of quotes. That does not happen in the latter case. So, it would make sense to quote some configuration values on the command line, like so:
 
 ```
-$ puppet-lint --ignore-paths 'modules/stdlib/*' modules/
+$ puppetlabs-lint --ignore-paths 'modules/stdlib/*' modules/
 ```
 
 When reading from a configuration file those quotes would be passed on to the option parser -- probably not giving the expected result. Instead the line should read
@@ -134,7 +134,7 @@ When reading from a configuration file those quotes would be passed on to the op
 
 ## Testing with Puppet Lint as a Rake task
 
-To test your entire Puppet manifest directory, add `require 'puppetlabs/puppet-lint/tasks/puppet-lint'` to your Rakefile and then run:
+To test your entire Puppet manifest directory, add `require 'puppetlabs/puppetlabs-lint/tasks/puppetlabs-lint'` to your Rakefile and then run:
 
 ```
 rake lint
@@ -153,14 +153,14 @@ PuppetLint::RakeTask.new :lint do |config|
   # List of checks to disable
   config.disable_checks = ['documentation', '140chars']
 
-  # Should puppet-lint prefix it's output with the file being checked,
+  # Should puppetlabs-lint prefix it's output with the file being checked,
   # defaults to true
   config.with_filename = false
 
   # Should the task fail if there were any warnings, defaults to false
   config.fail_on_warnings = true
 
-  # Format string for puppet-lint's output (see the puppet-lint help output
+  # Format string for puppetlabs-lint's output (see the puppetlabs-lint help output
   # for details
   config.log_format = '%{filename} - %{message}'
 
@@ -239,7 +239,7 @@ validate lint check rubocop-Ruby 2.7.2-Puppet ~> 7:
 
 ## Options
 
-See `puppet-lint --help` for a full list of command line options and checks.
+See `puppetlabs-lint --help` for a full list of command line options and checks.
 
 ## Checks
 
@@ -309,7 +309,7 @@ If you have problems getting this tool up and running, please [contact Support](
 
 ## Thank you
 
-Many thanks to the following people for contributing to puppet-lint
+Many thanks to the following people for contributing to puppetlabs-lint
 
 * James Turnbull (@kartar)
 * Jan Vansteenkiste (@vStone)

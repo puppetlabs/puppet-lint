@@ -28,7 +28,7 @@ def run_cmd(message, *cmd)
 end
 
 def with_puppet_lint_head(&block)
-  print('  Updating Gemfile to use puppet-lint HEAD... ')
+  print('  Updating Gemfile to use puppetlabs-lint HEAD... ')
 
   buffer = Parser::Source::Buffer.new('Gemfile')
   buffer.source = File.read('Gemfile')
@@ -39,7 +39,7 @@ def with_puppet_lint_head(&block)
   if modified_gemfile == buffer.source
     puppet_lint_root = File.expand_path(File.join(__FILE__, '..', '..', '..', '..'))
     File.open('Gemfile', 'a') do |f|
-      f.puts "gem 'puppet-lint', :path => '#{puppet_lint_root}'"
+      f.puts "gem 'puppetlabs-lint', :path => '#{puppet_lint_root}'"
     end
   else
     File.open('Gemfile', 'w') do |f|
@@ -75,7 +75,7 @@ task :release_test do
     exit
   end
 
-  require 'puppetlabs/puppet-lint/tasks/gemfile_rewrite'
+  require 'puppetlabs/puppetlabs-lint/tasks/gemfile_rewrite'
 
   modules_to_test = [
     'puppetlabs/puppetlabs-apt',
@@ -115,14 +115,14 @@ task :release_test do
           _, success = run_cmd('Installing dependencies', 'bundle', 'install', '--path', File.join('..', 'vendor', 'gems'))
           next unless success
 
-          output, success = run_cmd('Running puppet-lint CLI', 'bundle', 'exec', 'puppet-lint', '--relative', '--no-documentation-check', 'manifests')
+          output, success = run_cmd('Running puppetlabs-lint CLI', 'bundle', 'exec', 'puppetlabs-lint', '--relative', '--no-documentation-check', 'manifests')
           unless output.empty?
             output.split("\n").each do |line|
               puts "    #{line}"
             end
           end
 
-          output, success = run_cmd('Running puppet-lint Rake task', 'bundle', 'exec', 'rake', 'lint')
+          output, success = run_cmd('Running puppetlabs-lint Rake task', 'bundle', 'exec', 'rake', 'lint')
           unless output.empty?
             output.split("\n").each do |line|
               puts "    #{line}"

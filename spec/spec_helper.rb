@@ -6,11 +6,11 @@ if ENV['COVERAGE'] == 'yes' && RUBY_VERSION.start_with?('2.7.')
   SimpleCov.start do
     add_filter('/spec/')
     add_filter('/vendor/')
-    add_group('Checks', 'lib/puppet-lint/plugins')
+    add_group('Checks', 'lib/puppetlabs/puppetlabs-lint/plugins')
   end
 end
 
-require 'puppetlabs/puppet-lint'
+require 'puppetlabs/puppetlabs-lint'
 require 'rspec/its'
 begin
   require 'rspec/json_expectations'

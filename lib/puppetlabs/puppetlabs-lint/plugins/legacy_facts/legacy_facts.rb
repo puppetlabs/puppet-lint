@@ -1,10 +1,10 @@
-# Public: A puppet-lint custom check to detect legacy facts.
+# Public: A puppetlabs-lint custom check to detect legacy facts.
 #
 # This check will optionally convert from legacy facts like $::operatingsystem
 # or legacy hashed facts like $facts['operatingsystem'] to the
 # new structured facts like $facts['os']['name'].
 #
-# This plugin was adopted in to puppet-lint from https://github.com/mmckinst/puppet-lint-legacy_facts-check
+# This plugin was adopted in to puppetlabs-lint from https://github.com/mmckinst/puppetlabs-lint-legacy_facts-check
 # Thanks to @mmckinst, @seanmil, @rodjek, @baurmatt, @bart2 and @joshcooper for the original work.
 LEGACY_FACTS_VAR_TYPES = Set[:VARIABLE, :UNENC_VARIABLE]
 

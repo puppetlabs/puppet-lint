@@ -1,7 +1,7 @@
 # Public: Find and warn about module names with illegal uppercase characters.
 #
 # https://puppet.com/docs/puppet/latest/modules_fundamentals.html#allowed-module-names
-# Provides a fix. [puppet-lint #554]
+# Provides a fix. [puppetlabs-lint #554]
 PuppetLint.new_check(:names_containing_uppercase) do
   def check
     (class_indexes + defined_type_indexes).each do |class_idx|

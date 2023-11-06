@@ -1,7 +1,7 @@
 require 'strscan'
 require 'set'
-require 'puppetlabs/puppet-lint/lexer/token'
-require 'puppetlabs/puppet-lint/lexer/string_slurper'
+require 'puppetlabs/puppetlabs-lint/lexer/token'
+require 'puppetlabs/puppetlabs-lint/lexer/string_slurper'
 
 # Internal: A generic error thrown by the lexer when it encounters something
 # it can't handle.
@@ -32,7 +32,7 @@ class PuppetLint::LexerError < StandardError
   end
 end
 
-# Internal: The puppet-lint lexer. Converts your manifest into its tokenised
+# Internal: The puppetlabs-lint lexer. Converts your manifest into its tokenised
 # form.
 class PuppetLint::Lexer
   def initialize

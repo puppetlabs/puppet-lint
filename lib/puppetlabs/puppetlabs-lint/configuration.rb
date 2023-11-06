@@ -1,5 +1,5 @@
 # Public: A singleton class to store the running configuration of
-# puppet-lint.
+# puppetlabs-lint.
 class PuppetLint::Configuration
   # Internal: Add helper methods for a new check to the
   # PuppetLint::Configuration object.

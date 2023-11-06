@@ -1,10 +1,10 @@
 FROM ruby:2.7-alpine
 
-RUN mkdir /puppet-lint /puppet
+RUN mkdir /puppetlabs-lint /puppet
 
 VOLUME /puppet
 WORKDIR /puppet
-ENTRYPOINT ["/puppet-lint/bin/puppet-lint"]
+ENTRYPOINT ["/puppetlabs-lint/bin/puppetlabs-lint"]
 CMD ["--help"]
 
-COPY . /puppet-lint/
+COPY . /puppetlabs-lint/

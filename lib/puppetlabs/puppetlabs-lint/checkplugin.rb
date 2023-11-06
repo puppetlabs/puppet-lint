@@ -1,4 +1,4 @@
-# Public: A class that contains and provides information for the puppet-lint
+# Public: A class that contains and provides information for the puppetlabs-lint
 # checks.
 #
 # This class should not be used directly, but instead should be inherited.
@@ -146,7 +146,7 @@ class PuppetLint::CheckPlugin
   end
 
   # Public: Provides the path of the file being analysed as it was provided to
-  # puppet-lint to the check plugins.
+  # puppetlabs-lint to the check plugins.
   #
   # Returns the String path.
   def path

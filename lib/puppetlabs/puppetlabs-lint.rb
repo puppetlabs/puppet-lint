@@ -4,14 +4,14 @@
 
 require 'set'
 require 'json'
-require 'puppetlabs/puppet-lint/version'
-require 'puppetlabs/puppet-lint/lexer'
-require 'puppetlabs/puppet-lint/configuration'
-require 'puppetlabs/puppet-lint/data'
-require 'puppetlabs/puppet-lint/checks'
-require 'puppetlabs/puppet-lint/report/github'
-require 'puppetlabs/puppet-lint/bin'
-require 'puppetlabs/puppet-lint/monkeypatches'
+require 'puppetlabs/puppetlabs-lint/version'
+require 'puppetlabs/puppetlabs-lint/lexer'
+require 'puppetlabs/puppetlabs-lint/configuration'
+require 'puppetlabs/puppetlabs-lint/data'
+require 'puppetlabs/puppetlabs-lint/checks'
+require 'puppetlabs/puppetlabs-lint/report/github'
+require 'puppetlabs/puppetlabs-lint/bin'
+require 'puppetlabs/puppetlabs-lint/monkeypatches'
 
 class PuppetLint::NoCodeError < StandardError; end
 
@@ -27,7 +27,7 @@ class PuppetLint::SyntaxError < StandardError
   end
 end
 
-# Public: The public interface to puppet-lint.
+# Public: The public interface to puppetlabs-lint.
 class PuppetLint
   # Public: Gets/Sets the String manifest code to be checked.
   attr_accessor :code
@@ -263,4 +263,4 @@ end
 # Default configuration options
 PuppetLint.configuration.defaults
 
-require 'puppetlabs/puppet-lint/plugins'
+require 'puppetlabs/puppetlabs-lint/plugins'

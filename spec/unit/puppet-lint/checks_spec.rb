@@ -146,13 +146,13 @@ describe PuppetLint::Checks do
         allow($stdout).to receive(:puts).with(anything)
       end
 
-      it 'prints out information about the puppet-lint version and ruby environment' do
+      it 'prints out information about the puppetlabs-lint version and ruby environment' do
         expected_info = [
-          'Whoops! It looks like puppet-lint has encountered an error that it doesn\'t',
+          'Whoops! It looks like puppetlabs-lint has encountered an error that it doesn\'t',
           'know how to handle. Please open an issue at https://github.com/puppetlabs/puppet-lint',
           'and paste the following output into the issue description.',
           '---',
-          "puppet-lint version: #{PuppetLint::VERSION}",
+          "puppetlabs-lint version: #{PuppetLint::VERSION}",
           "ruby version: #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}",
           "platform: #{RUBY_PLATFORM}",
           "file path: #{fileinfo}",

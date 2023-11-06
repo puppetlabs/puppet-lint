@@ -1,9 +1,9 @@
 require 'pathname'
 require 'uri'
-require 'puppetlabs/puppet-lint/optparser'
-require 'puppetlabs/puppet-lint/report/codeclimate'
+require 'puppetlabs/puppetlabs-lint/optparser'
+require 'puppetlabs/puppetlabs-lint/report/codeclimate'
 
-# Internal: The logic of the puppet-lint bin script, contained in a class for
+# Internal: The logic of the puppetlabs-lint bin script, contained in a class for
 # ease of testing.
 class PuppetLint::Bin
   # Public: Initialise a new PuppetLint::Bin.
@@ -18,7 +18,7 @@ class PuppetLint::Bin
     @args = args
   end
 
-  # Public: Run puppet-lint as a command line tool.
+  # Public: Run puppetlabs-lint as a command line tool.
   #
   # Returns an Integer exit code to be passed back to the shell.
   def run
@@ -26,13 +26,13 @@ class PuppetLint::Bin
       opts = PuppetLint::OptParser.build(@args)
       opts.parse!(@args)
     rescue OptionParser::InvalidOption => e
-      puts "puppet-lint: #{e.message}"
-      puts "puppet-lint: try 'puppet-lint --help' for more information"
+      puts "puppetlabs-lint: #{e.message}"
+      puts "puppetlabs-lint: try 'puppetlabs-lint --help' for more information"
       return 1
     end
 
     if PuppetLint.configuration.display_version
-      puts "puppet-lint #{PuppetLint::VERSION}"
+      puts "puppetlabs-lint #{PuppetLint::VERSION}"
       return 0
     end
 
@@ -42,8 +42,8 @@ class PuppetLint::Bin
     end
 
     if @args[0].nil?
-      puts 'puppet-lint: no file specified'
-      puts "puppet-lint: try 'puppet-lint --help' for more information"
+      puts 'puppetlabs-lint: no file specified'
+      puts "puppetlabs-lint: try 'puppetlabs-lint --help' for more information"
       return 1
     end
 
@@ -107,8 +107,8 @@ class PuppetLint::Bin
 
       return_val
     rescue PuppetLint::NoCodeError
-      puts 'puppet-lint: no file specified or specified file does not exist'
-      puts "puppet-lint: try 'puppet-lint --help' for more information"
+      puts 'puppetlabs-lint: no file specified or specified file does not exist'
+      puts "puppetlabs-lint: try 'puppetlabs-lint --help' for more information"
       1
     end
   end

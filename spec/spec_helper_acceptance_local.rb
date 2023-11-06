@@ -7,7 +7,7 @@ require 'rspec/expectations'
 def puppet_lint(args = [])
   raise "Parameter 'args' should an Array but it was of type #{args.class}." unless args.is_a?(Array) || args.empty?
 
-  bin_path = File.join(File.dirname(__FILE__), '..', 'bin', 'puppet-lint')
+  bin_path = File.join(File.dirname(__FILE__), '..', 'bin', 'puppetlabs-lint')
 
   command = [bin_path]
   command.concat(args) unless args.empty?

@@ -2,6 +2,6 @@
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-require 'puppetlabs/puppet-lint'
+require 'puppetlabs/puppetlabs-lint'
 
 exit PuppetLint::Bin.new(ARGV).run

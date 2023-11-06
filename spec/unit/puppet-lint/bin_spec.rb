@@ -52,7 +52,7 @@ describe PuppetLint::Bin do
     let(:args) { '--version' }
 
     its(:exitstatus) { is_expected.to eq(0) }
-    its(:stdout) { is_expected.to eq("puppet-lint #{PuppetLint::VERSION}") }
+    its(:stdout) { is_expected.to eq("puppetlabs-lint #{PuppetLint::VERSION}") }
   end
 
   context 'when asked to display available checks' do

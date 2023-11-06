@@ -1,17 +1,17 @@
 require 'pathname'
 
-# Public: Various methods that implement puppet-lint's plugin system
+# Public: Various methods that implement puppetlabs-lint's plugin system
 #
 # Examples
 #
 #   PuppetLint::Plugins.load_spec_helper
 class PuppetLint::Plugins
-  # Internal: Find any gems containing puppet-lint plugins and load them.
+  # Internal: Find any gems containing puppetlabs-lint plugins and load them.
   #
   # Returns nothing.
   def self.load_from_gems
     gem_directories.each do |directory|
-      path = directory + 'puppet-lint/plugins'
+      path = directory + 'puppetlabs-lint/plugins'
       next unless path.directory?
 
       Dir["#{path}/**/*.rb"].each do |file|
@@ -20,11 +20,11 @@ class PuppetLint::Plugins
     end
   end
 
-  # Public: Load the puppet-lint spec_helper.rb
+  # Public: Load the puppetlabs-lint spec_helper.rb
   #
   # Returns nothings.
   def self.load_spec_helper
-    gemspec = gemspecs.find { |spec| spec.name == 'puppet-lint' }
+    gemspec = gemspecs.find { |spec| spec.name == 'puppetlabs-lint' }
     load(Pathname.new(gemspec.full_gem_path) + 'spec/spec_helper.rb')
   end
 
@@ -54,7 +54,7 @@ class PuppetLint::Plugins
     # Returns true if the configuration is set to load "prerelease" gems, false otherwise.
     def load_prerelease_plugins?
       # Load prerelease plugins (which ruby defines as any gem which has a letter in its version number).
-      # Can't use puppet-lint configuration object here because this code executes before the command line is parsed.
+      # Can't use puppetlabs-lint configuration object here because this code executes before the command line is parsed.
       return ['true', 'yes'].include?(ENV['PUPPET_LINT_LOAD_PRERELEASE_PLUGINS'].downcase) if ENV['PUPPET_LINT_LOAD_PRERELEASE_PLUGINS']
 
       false
@@ -65,7 +65,7 @@ class PuppetLint::Plugins
     # Returns an Array of Pathname objects.
     def gem_directories
       if rubygems?
-        gemspecs.reject { |spec| spec.name == 'puppet-lint' }.map do |spec|
+        gemspecs.reject { |spec| spec.name == 'puppetlabs-lint' }.map do |spec|
           Pathname.new(spec.full_gem_path) + 'lib'
         end
       else

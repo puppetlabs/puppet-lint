@@ -1,20 +1,20 @@
 require 'optparse'
 
-# Public: Contains the puppet-lint option parser so that it can be used easily
+# Public: Contains the puppetlabs-lint option parser so that it can be used easily
 # in multiple places.
 class PuppetLint::OptParser
   HELP_TEXT = <<-EOF.freeze
-    puppet-lint
+    puppetlabs-lint
 
     Basic Command Line Usage:
-      puppet-lint [OPTIONS] PATH
+      puppetlabs-lint [OPTIONS] PATH
 
             PATH                         The path to the Puppet manifest.
 
     Option:
   EOF
 
-  # Public: Initialise a new puppet-lint OptionParser.
+  # Public: Initialise a new puppetlabs-lint OptionParser.
   #
   # Returns an OptionParser object.
   def self.build(args = [])
@@ -25,11 +25,11 @@ class PuppetLint::OptParser
         PuppetLint.configuration.display_version = true
       end
 
-      opts.on('--no-config', 'Do not load default puppet-lint option files.') do
+      opts.on('--no-config', 'Do not load default puppetlabs-lint option files.') do
         # nothing to do, option is handled differently
       end
 
-      opts.on('-c', '--config FILE', 'Load puppet-lint options from file.') do |file|
+      opts.on('-c', '--config FILE', 'Load puppetlabs-lint options from file.') do |file|
         opts.load(file)
       end
 
@@ -61,13 +61,13 @@ class PuppetLint::OptParser
         PuppetLint.configuration.relative = true
       end
 
-      opts.on('-l', '--load FILE', 'Load a file containing custom puppet-lint checks.') do |f|
+      opts.on('-l', '--load FILE', 'Load a file containing custom puppetlabs-lint checks.') do |f|
         load(f)
       end
 
       opts.on('--load-from-puppet MODULEPATH', 'Load plugins from the given Puppet module path.') do |path|
         path.split(':').each do |p|
-          Dir["#{p}/*/lib/puppet-lint/plugins/*.rb"].each do |file|
+          Dir["#{p}/*/lib/puppetlabs-lint/plugins/*.rb"].each do |file|
             load(file)
           end
         end
@@ -82,7 +82,7 @@ class PuppetLint::OptParser
         'Change the log format.', 'Overrides --with-filename.',
         'The following placeholders can be used:',
         '%{filename} - Filename without path.',
-        '%{path}     - Path as provided to puppet-lint.',
+        '%{path}     - Path as provided to puppetlabs-lint.',
         '%{fullpath} - Expanded path to the file.',
         '%{line}     - Line number.',
         '%{column}   - Column number.',
@@ -142,12 +142,12 @@ class PuppetLint::OptParser
     end
 
     unless args.include?('--no-config')
-      opt_parser.load('/etc/puppet-lint.rc')
+      opt_parser.load('/etc/puppetlabs-lint.rc')
       if File.readable?(Dir.home)
-        home_dotfile_path = File.expand_path('~/.puppet-lint.rc')
+        home_dotfile_path = File.expand_path('~/.puppetlabs-lint.rc')
         opt_parser.load(home_dotfile_path) if File.readable?(home_dotfile_path)
       end
-      opt_parser.load('.puppet-lint.rc')
+      opt_parser.load('.puppetlabs-lint.rc')
     end
 
     opt_parser.parse!(args) unless args.empty?

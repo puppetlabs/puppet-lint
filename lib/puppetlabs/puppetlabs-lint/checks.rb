@@ -1,6 +1,6 @@
-require 'puppetlabs/puppet-lint/checkplugin'
+require 'puppetlabs/puppetlabs-lint/checkplugin'
 
-# Internal: Various methods that orchestrate the actions of the puppet-lint
+# Internal: Various methods that orchestrate the actions of the puppetlabs-lint
 # check plugins.
 class PuppetLint::Checks
   # Public: Get an Array of problem Hashes.
@@ -13,7 +13,7 @@ class PuppetLint::Checks
 
   # Internal: Tokenise the manifest code and prepare it for checking.
   #
-  # path    - The path to the file as passed to puppet-lint as a String.
+  # path    - The path to the file as passed to puppetlabs-lint as a String.
   # content - The String manifest code to be checked.
   #
   # Returns nothing.
@@ -47,7 +47,7 @@ class PuppetLint::Checks
 
   # Internal: Run the lint checks over the manifest code.
   #
-  # fileinfo - The path to the file as passed to puppet-lint as a String.
+  # fileinfo - The path to the file as passed to puppetlabs-lint as a String.
   # data     - The String manifest code to be checked.
   #
   # Returns an Array of problem Hashes.
@@ -86,11 +86,11 @@ class PuppetLint::Checks
     @problems
   rescue StandardError => e
     $stdout.puts <<-END.gsub(%r{^ {6}}, '')
-      Whoops! It looks like puppet-lint has encountered an error that it doesn't
-      know how to handle. Please open an issue at https://github.com/puppetlabs/puppet-lint
+      Whoops! It looks like puppetlabs-lint has encountered an error that it doesn't
+      know how to handle. Please open an issue at https://github.com/puppetlabs-lint
       and paste the following output into the issue description.
       ---
-      puppet-lint version: #{PuppetLint::VERSION}
+      puppetlabs-lint version: #{PuppetLint::VERSION}
       ruby version: #{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}
       platform: #{RUBY_PLATFORM}
       file path: #{fileinfo}

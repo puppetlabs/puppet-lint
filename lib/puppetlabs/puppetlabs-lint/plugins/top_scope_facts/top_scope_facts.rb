@@ -1,4 +1,4 @@
-# Public: A puppet-lint plugin that will check for the use of top scope facts.
+# Public: A puppetlabs-lint plugin that will check for the use of top scope facts.
 # For example, the fact `$facts['kernel']` should be used over
 # `$::kernel`.
 #
@@ -11,7 +11,7 @@
 # You should insert the following line to your Rakefile.
 # `PuppetLint.configuration.top_scope_variables = ['location', 'role']`
 #
-# This plugin was adopted in to puppet-lint from https://github.com/mmckinst/puppet-lint-top_scope_facts-check
+# This plugin was adopted in to puppetlabs-lint from https://github.com/mmckinst/puppetlabs-lint-top_scope_facts-check
 # Thanks to @mmckinst, @seanmil and @alexjfisher for the original work.
 TOP_SCOPE_FACTS_VAR_TYPES = Set[:VARIABLE, :UNENC_VARIABLE]
 
