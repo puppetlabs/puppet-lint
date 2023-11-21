@@ -1,3 +1,3 @@
 class PuppetLint
-  VERSION = '5.0.0'.freeze
+  VERSION = '4.2.2'.freeze
 end
