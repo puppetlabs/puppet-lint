@@ -116,6 +116,8 @@ module RSpec::LintExampleGroup
   end
 
   def subject
+    require 'pry-byebug'
+    binding.pry
     klass = PuppetLint::Checks.new
     filepath = respond_to?(:path) ? path : ''
     klass.load_data(filepath, code)

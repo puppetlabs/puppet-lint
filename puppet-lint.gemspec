@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
     'spec/**/*',
   ]
   spec.executables = Dir['bin/**/*'].map { |f| File.basename(f) }
-  spec.require_paths = ['lib']
+  spec.require_paths = ['lib/']
 
   spec.authors = [
     'Tim Sharpe',
