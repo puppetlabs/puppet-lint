@@ -5,12 +5,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [v5.0.0](https://github.com/puppetlabs/puppet-lint/tree/v5.0.0) - 2023-10-18
+## [v4.2.3](https://github.com/puppetlabs/puppet-lint/tree/v4.2.3) - 2023-11-22
 
-[Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.2.1...v5.0.0)
+[Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.2.2...v4.2.3)
 
-### Changed
-- (CAT-1248) Update Published Name and Owner [#158](https://github.com/puppetlabs/puppet-lint/pull/158) ([david22swan](https://github.com/david22swan))
+### Fixed
+
+- (maint) - Update redundant description [#179](https://github.com/puppetlabs/puppet-lint/pull/179) ([jordanbreen28](https://github.com/jordanbreen28))
+
+## [v4.2.2](https://github.com/puppetlabs/puppet-lint/tree/v4.2.2) - 2023-11-21
+
+[Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.2.1...v4.2.2)
+
+### Fixed
+
+- Use better yardoc tags [#172](https://github.com/puppetlabs/puppet-lint/pull/172) ([ekohl](https://github.com/ekohl))
 
 ## [v4.2.1](https://github.com/puppetlabs/puppet-lint/tree/v4.2.1) - 2023-10-09
 
