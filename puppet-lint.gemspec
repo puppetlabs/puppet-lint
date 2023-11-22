@@ -8,8 +8,6 @@ Gem::Specification.new do |spec|
   spec.summary = 'Ensure your Puppet manifests conform with the Puppetlabs style guide'
   spec.description = <<-EOF
     Checks your Puppet manifests against the Puppetlabs style guide and alerts you to any discrepancies.
-    Note: Support for this gem has been moved under the github rubygems registry and as such any future updates from
-    the Puppet team will be released under `https://github.com/orgs/puppetlabs/packages/rubygems/puppet-lint`.
   EOF
 
   spec.files = Dir[
