@@ -121,7 +121,7 @@ class PuppetLint::Checks
   # Returns an Array of String check names.
   def enabled_checks
     @enabled_checks ||= PuppetLint.configuration.checks.select do |check|
-      PuppetLint.configuration.send("#{check}_enabled?")
+      PuppetLint.configuration.send(:"#{check}_enabled?")
     end
   end
 
