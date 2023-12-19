@@ -52,19 +52,19 @@ class PuppetLint::RakeTask < Rake::TaskLib
         enable_checks = Array(@only_checks).map(&:to_sym)
         PuppetLint.configuration.checks.each do |check|
           if enable_checks.include?(check)
-            PuppetLint.configuration.send("enable_#{check}")
+            PuppetLint.configuration.send(:"enable_#{check}")
           else
-            PuppetLint.configuration.send("disable_#{check}")
+            PuppetLint.configuration.send(:"disable_#{check}")
           end
         end
       end
 
       Array(@disable_checks).each do |check|
-        PuppetLint.configuration.send("disable_#{check}")
+        PuppetLint.configuration.send(:"disable_#{check}")
       end
 
       ['with_filename', 'fail_on_warnings', 'error_level', 'log_format', 'with_context', 'fix', 'show_ignored', 'relative'].each do |config|
-        value = instance_variable_get("@#{config}")
+        value = instance_variable_get(:"@#{config}")
         PuppetLint.configuration.send("#{config}=".to_sym, value) unless value.nil?
       end
 

@@ -17,21 +17,21 @@ class PuppetLint::Configuration
     # Public: Determine if the named check is enabled.
     #
     # Returns true if the check is enabled, otherwise return false.
-    define_method("#{check}_enabled?") do
+    define_method(:"#{check}_enabled?") do
       settings["#{check}_disabled"] != true
     end
 
     # Public: Disable the named check.
     #
     # Returns nothing.
-    define_method("disable_#{check}") do
+    define_method(:"disable_#{check}") do
       settings["#{check}_disabled"] = true
     end
 
     # Public: Enable the named check.
     #
     # Returns nothing.
-    define_method("enable_#{check}") do
+    define_method(:"enable_#{check}") do
       settings["#{check}_disabled"] = false
     end
   end
@@ -92,7 +92,7 @@ class PuppetLint::Configuration
     # value - The value to set the option to.
     #
     # Returns nothing.
-    define_method("#{option}=") do |value|
+    define_method(:"#{option}=") do |value|
       settings[option] = value
     end
 
