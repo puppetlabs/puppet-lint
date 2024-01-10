@@ -1,12 +1,26 @@
 # Disable GitHub Actions reporting since it breaks the test suite
 ENV.delete('GITHUB_ACTION')
 
-if ENV['COVERAGE'] == 'yes' && RUBY_VERSION.start_with?('2.7.')
-  require 'simplecov'
-  SimpleCov.start do
-    add_filter('/spec/')
-    add_filter('/vendor/')
-    add_group('Checks', 'lib/puppet-lint/plugins')
+if ENV['COVERAGE'] == 'yes'
+  begin
+    require 'simplecov'
+    require 'simplecov-console'
+    SimpleCov.formatters = [
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::Console,
+    ]
+    if ENV['CI'] == 'true'
+      require 'codecov'
+      SimpleCov.formatters << SimpleCov::Formatter::Codecov
+    end
+
+    SimpleCov.start do
+      add_filter('/spec/')
+      add_filter('/vendor/')
+      add_group('Checks', 'lib/puppet-lint/plugins')
+    end
+  rescue LoadError
+    raise 'Add the simplecov, simplecov-console, codecov gems to Gemfile to enable this task'
   end
 end
 

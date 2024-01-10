@@ -10,8 +10,9 @@ group :test do
   gem 'json'
 
   gem 'rspec-json_expectations', '~> 1.4'
-
-  gem 'simplecov', :require => false if ENV['COVERAGE'] == 'yes'
+  gem 'simplecov', :require => false
+  gem 'simplecov-console', :require => false
+  gem 'codecov', :require => false
 end
 
 group :acceptance do
