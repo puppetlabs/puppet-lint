@@ -12,7 +12,6 @@ group :test do
   gem 'rspec-json_expectations', '~> 1.4'
   gem 'simplecov', :require => false
   gem 'simplecov-console', :require => false
-  gem 'codecov', :require => false
 end
 
 group :acceptance do
