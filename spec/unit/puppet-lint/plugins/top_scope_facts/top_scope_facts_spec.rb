@@ -102,6 +102,18 @@ describe 'top_scope_facts' do
       end
     end
 
+    context 'top scope structured fact not present on allowlist' do
+      let(:code) { "$::my_structured_fact['foo']['test']" }
+
+      it 'detects a problem' do
+        expect(problems).to contain_fixed('top scope fact instead of facts hash').on_line(1).in_column(1)
+      end
+
+      it 'fixes the problem' do
+        expect(manifest).to eq("$facts['my_structured_fact']['foo']['test']")
+      end
+    end
+
     context 'top scope $::trusted hash' do
       let(:code) { "$::trusted['certname']" }
 

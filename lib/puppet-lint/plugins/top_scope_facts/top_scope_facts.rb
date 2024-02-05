@@ -44,6 +44,14 @@ PuppetLint.new_check(:top_scope_facts) do
   end
 
   def fix(problem)
-    problem[:token].value = "facts['" + problem[:token].value.sub(%r{^::}, '') + "']"
+    problem[:token].value.sub!(%r{^::}, '')
+    # checks if the fact is a top level structured fact e.g. ::my_structured_fact['foo']['bar']
+    if %r{\[.*}.match?(problem[:token].value)
+      fact_name = problem[:token].value.sub(%r{\[.*}, '')
+      nested_facts = problem[:token].value.scan(%r{\[.*}).first
+      problem[:token].value = "facts['" + fact_name + "']" + nested_facts
+    else
+      problem[:token].value = "facts['" + problem[:token].value + "']"
+    end
   end
 end
