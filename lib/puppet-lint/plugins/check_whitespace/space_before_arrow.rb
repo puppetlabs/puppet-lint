@@ -22,7 +22,7 @@
 #   bar  => 'baz',
 # }
 #
-# is handled by the "arrow_alignment") plugin.
+# is handled by the "arrow_alignment" plugin.
 
 PuppetLint.new_check(:space_before_arrow) do
   def check

@@ -58,7 +58,7 @@ describe 'space_before_arrow' do
     end
 
     context 'with fix disabled' do
-      it 'does not detect any problems' do
+      it 'detects extra space before arrow' do
         expect(problems.size).to eq(1)
       end
 
@@ -96,7 +96,7 @@ describe 'space_before_arrow' do
     end
 
     context 'with fix disabled' do
-      it 'does not detect any problems' do
+      it 'detects extra space before arrow' do
         expect(problems.size).to eq(1)
       end
 
