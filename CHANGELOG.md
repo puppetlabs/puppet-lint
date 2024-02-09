@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v4.2.4](https://github.com/puppetlabs/puppet-lint/tree/v4.2.4) - 2024-02-09
+
+[Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.2.3...v4.2.4)
+
+### Fixed
+
+- (GH-189) - invalid fact correction for top scope structured fact [#190](https://github.com/puppetlabs/puppet-lint/pull/190) ([jordanbreen28](https://github.com/jordanbreen28))
+
 ## [v4.2.3](https://github.com/puppetlabs/puppet-lint/tree/v4.2.3) - 2023-11-22
 
 [Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.2.2...v4.2.3)
