@@ -117,7 +117,7 @@ Any flag that can be specified on the command line can also be specified in the 
 Or to specify an allowlist of allowed checks, include a line like:
 
 ```
---only-checks=trailing_whitespace,hard_tabs,duplicate_params,double_quoted_strings,unquoted_file_mode,only_variable_string,variables_not_enclosed,single_quote_string_with_variables,variable_contains_dash,ensure_not_symlink_target,unquoted_resource_title,relative_classname_inclusion,file_mode,resource_reference_without_title_capital,leading_zero,arrow_alignment,variable_is_lowercase,ensure_first_param,resource_reference_without_whitespace,file_ensure,trailing_comma,leading_zero
+--only-checks=trailing_whitespace,hard_tabs,duplicate_params,double_quoted_strings,unquoted_file_mode,only_variable_string,variables_not_enclosed,single_quote_string_with_variables,variable_contains_dash,ensure_not_symlink_target,unquoted_resource_title,relative_classname_inclusion,file_mode,resource_reference_without_title_capital,leading_zero,arrow_alignment,space_before_arrow,variable_is_lowercase,ensure_first_param,resource_reference_without_whitespace,file_ensure,trailing_comma,leading_zero
 ```
 
 Please note that there is an important difference between reading options from the command line and reading options from a configuration file: In the former case the shell interprets one level of quotes. That does not happen in the latter case. So, it would make sense to quote some configuration values on the command line, like so:
@@ -253,6 +253,7 @@ For a complete list of checks, and how to resolve errors on each check, see the 
 * Should not exceed an 140-character line width.
   * An exception has been made for `source => 'puppet://...'` lines as splitting these over multiple lines decreases the readability of the manifests.
 * Should align arrows (`=>`) within blocks of attributes.
+* Should contain at most a single space before an arrows(`=>`) where the parameter block contains exactly one parameter.
 
 ### Quoting
 
