@@ -256,7 +256,7 @@ describe PuppetLint::Lexer do
     end
 
     context 'treats a variable named the same as the keyword as a variable' do
-      PuppetLint::Lexer::KEYWORDS.each_key do |keyword|
+      described_class::KEYWORDS.each_key do |keyword|
         context "for '#{keyword}'" do
           let(:segments) do
             [
