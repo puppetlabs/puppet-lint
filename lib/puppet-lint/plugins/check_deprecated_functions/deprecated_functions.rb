@@ -13,15 +13,15 @@ EASY_FUNCTIONS = [
 PuppetLint.new_check(:deprecated_functions) do
   def check
     tokens.select { |x| DEPRECATED_FUNCTIONS_VAR_TYPES.include?(x.type) }.each do |token|
-      if EASY_FUNCTIONS.include?(token.value)
-        notify :warning, {
-          message: "Deprecated Function Found: '#{token.value}'",
-          line: token.line,
-          column: token.column,
-          token: token,
-          fact_name: token.value
-        }
-      end
+      next unless EASY_FUNCTIONS.include?(token.value)
+
+      notify :warning, {
+        message: "Deprecated Function Found: '#{token.value}'",
+        line: token.line,
+        column: token.column,
+        token: token,
+        fact_name: token.value
+      }
     end
   end
 end
