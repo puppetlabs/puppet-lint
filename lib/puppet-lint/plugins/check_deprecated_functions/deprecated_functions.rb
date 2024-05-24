@@ -1,7 +1,7 @@
 # Public: A puppet-lint custom check to detect deprecated functions.
 DEPRECATED_FUNCTIONS_VAR_TYPES = Set[:FUNCTION_NAME]
 
-# These functions have been deprecated in stblib and will impact puppet upgrades
+# These functions have been deprecated in stdlib and will impact puppet upgrades
 # between puppet 7 and puppet 8.
 EASY_FUNCTIONS = [
   'strip', 'rstrip', 'getvar', 'sort', 'upcase', 'round', 'chop', 'chomp',
