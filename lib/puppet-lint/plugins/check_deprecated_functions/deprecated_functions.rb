@@ -5,7 +5,7 @@ DEPRECATED_FUNCTIONS_VAR_TYPES = Set[:FUNCTION_NAME]
 # between puppet 7 and puppet 8.
 EASY_FUNCTIONS = [
   'strip', 'rstrip', 'getvar', 'sort', 'upcase', 'round', 'chop', 'chomp',
-  'ceiling', 'capitalize', 'cammelcase', 'is_array', 'cod',
+  'ceiling', 'capitalize', 'camelcase', 'is_array', 'cod',
   'min', 'max', 'lstrip', 'hash', 'has_key', 'downcase', 'abs', 'dig',
   'dig44', 'unique'
 ].freeze
