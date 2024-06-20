@@ -81,10 +81,3 @@ Style/Documentation:
   - spec/**/*
 Style/WordArray:
   EnforcedStyle: brackets
-####################################################
-# Cops below here due for deprecation
-####################################################
-# ``Rspec/FilePath`` is going to be deprecated in the next major release of rubocop >=3.0.0: see <https://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/FilePath>
-# As the new cops are already present, e.g., Rspec/SpecFilePathPathFormat, then disabling this in preparation
-RSpec/FilePath:
-  Enabled: false
