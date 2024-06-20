@@ -172,9 +172,9 @@ class PuppetLint::Lexer
       return nil unless [:next, :prev].include?(direction)
 
       opts[:skip_blocks] ||= true
-      to_find = Array[*type]
+      to_find = [*type]
 
-      token_iter = send("#{direction}_token".to_sym)
+      token_iter = send(:"#{direction}_token")
       until token_iter.nil?
         return token_iter if to_find.include?(token_iter.type) && (opts[:value].nil? || token_iter.value == opts[:value])
 
@@ -183,18 +183,18 @@ class PuppetLint::Lexer
 
         if opts[:skip_blocks]
           case token_iter.type
-          when "#{opening_token}BRACE".to_sym
-            token_iter = token_iter.send("#{direction}_token_of".to_sym, ["#{closing_token}BRACE".to_sym, opts])
-          when "#{opening_token}BRACK".to_sym
-            token_iter = token_iter.send("#{direction}_token_of".to_sym, ["#{closing_token}BRACK".to_sym, opts])
-          when "#{opening_token}PAREN".to_sym
-            token_iter = token_iter.send("#{direction}_token_of".to_sym, ["#{closing_token}PAREN".to_sym, opts])
+          when :"#{opening_token}BRACE"
+            token_iter = token_iter.send(:"#{direction}_token_of", [:"#{closing_token}BRACE", opts])
+          when :"#{opening_token}BRACK"
+            token_iter = token_iter.send(:"#{direction}_token_of", [:"#{closing_token}BRACK", opts])
+          when :"#{opening_token}PAREN"
+            token_iter = token_iter.send(:"#{direction}_token_of", [:"#{closing_token}PAREN", opts])
           end
         end
 
         return nil if token_iter.nil?
 
-        token_iter = token_iter.send("#{direction}_token".to_sym)
+        token_iter = token_iter.send(:"#{direction}_token")
       end
       nil
     end
