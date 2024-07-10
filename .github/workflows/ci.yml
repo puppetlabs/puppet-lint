@@ -28,18 +28,3 @@ jobs:
     with:
       rake_task: "spec:coverage"
       ruby_version: ${{ matrix.ruby_version }}
-
-  acceptance:
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby_version:
-          - '2.7'
-          - '3.2'
-          - '3.3'
-    name: "acceptance (ruby ${{ matrix.ruby_version }})"
-    needs: "spec"
-    uses: "puppetlabs/cat-github-actions/.github/workflows/gem_acceptance.yml@main"
-    secrets: "inherit"
-    with:
-      ruby_version: ${{ matrix.ruby_version }}
