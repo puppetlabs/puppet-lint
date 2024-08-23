@@ -1390,6 +1390,12 @@ END
         expect(token.value).to eq('Sensitive')
       end
     end
+
+    it 'matches Error type' do
+      token = lexer.tokenise('Error').first
+      expect(token.type).to eq(:TYPE)
+      expect(token.value).to eq('Error')
+    end
   end
 
   context ':HEREDOC without interpolation' do
