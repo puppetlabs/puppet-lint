@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
+  gem 'aruba', '~> 2.0'
+  gem 'cucumber', '~> 8.0'
+
   gem 'rake'
   gem 'rspec-its', '~> 1.0'
 
@@ -12,12 +15,6 @@ group :test do
   gem 'rspec-json_expectations', '~> 1.4'
   gem 'simplecov', :require => false
   gem 'simplecov-console', :require => false
-end
-
-group :acceptance do
-  gem 'serverspec'
-  gem 'puppetlabs_spec_helper'
-  gem 'puppet_litmus'
 end
 
 group :development do
