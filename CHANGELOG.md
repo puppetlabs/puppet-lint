@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v9.0.0](https://github.com/puppetlabs/puppet-lint/tree/v9.0.0) - 2024-10-18
+
+[Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.2.4...v9.0.0)
+
+### Added
+
+- Add Error type to the lexer tokens (and sort them) [#216](https://github.com/puppetlabs/puppet-lint/pull/216) ([jay7x](https://github.com/jay7x))
+- Create a new plugin for ensuring a single space before a '=>' [#175](https://github.com/puppetlabs/puppet-lint/pull/175) ([gerases](https://github.com/gerases))
+
+### Fixed
+
+- Fix function call name token type in function_indexes method [#198](https://github.com/puppetlabs/puppet-lint/pull/198) ([hsnodgrass](https://github.com/hsnodgrass))
+
 ## [v4.2.4](https://github.com/puppetlabs/puppet-lint/tree/v4.2.4) - 2024-02-09
 
 [Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v4.2.3...v4.2.4)
@@ -68,6 +81,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 [Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/v3.4.0...v4.0.0)
 
 ### Changed
+
 - (CONT-811) Add Ruby 3.2 support and Remove support for Ruby 2.5 [#113](https://github.com/puppetlabs/puppet-lint/pull/113) ([GSPatton](https://github.com/GSPatton))
 
 ## [v3.4.0](https://github.com/puppetlabs/puppet-lint/tree/v3.4.0) - 2023-04-05
@@ -128,6 +142,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 [Full Changelog](https://github.com/puppetlabs/puppet-lint/compare/2.5.2...v3.0.0)
 
 ### Changed
+
 - (MAINT) bump ruby version [#50](https://github.com/puppetlabs/puppet-lint/pull/50) ([chelnak](https://github.com/chelnak))
 
 ### Added
