@@ -13,7 +13,7 @@ on:
 
 jobs:
   release_prep:
-    uses: "puppetlabs/cat-github-actions/.github/workflows/gem_release_prep.yml@main"
+    uses: "puppetlabs/cat-github-actions/.github/workflows/gem_release_prep.yml@dependabot/github_actions/peter-evans/create-pull-request-7"
     with:
       target: "${{ github.event.inputs.target }}"
       version: "${{ github.event.inputs.version }}"
