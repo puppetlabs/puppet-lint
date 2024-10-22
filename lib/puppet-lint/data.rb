@@ -386,7 +386,7 @@ class PuppetLint::Data
       @function_indexes ||= begin
         functions = []
         tokens.each_with_index do |token, token_idx|
-          next unless token.type == :F_NAME
+          next unless token.type == :NAME
           next unless token_idx.zero? ||
                       (token_idx == 1 && tokens[0].type == :WHITESPACE) ||
                       [:NEWLINE, :INDENT].include?(token.prev_token.type) ||
