@@ -10,6 +10,27 @@ describe PuppetLint::Data do
       data.tokens = lexer.tokenise(manifest)
     end
 
+    context 'basic function call' do
+      let(:tokens) do
+        [
+          double('Token', type: :FUNCTION_NAME, prev_token: nil, prev_code_token: nil, next_code_token: nil),
+          double('Token', type: :LPAREN, prev_token: nil, prev_code_token: nil, next_code_token: nil),
+          double('Token', type: :RPAREN, prev_token: nil, prev_code_token: nil, next_code_token: nil)
+        ]
+      end
+  
+      it 'returns the correct function indexes' do
+        result = data.function_indexes
+        expect(result).to eq([
+          {
+            start: 0,
+            end: 2,
+            tokens: tokens[0..2]
+          }
+        ])
+      end
+    end
+
     context 'when a namespaced class name contains a single colon' do
       let(:manifest) { 'class foo:bar { }' }
 
