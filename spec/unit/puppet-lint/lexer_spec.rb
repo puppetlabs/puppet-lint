@@ -1396,6 +1396,12 @@ END
       expect(token.type).to eq(:TYPE)
       expect(token.value).to eq('Error')
     end
+
+    it 'matches Binary type' do
+      token = lexer.tokenise('Binary').first
+      expect(token.type).to eq(:TYPE)
+      expect(token.value).to eq('Binary')
+    end
   end
 
   context ':HEREDOC without interpolation' do
