@@ -1359,6 +1359,14 @@ END
   end
 
   context ':TYPE' do
+    shared_examples 'a type matcher' do |type|
+      it "matches #{type}" do
+        token = lexer.tokenise(type).first
+        expect(token.type).to eq(:TYPE)
+        expect(token.value).to eq(type)
+      end
+    end
+
     it 'matches Data Types' do
       token = lexer.tokenise('Integer').first
       expect(token.type).to eq(:TYPE)
@@ -1378,30 +1386,12 @@ END
     end
 
     describe 'Platform Types' do
-      it 'matches Callable' do
-        token = lexer.tokenise('Callable').first
-        expect(token.type).to eq(:TYPE)
-        expect(token.value).to eq('Callable')
-      end
-
-      it 'matches Sensitive' do
-        token = lexer.tokenise('Sensitive').first
-        expect(token.type).to eq(:TYPE)
-        expect(token.value).to eq('Sensitive')
-      end
+      it_behaves_like 'a type matcher', 'Callable'
+      it_behaves_like 'a type matcher', 'Sensitive'
     end
 
-    it 'matches Error type' do
-      token = lexer.tokenise('Error').first
-      expect(token.type).to eq(:TYPE)
-      expect(token.value).to eq('Error')
-    end
-
-    it 'matches Binary type' do
-      token = lexer.tokenise('Binary').first
-      expect(token.type).to eq(:TYPE)
-      expect(token.value).to eq('Binary')
-    end
+    it_behaves_like 'a type matcher', 'Error'
+    it_behaves_like 'a type matcher', 'Binary'
   end
 
   context ':HEREDOC without interpolation' do
