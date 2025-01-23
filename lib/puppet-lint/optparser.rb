@@ -128,6 +128,10 @@ class PuppetLint::OptParser
         PuppetLint.configuration.ignore_paths = paths.split(',')
       end
 
+      opts.on('--top-scope-variables VARS', 'A comma separated list of allowed top scope variables') do |vars|
+        PuppetLint.configuration.top_scope_variables = vars.split(',')
+      end
+
       PuppetLint.configuration.checks.each do |check|
         opts.on("--no-#{check}-check", "Skip the #{check} check.") do
           PuppetLint.configuration.send(:"disable_#{check}")
