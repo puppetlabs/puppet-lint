@@ -57,7 +57,7 @@ class PuppetLint::Checks
     load_data(fileinfo, data)
 
     checks_run = []
-    if File.extname(fileinfo).downcase.match?(/\.ya?ml$/)
+    if File.extname(fileinfo).downcase.match?(%r{\.ya?ml$})
       enabled_checks.select { |check| YAML_COMPATIBLE_CHECKS.include?(check) }.each do |check|
         klass = PuppetLint.configuration.check_object[check].new
         # FIXME: shadowing #problems

@@ -114,13 +114,13 @@ HASH_KEY_TYPES = Set[
 
 PuppetLint.new_check(:legacy_facts) do
   def check
-    if File.extname(PuppetLint::Data.path).downcase.match?(/\.ya?ml$/)
+    if File.extname(PuppetLint::Data.path).downcase.match?(%r{\.ya?ml$})
       begin
         content = PuppetLint::Data.manifest_lines
         yaml_content = content.join("\n")
         data = YAML.safe_load(yaml_content, aliases: true, permitted_classes: [Symbol])
         search_yaml(data)
-      rescue => e
+      rescue StandardError => e
         raise e
       end
     else
@@ -142,8 +142,8 @@ PuppetLint.new_check(:legacy_facts) do
     end
   end
 
-  def search_value(value, path)    
-    value.scan(/%{(?:(?:::?)?|facts\.)([a-zA-Z0-9_]+)(?!\.[a-zA-Z])}/) do |match|      
+  def search_value(value, _path)
+    value.scan(%r{%{(?:(?:::?)?|facts\.)([a-zA-Z0-9_]+)(?!\.[a-zA-Z])}}) do |match|
       base_fact = match[0].split('.').first
       next unless EASY_FACTS.include?(base_fact) || UNCONVERTIBLE_FACTS.include?(base_fact) || base_fact.match(Regexp.union(REGEX_FACTS))
 
