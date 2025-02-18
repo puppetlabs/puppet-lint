@@ -115,14 +115,10 @@ HASH_KEY_TYPES = Set[
 PuppetLint.new_check(:legacy_facts) do
   def check
     if File.extname(PuppetLint::Data.path).downcase.match?(%r{\.ya?ml$})
-      begin
-        content = PuppetLint::Data.manifest_lines
-        yaml_content = content.join("\n")
-        data = YAML.safe_load(yaml_content, aliases: true, permitted_classes: [Symbol])
-        search_yaml(data)
-      rescue StandardError => e
-        raise e
-      end
+      content = PuppetLint::Data.manifest_lines
+      yaml_content = content.join("\n")
+      data = YAML.safe_load(yaml_content, aliases: true, permitted_classes: [Symbol])
+      search_yaml(data)
     else
       check_puppet
     end
