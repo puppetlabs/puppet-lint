@@ -196,6 +196,59 @@ describe PuppetLint::Checks do
     end
   end
 
+  describe '#run_yaml' do
+    let(:fileinfo) { File.join('path', 'to', 'test.yaml') }
+    let(:data) { <<~EOS
+    ---
+    version: 5
+    defaults:
+      datadir: data
+      data_hash: yaml_data
+    hierarchy:
+      - name: "LEGACY FACT PATH"
+        paths:
+          - "os/%{facts.hostname}.yaml"
+      - name: "osfamily/major release"
+        paths:
+          - "os/%{facts.os.name}/%{facts.os.release.major}.yaml"
+      - name: 'common'
+        path: 'common.yaml'
+    EOS
+    }
+    let(:enabled_checks) { [:legacy_facts] }
+
+    before(:each) do
+      allow(instance).to receive(:enabled_checks).and_return(enabled_checks)
+      allow(File).to receive(:extname).with(fileinfo).and_return('.yaml')
+    end
+
+    it 'loads the yaml data' do
+      expect(instance).to receive(:load_data).with(fileinfo, data).and_call_original
+      instance.run(fileinfo, data)
+    end
+
+    context 'when there are checks enabled' do
+      let(:enabled_checks) { [:legacy_facts] }
+      let(:enabled_check_classes) { enabled_checks.map { |r| PuppetLint.configuration.check_object[r] } }
+      let(:disabled_checks) { PuppetLint.configuration.checks - enabled_checks }
+      let(:disabled_check_classes) { disabled_checks.map { |r| PuppetLint.configuration.check_object[r] } }
+  
+      it 'runs the enabled checks' do
+        expect(enabled_check_classes).to all(receive(:new).and_call_original)
+  
+        instance.run(fileinfo, data)
+      end
+  
+      it 'does not run the disabled checks' do
+        disabled_check_classes.each do |check_class|
+          expect(check_class).not_to receive(:new)
+        end
+  
+        instance.run(fileinfo, data)
+      end
+    end
+  end
+
   describe '#enabled_checks' do
     subject(:enabled_checks) { instance.enabled_checks }
 
