@@ -188,11 +188,12 @@ describe 'legacy_facts' do
         end
       end
 
-      context 'when no search text is found' do
+      context 'when find_line_for_content cannot find the search text in any line' do
         let(:code) { '' }
-
-        it 'does not detect any problems' do
-          expect(problems).to be_empty
+        
+        it 'returns the default line number of 1 when text is not found' do
+          problems
+          expect(check.find_line_for_content('nonexistent_content')).to eq(1)
         end
       end
     end
