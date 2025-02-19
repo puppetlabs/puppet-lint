@@ -187,6 +187,14 @@ describe 'legacy_facts' do
           expect(problems.size).to eq(2)
         end
       end
+
+      context 'when no search text is found' do
+        let(:code) { '' }
+
+        it 'does not detect any problems' do
+          expect(problems).to be_empty
+        end
+      end
     end
   end
 
