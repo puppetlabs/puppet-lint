@@ -134,47 +134,47 @@ describe 'legacy_facts' do
       before(:each) do
         allow(File).to receive(:extname).and_return('.yaml')
       end
-  
+
       context 'with YAML string containing legacy fact' do
         let(:code) { 'some_key: "%{::osfamily}"' }
-  
+
         it 'detects a single problem' do
           expect(problems.size).to eq(1)
         end
       end
-  
+
       context 'with YAML nested structure containing legacy fact' do
         let(:code) { "nested:\n  value: \"%{::architecture}\"" }
-  
+
         it 'detects a single problem' do
           expect(problems.size).to eq(1)
         end
       end
-  
+
       context 'with YAML array containing legacy facts' do
         let(:code) do
           [
             'array:',
             '  - "%{::processor0}"',
-            '  - "%{::ipaddress_eth0}"'
+            '  - "%{::ipaddress_eth0}"',
           ].join("\n")
         end
-  
+
         it 'detects multiple problems' do
           expect(problems.size).to eq(2)
         end
       end
-  
+
       context 'with YAML alias containing legacy fact' do
         let(:code) do
           [
             'template: &template',
             '  fact: "%{::osfamily}"',
             'instance:',
-            '  <<: *template'
+            '  <<: *template',
           ].join("\n")
         end
-  
+
         it 'detects multiple instances' do
           expect(problems.size).to eq(2)
         end
