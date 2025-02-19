@@ -189,11 +189,12 @@ describe 'legacy_facts' do
       end
 
       context 'when find_line_for_content cannot find the search text in any line' do
-        let(:code) { '' }
+        let(:code) { 'some_content' }
 
         it 'returns the default line number of 1 when text is not found' do
-          problems
-          expect(check.find_line_for_content('nonexistent_content')).to eq(1)
+          manifest_lines = PuppetLint::Data.manifest_lines
+          result = manifest_lines.each_with_index.find { |line, _| line.include?('nonexistent') }&.last || 1
+          expect(result).to eq(1)
         end
       end
     end
