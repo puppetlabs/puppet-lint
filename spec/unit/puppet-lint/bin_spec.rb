@@ -121,6 +121,18 @@ describe PuppetLint::Bin do
     its(:stdout) { is_expected.to eq('') }
   end
 
+  context 'when passed top scope variables option' do
+    let(:args) do
+      [
+        '--top-scope-variables=role',
+        'spec/fixtures/test/manifests/top_scope_variables.pp',
+      ]
+    end
+
+    its(:exitstatus) { is_expected.to eq(0) }
+    its(:stdout) { is_expected.to eq('') }
+  end
+
   context 'when limited to errors only' do
     let(:args) do
       [
