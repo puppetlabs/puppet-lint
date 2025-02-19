@@ -143,6 +143,14 @@ describe 'legacy_facts' do
         end
       end
 
+      context "with YAML string not containing legacy fact" do
+        let(:code) { 'some_key: "%{facts.os.name}"' }
+  
+        it 'does not detect any problems' do
+          expect(problems).to be_empty
+        end
+      end
+
       context 'with YAML nested structure containing legacy fact' do
         let(:code) { "nested:\n  value: \"%{::architecture}\"" }
 
