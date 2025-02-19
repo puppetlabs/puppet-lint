@@ -219,12 +219,12 @@ describe PuppetLint::Checks do
     let(:enabled_checks) { [:legacy_facts] }
 
     before(:each) do
-      allow(instance).to receive(:enabled_checks).and_return(enabled_checks)
+      allow(instance).to receive(:enabled_checks).and_return(enabled_checks) # rubocop: disable RSpec/SubjectStub
       allow(File).to receive(:extname).with(fileinfo).and_return('.yaml')
     end
 
     it 'loads the yaml data' do
-      expect(instance).to receive(:load_data).with(fileinfo, data).and_call_original
+      expect(instance).to receive(:load_data).with(fileinfo, data).and_call_original # rubocop: disable RSpec/SubjectStub
       instance.run(fileinfo, data)
     end
 
