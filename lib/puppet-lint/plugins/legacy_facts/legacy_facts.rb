@@ -1,3 +1,5 @@
+require 'yaml'
+
 # Public: A puppet-lint custom check to detect legacy facts.
 #
 # This check will optionally convert from legacy facts like $::operatingsystem
@@ -112,6 +114,51 @@ HASH_KEY_TYPES = Set[
 
 PuppetLint.new_check(:legacy_facts) do
   def check
+    if File.extname(PuppetLint::Data.path).downcase.match?(%r{\.ya?ml$})
+      content = PuppetLint::Data.manifest_lines
+      yaml_content = content.join("\n")
+      data = YAML.safe_load(yaml_content, aliases: true, permitted_classes: [Symbol])
+      search_yaml(data)
+    else
+      check_puppet
+    end
+  end
+
+  def search_yaml(data, path = [])
+    case data
+    when Hash
+      data.each do |k, v|
+        search_value(k.to_s, path)
+        search_yaml(v, path + [k.to_s])
+      end
+    when Array
+      data.each_with_index { |v, i| search_yaml(v, path + [i]) }
+    when String
+      search_value(data, path)
+    end
+  end
+
+  def search_value(value, _path)
+    value.scan(%r{%{(?:(?:::?)?|facts\.)([a-zA-Z0-9_]+)(?!\.[a-zA-Z])}}) do |match|
+      base_fact = match[0].split('.').first
+      next unless EASY_FACTS.include?(base_fact) || UNCONVERTIBLE_FACTS.include?(base_fact) || base_fact.match(Regexp.union(REGEX_FACTS))
+
+      notify :warning, {
+        message: "legacy fact '#{base_fact}'",
+        line: find_line_for_content(value),
+        column: 1
+      }
+    end
+  end
+
+  def find_line_for_content(content)
+    PuppetLint::Data.manifest_lines.each_with_index do |line, index|
+      return index + 1 if line.include?(content)
+    end
+    1
+  end
+
+  def check_puppet
     tokens.select { |x| LEGACY_FACTS_VAR_TYPES.include?(x.type) }.each do |token|
       fact_name = ''
 

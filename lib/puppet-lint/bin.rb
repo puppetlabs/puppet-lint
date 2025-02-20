@@ -66,7 +66,10 @@ class PuppetLint::Bin
 
       path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR) if File::ALT_SEPARATOR
       path = if File.directory?(path)
-               Dir.glob("#{path}/**/*.pp")
+               Dir.glob([
+                          "#{path}/**/*.pp",
+                          "#{path}/**/*.{yaml,yml}",
+                        ])
              else
                @args
              end

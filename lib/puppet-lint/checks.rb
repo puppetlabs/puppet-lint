@@ -6,6 +6,8 @@ class PuppetLint::Checks
   # Public: Get an Array of problem Hashes.
   attr_accessor :problems
 
+  YAML_COMPATIBLE_CHECKS = [:legacy_facts].freeze
+
   # Public: Initialise a new PuppetLint::Checks object.
   def initialize
     @problems = []
@@ -45,23 +47,31 @@ class PuppetLint::Checks
     end
   end
 
-  # Internal: Run the lint checks over the manifest code.
+  # Internal: Run the lint checks over the manifest or YAML code.
   #
   # fileinfo - The path to the file as passed to puppet-lint as a String.
-  # data     - The String manifest code to be checked.
+  # data     - The String manifest or YAML code to be checked.
   #
   # Returns an Array of problem Hashes.
   def run(fileinfo, data)
     load_data(fileinfo, data)
 
     checks_run = []
-    enabled_checks.each do |check|
-      klass = PuppetLint.configuration.check_object[check].new
-      # FIXME: shadowing #problems
-      problems = klass.run
-      checks_run << [klass, problems]
+    if File.extname(fileinfo).downcase.match?(%r{\.ya?ml$})
+      enabled_checks.select { |check| YAML_COMPATIBLE_CHECKS.include?(check) }.each do |check|
+        klass = PuppetLint.configuration.check_object[check].new
+        # FIXME: shadowing #problems
+        problems = klass.run
+        checks_run << [klass, problems]
+      end
+    else
+      enabled_checks.each do |check|
+        klass = PuppetLint.configuration.check_object[check].new
+        # FIXME: shadowing #problems
+        problems = klass.run
+        checks_run << [klass, problems]
+      end
     end
-
     checks_run.each do |klass, problems|
       if PuppetLint.configuration.fix
         @problems.concat(klass.fix_problems)
