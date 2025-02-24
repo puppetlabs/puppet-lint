@@ -41,6 +41,8 @@ To instruct Lint to automatically fix any issues that it detects, use the `--fix
 puppet-lint --fix /modules
 ```
 
+Note: The auto-fix functionality is available for Puppet manifest files only.
+
 ### Modify which checks to run
 
 Puppet Lint options allow you to modify which checks to run. You can disable any of the checks temporarily or permanently, or you can limit testing to specific checks.
@@ -244,6 +246,23 @@ See `puppet-lint --help` for a full list of command line options and checks.
 ## Checks
 
 For a complete list of checks, and how to resolve errors on each check, see the Puppet Lint [checks](http://puppet-lint.com/checks/) page.
+
+### YAML Checks
+
+Puppet Lint can check Hiera YAML files for legacy facts.
+
+For example, the following YAML would trigger warnings:
+
+```yaml
+hierarchy:
+  - name: "Legacy Facts Example"
+    paths:
+      - "os/%{facts.hostname}.yaml"
+      - "/var/www/%{::hostname}.yaml"
+      - "%{::bios_vendor}.yaml"
+```
+
+Refer to the [Puppet Core Facts documentation](https://www.puppet.com/docs/puppet/8/core_facts.html) for a complete list of available core facts.
 
 ### Spacing, Indentation, and Whitespace
 
