@@ -123,7 +123,44 @@ class PuppetLint::Lexer
     [:WHITESPACE, %r{\A(#{WHITESPACE_RE}+)}],
     # FIXME: Future breaking change, the following :TYPE tokens conflict with
     #        the :TYPE keyword token.
-    [:TYPE, %r{\A(Any|Array|Binary|Boolean|Callable|CatalogEntry|Class|Collection|Data|Default|Enum|Error|Float|Hash|Integer|NotUndef|Numeric|Optional|Pattern|Regexp|Resource|Runtime|Scalar|Sensitive|String|Struct|Tuple|Type|Undef|Variant)\b}], # rubocop:disable Layout/LineLength
+    [:TYPE, %r{\A(
+      Any|
+      Array|
+      Binary|
+      Boolean|
+      Callable|
+      CatalogEntry|
+      Class|
+      Collection|
+      Data|
+      Default|
+      Enum|
+      Error|
+      Float|
+      Hash|
+      Integer|
+      Iterable|
+      Iterator|
+      NotUndef|
+      Numeric|
+      Optional|
+      Pattern|
+      Regexp|
+      Resource|
+      RichData|
+      Runtime|
+      Scalar|
+      ScalarData|
+      SemVer|
+      SemVerRange|
+      Sensitive|
+      String|
+      Struct|
+      Tuple|
+      Type|
+      Undef|
+      Variant
+    )\b}x],
     [:CLASSREF, %r{\A(((::){0,1}[A-Z][-\w]*)+)}],
     [:NUMBER, %r{\A\b((?:0[xX][0-9A-Fa-f]+|0?\d+(?:\.\d+)?(?:[eE]-?\d+)?))\b}],
     [:FUNCTION_NAME, %r{#{NAME_RE}(?=\()}],
