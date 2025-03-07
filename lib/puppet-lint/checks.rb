@@ -54,10 +54,11 @@ class PuppetLint::Checks
   #
   # Returns an Array of problem Hashes.
   def run(fileinfo, data)
-    load_data(fileinfo, data)
-
     checks_run = []
     if File.extname(fileinfo).downcase.match?(%r{\.ya?ml$})
+      PuppetLint::Data.path = fileinfo
+      PuppetLint::Data.manifest_lines = data.split("\n", -1)
+
       enabled_checks.select { |check| YAML_COMPATIBLE_CHECKS.include?(check) }.each do |check|
         klass = PuppetLint.configuration.check_object[check].new
         # FIXME: shadowing #problems
@@ -65,6 +66,8 @@ class PuppetLint::Checks
         checks_run << [klass, problems]
       end
     else
+      load_data(fileinfo, data)
+
       enabled_checks.each do |check|
         klass = PuppetLint.configuration.check_object[check].new
         # FIXME: shadowing #problems

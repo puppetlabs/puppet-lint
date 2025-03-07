@@ -43,4 +43,11 @@ describe 'When executing puppet-lint' do
       expect(result[:stdout]).to have_warnings(2)
     end
   end
+
+  context 'with a YAML file provided' do
+    it 'returns zero errors' do
+      result = puppet_lint([File.join(manifest_root, 'parseable.yaml')])
+      expect(result[:stdout]).to have_errors(0)
+    end
+  end
 end
