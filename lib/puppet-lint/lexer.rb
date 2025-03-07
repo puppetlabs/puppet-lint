@@ -139,14 +139,20 @@ class PuppetLint::Lexer
       Float|
       Hash|
       Integer|
+      Iterable|
+      Iterator|
       NotUndef|
       Numeric|
       Optional|
       Pattern|
       Regexp|
       Resource|
+      RichData|
       Runtime|
       Scalar|
+      ScalarData|
+      SemVer|
+      SemVerRange|
       Sensitive|
       String|
       Struct|
