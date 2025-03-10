@@ -1392,6 +1392,12 @@ END
 
     it_behaves_like 'a type matcher', 'Error'
     it_behaves_like 'a type matcher', 'Binary'
+    it_behaves_like 'a type matcher', 'Iterable'
+    it_behaves_like 'a type matcher', 'Iterator'
+    it_behaves_like 'a type matcher', 'RichData'
+    it_behaves_like 'a type matcher', 'ScalarData'
+    it_behaves_like 'a type matcher', 'SemVer'
+    it_behaves_like 'a type matcher', 'SemVerRange'
   end
 
   context ':HEREDOC without interpolation' do
