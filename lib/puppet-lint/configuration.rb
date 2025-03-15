@@ -154,5 +154,6 @@ class PuppetLint::Configuration
     self.ignore_paths = ['vendor/**/*.pp']
     self.github_actions = ENV.key?('GITHUB_ACTION')
     self.codeclimate_report_file = ENV.fetch('CODECLIMATE_REPORT_FILE', nil)
+    self.read_paths = false
   end
 end

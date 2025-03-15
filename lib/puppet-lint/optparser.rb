@@ -132,6 +132,10 @@ class PuppetLint::OptParser
         PuppetLint.configuration.top_scope_variables = vars.split(',')
       end
 
+      opts.on('--read-paths', 'Threat PATH as a file containing puppet manifest paths.') do
+        PuppetLint.configuration.read_paths = true
+      end
+
       PuppetLint.configuration.checks.each do |check|
         opts.on("--no-#{check}-check", "Skip the #{check} check.") do
           PuppetLint.configuration.send(:"disable_#{check}")

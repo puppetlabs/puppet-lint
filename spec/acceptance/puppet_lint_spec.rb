@@ -42,6 +42,12 @@ describe 'When executing puppet-lint' do
       result = puppet_lint([File.join(manifest_root, 'two_warnings.pp')])
       expect(result[:stdout]).to have_warnings(2)
     end
+
+    it 'reads paths from file' do
+      result = puppet_lint(['--read-paths', File.join(manifest_root, 'list')])
+      expect(result[:stdout]).to have_warnings(1)
+      expect(result[:stdout]).to have_errors(1)
+    end
   end
 
   context 'with a YAML file provided' do

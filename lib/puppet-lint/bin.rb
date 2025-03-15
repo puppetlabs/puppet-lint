@@ -65,14 +65,23 @@ class PuppetLint::Bin
       full_base_path_uri += '/' unless full_base_path_uri.end_with?('/')
 
       path = path.gsub(File::ALT_SEPARATOR, File::SEPARATOR) if File::ALT_SEPARATOR
-      path = if File.directory?(path)
-               Dir.glob([
-                          "#{path}/**/*.pp",
-                          "#{path}/**/*.{yaml,yml}",
-                        ])
-             else
-               @args
-             end
+
+      if PuppetLint.configuration.read_paths
+        paths_from_path = []
+        File.readlines(path, chomp: true).each do |line|
+          paths_from_path.append(line)
+        end
+        path = paths_from_path
+      else
+        path = if File.directory?(path)
+                 Dir.glob([
+                            "#{path}/**/*.pp",
+                            "#{path}/**/*.{yaml,yml}",
+                          ])
+               else
+                 @args
+               end
+      end
 
       PuppetLint.configuration.with_filename = true if path.length > 1
 
