@@ -68,7 +68,7 @@ class PuppetLint::Bin
 
       if PuppetLint.configuration.read_paths
         paths_from_path = []
-        File.readlines(path, chomp: true).each do |line|
+        File.readlines(path, chomp: true).map do |line|
           paths_from_path.append(line)
         end
         path = paths_from_path
