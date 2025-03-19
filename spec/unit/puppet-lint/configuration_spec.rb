@@ -60,6 +60,7 @@ describe PuppetLint::Configuration do
       'codeclimate_report_file' => nil,
       'error_level' => :all,
       'log_format' => '',
+      'read_paths' => false,
       'sarif' => false,
       'with_context' => false,
       'fix' => false,
