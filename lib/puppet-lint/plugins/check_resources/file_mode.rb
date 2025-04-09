@@ -6,7 +6,7 @@
 MSG = 'mode should be represented as a 4 digit octal value or symbolic mode'.freeze
 SYM_RE = '([ugoa]*[-=+][-=+rstwxXugo]*)(,[ugoa]*[-=+][-=+rstwxXugo]*)*'.freeze
 IGNORE_TYPES = Set[:VARIABLE, :UNDEF, :FUNCTION_NAME]
-MODE_RE = %r{\A([0-7]{4}|#{SYM_RE})\Z}.freeze
+MODE_RE = %r{\A([0-7]{4}|#{SYM_RE})\Z}
 
 PuppetLint.new_check(:file_mode) do
   def check

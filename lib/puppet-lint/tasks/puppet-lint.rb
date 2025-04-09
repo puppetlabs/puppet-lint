@@ -27,7 +27,7 @@ class PuppetLint::RakeTask < Rake::TaskLib
   #
   #   PuppetLint::RakeTask.new
   # rubocop:disable Lint/MissingSuper
-  def initialize(*args, &task_block)
+  def initialize(*args, &)
     @name = args.shift || :lint
     @pattern = DEFAULT_PATTERN
     @with_filename = true
@@ -35,7 +35,7 @@ class PuppetLint::RakeTask < Rake::TaskLib
     @only_checks = []
     @ignore_paths = []
 
-    define(args, &task_block)
+    define(args, &)
   end
 
   def define(args, &task_block)

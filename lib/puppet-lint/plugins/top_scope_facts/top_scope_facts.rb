@@ -38,7 +38,7 @@ PuppetLint.new_check(:top_scope_facts) do
         message: 'top scope fact instead of facts hash',
         line: token.line,
         column: token.column,
-        token: token
+        token:
       }
     end
   end

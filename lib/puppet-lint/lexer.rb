@@ -111,9 +111,9 @@ class PuppetLint::Lexer
   # \p{Zs} == ASCII + Unicode non-linebreaking whitespace
   WHITESPACE_RE = (RUBY_VERSION == '1.8.7') ? %r{[\t\v\f ]} : %r{[\t\v\f\p{Zs}]}
 
-  LINE_END_RE = %r{(?:\r\n|\r|\n)}.freeze
+  LINE_END_RE = %r{(?:\r\n|\r|\n)}
 
-  NAME_RE = %r{\A((?:(?:::)?[_a-z0-9][-\w]*)(?:::[a-z0-9][-\w]*)*)}.freeze
+  NAME_RE = %r{\A((?:(?:::)?[_a-z0-9][-\w]*)(?:::[a-z0-9][-\w]*)*)}
 
   # Internal: An Array of Arrays containing tokens that can be described by
   # a single regular expression.  Each sub-Array contains 2 elements, the

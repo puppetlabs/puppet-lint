@@ -250,11 +250,11 @@ class PuppetLint
   #     def check
   #     end
   #   end
-  def self.new_check(name, &block)
+  def self.new_check(name, &)
     class_name = name.to_s.split('_').map(&:capitalize).join
     klass = PuppetLint.const_set(:"Check#{class_name}", Class.new(PuppetLint::CheckPlugin))
     klass.const_set(:NAME, name)
-    klass.class_exec(&block)
+    klass.class_exec(&)
     PuppetLint.configuration.add_check(name, klass)
     PuppetLint::Data.ignore_overrides[name] ||= {}
   end

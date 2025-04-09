@@ -12,7 +12,7 @@ PuppetLint.new_check(:slash_comments) do
         message: '// comment found',
         line: token.line,
         column: token.column,
-        token: token,
+        token:,
         description: 'Check the manifest tokens for any comments started with slashes (//) and record a warning for each instance found.',
         help_uri: 'https://puppet.com/docs/puppet/latest/style_guide.html#comments',
       )

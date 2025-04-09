@@ -51,8 +51,8 @@ PuppetLint.new_check(:space_before_arrow) do
         notify(
           :warning,
           message: "there should be a single space before '=>' on line #{line}, column #{column}",
-          line: line,
-          column: column,
+          line:,
+          column:,
           token: prev_token,
         )
       end

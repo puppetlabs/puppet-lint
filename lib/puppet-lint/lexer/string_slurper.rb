@@ -6,12 +6,12 @@ class PuppetLint::Lexer
   class StringSlurper
     attr_accessor :scanner, :results, :interp_stack
 
-    START_INTERP_PATTERN = %r{\$\{}.freeze
-    END_INTERP_PATTERN = %r{\}}.freeze
-    END_STRING_PATTERN = %r{(\A|[^\\])(\\\\)*"}.freeze
-    UNENC_VAR_PATTERN = %r{(\A|[^\\])\$(::)?(\w+(-\w+)*::)*\w+(-\w+)*}.freeze
-    ESC_DQUOTE_PATTERN = %r{\\+"}.freeze
-    LBRACE_PATTERN = %r{\{}.freeze
+    START_INTERP_PATTERN = %r{\$\{}
+    END_INTERP_PATTERN = %r{\}}
+    END_STRING_PATTERN = %r{(\A|[^\\])(\\\\)*"}
+    UNENC_VAR_PATTERN = %r{(\A|[^\\])\$(::)?(\w+(-\w+)*::)*\w+(-\w+)*}
+    ESC_DQUOTE_PATTERN = %r{\\+"}
+    LBRACE_PATTERN = %r{\{}
 
     def initialize(string)
       @scanner = StringScanner.new(string)

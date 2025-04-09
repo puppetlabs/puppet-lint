@@ -25,7 +25,7 @@ PuppetLint.new_check(:variables_not_enclosed) do
         message: 'variable not enclosed in {}',
         line: token.line,
         column: token.column,
-        token: token,
+        token:,
         description: 'Check the manifest tokens for any variables in a string that have not been enclosed by braces ({}) and record a warning for each instance found.',
         help_uri: 'https://puppet.com/docs/puppet/latest/style_guide.html#quoting',
       )
