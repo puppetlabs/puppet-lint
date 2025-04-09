@@ -11,7 +11,6 @@ require 'puppet-lint/data'
 require 'puppet-lint/checks'
 require 'puppet-lint/report/github'
 require 'puppet-lint/bin'
-require 'puppet-lint/monkeypatches'
 
 class PuppetLint::NoCodeError < StandardError; end
 
