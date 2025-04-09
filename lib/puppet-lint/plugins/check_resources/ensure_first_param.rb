@@ -20,7 +20,7 @@ PuppetLint.new_check(:ensure_first_param) do
         message: "ensure found on line but it's not the first attribute",
         line: ensure_token.line,
         column: ensure_token.column,
-        resource: resource,
+        resource:,
         description: 'Check the tokens of each resource instance for an ensure parameter and if ' \
                      'found, check that it is the first parameter listed.  If it is not the first parameter, record a warning.',
         help_uri: 'https://puppet.com/docs/puppet/latest/style_guide.html#attribute-ordering',

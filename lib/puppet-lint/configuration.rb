@@ -48,7 +48,7 @@ class PuppetLint::Configuration
   # Signature
   #
   #   <option>=(value)
-  def method_missing(method, *args, &_block)
+  def method_missing(method, *args, &)
     super unless method.to_s =~ %r{^(\w+)=?$}
 
     option = Regexp.last_match(1)

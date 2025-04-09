@@ -36,7 +36,7 @@ class PuppetLint::Checks
       problems << {
         kind: :error,
         check: :syntax,
-        message: message,
+        message:,
         line: e.line_no,
         column: e.column,
         fullpath: PuppetLint::Data.fullpath,

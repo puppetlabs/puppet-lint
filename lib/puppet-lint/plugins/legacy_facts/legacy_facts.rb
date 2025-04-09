@@ -184,8 +184,8 @@ PuppetLint.new_check(:legacy_facts) do
         message: "legacy fact '#{fact_name}'",
         line: token.line,
         column: token.column,
-        token: token,
-        fact_name: fact_name
+        token:,
+        fact_name:
       }
     end
   end

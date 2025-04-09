@@ -5,7 +5,7 @@ rescue StandardError
   class String
     Percent = instance_method(:%) unless defined?(Percent)
 
-    def %(*a, &b)
+    def %(*a, &)
       a.flatten!
 
       string = case a.last
@@ -18,7 +18,7 @@ rescue StandardError
       if a.empty?
         string
       else
-        Percent.bind_call(string, a, &b)
+        Percent.bind_call(string, a, &)
       end
     end
 

@@ -180,9 +180,9 @@ class PuppetLint::CheckPlugin
   def default_info
     @default_info ||= {
       check: self.class.const_get(:NAME),
-      fullpath: fullpath,
-      path: path,
-      filename: filename
+      fullpath:,
+      path:,
+      filename:
     }
   end
 

@@ -19,7 +19,7 @@ PuppetLint.new_check(:puppet_url_without_modules) do
         message: 'puppet:// URL without modules/ found',
         line: token.line,
         column: token.column,
-        token: token,
+        token:,
         description: 'Check the manifest tokens for any puppet:// URL strings where the path section doesn\'t start with modules/ and record a warning for each instance found.',
         help_uri: nil,
       )

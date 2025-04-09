@@ -25,7 +25,7 @@ class PuppetLint::Report
             check_name: message[:check],
             description: message[:message],
             categories: [:Style],
-            severity: severity,
+            severity:,
             location: {
               path: message[:path],
               lines: {
