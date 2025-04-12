@@ -38,37 +38,14 @@ class PuppetLint::Data
       @defaults_indexes = nil
     end
 
-    # @api private
-    def ruby1?
-      @ruby1 = RbConfig::CONFIG['MAJOR'] == '1' if @ruby1.nil?
-      @ruby1
-    end
-
     # Get the tokenised manifest.
     #
+    # @param duplicate [Boolean] if true, returns a duplicate of the token array.
     # @return [Array[PuppetLint::Lexer::Token]]
     #
     # @api public
-    def tokens
-      calling_method = if ruby1?
-                         begin
-                           caller[0][%r{`.*'}][1..-2] # rubocop:disable Performance/Caller
-                         rescue NoMethodError
-                           caller[1][%r{`.*'}][1..-2] # rubocop:disable Performance/Caller
-                         end
-                       else
-                         begin
-                           caller(0..0).first[%r{`.*'}][1..-2]
-                         rescue NoMethodError
-                           caller(1..1).first[%r{`.*'}][1..-2]
-                         end
-                       end
-
-      if calling_method == 'check'
-        @tokens.dup
-      else
-        @tokens
-      end
+    def tokens(duplicate: false)
+      duplicate ? @tokens.dup : @tokens
     end
 
     # Add new token.

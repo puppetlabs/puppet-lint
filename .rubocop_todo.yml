@@ -129,7 +129,7 @@ RSpec/RepeatedExampleGroupDescription:
     - 'spec/unit/puppet-lint/plugins/check_resources/unquoted_file_mode_spec.rb'
     - 'spec/unit/puppet-lint/plugins/legacy_facts/legacy_facts_spec.rb'
 
-# Offense count: 8
+# Offense count: 9
 # Configuration parameters: Include, CustomTransform, IgnoreMethods, IgnoreMetadata.
 # Include: **/*_spec.rb
 RSpec/SpecFilePathFormat:
@@ -137,6 +137,7 @@ RSpec/SpecFilePathFormat:
     - '**/spec/routing/**/*'
     - 'spec/unit/puppet-lint/bin_spec.rb'
     - 'spec/unit/puppet-lint/checks_spec.rb'
+    - 'spec/unit/puppet-lint/checkplugin_spec.rb'
     - 'spec/unit/puppet-lint/configuration_spec.rb'
     - 'spec/unit/puppet-lint/data_spec.rb'
     - 'spec/unit/puppet-lint/lexer/string_slurper_spec.rb'

@@ -55,7 +55,9 @@ class PuppetLint::CheckPlugin
   #
   # Returns an Array of PuppetLint::Lexer::Token objects.
   def tokens
-    PuppetLint::Data.tokens
+    # When called from a plugins `check` method, the tokens array returned should be a (shallow) copy
+    called_from_check = (caller_locations(1..1).first.base_label == 'check')
+    PuppetLint::Data.tokens(duplicate: called_from_check)
   end
 
   def add_token(index, token)
