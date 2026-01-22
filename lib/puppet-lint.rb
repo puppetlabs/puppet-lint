@@ -225,7 +225,7 @@ class PuppetLint
     @problems = linter.run(@path, @code)
     @problems.each { |problem| @statistics[problem[:kind]] += 1 }
 
-    @manifest = linter.manifest if PuppetLint.configuration.fix
+    @manifest = linter.manifest if PuppetLint.configuration.fix && supports_fixes?
   end
 
   # Public: Print any problems that were found out to stdout.
@@ -269,6 +269,15 @@ class PuppetLint
     # Only .pp files support fixes currently
     # YAML files and other types may support fixes in the future
     File.extname(@path).match?(%r{\.pp$}i)
+  end
+
+  # Public: Determine if the passed in file name supports automatic fixes
+  #
+  # Returns true if fixes are supported for this file type, false otherwise.
+  def self.supports_fixes?(file)
+    # Only .pp files support fixes currently
+    # YAML files and other types may support fixes in the future
+    File.extname(file).match?(%r{\.pp$}i)
   end
 
   # Public: Define a new check.

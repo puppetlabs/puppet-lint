@@ -76,7 +76,7 @@ class PuppetLint::Checks
       end
     end
     checks_run.each do |klass, problems|
-      if PuppetLint.configuration.fix
+      if PuppetLint.configuration.fix && PuppetLint.supports_fixes?(fileinfo)
         @problems.concat(klass.fix_problems)
       else
         @problems.concat(problems)
