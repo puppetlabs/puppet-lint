@@ -14,7 +14,13 @@ class CommandRun
     $stderr = err
 
     PuppetLint.configuration.defaults
-    @exitstatus = PuppetLint::Bin.new(args).run
+    begin
+      @exitstatus = PuppetLint::Bin.new(args).run
+    rescue SystemExit => e
+      # When puppet-lint calls exit(1) due to an unhandled exception,
+      # it raises SystemExit. Catch it and use the exit status.
+      @exitstatus = e.status
+    end
     PuppetLint.configuration.defaults
 
     @stdout = out.string.strip
@@ -106,6 +112,20 @@ describe PuppetLint::Bin do
     its(:exitstatus) { is_expected.to eq(1) }
     its(:stdout) { is_expected.to eq('ERROR: Syntax error on line 1 (check: syntax)') }
     its(:stderr) { is_expected.to eq('Try running `puppet parser validate <file>`') }
+  end
+
+  context 'when passed a hiera.yaml file with issues' do
+    let(:args) { 'spec/fixtures/test/hiera.yaml' }
+
+    its(:exitstatus) { is_expected.to eq(0) }
+    its(:stdout) { is_expected.to eq("WARNING: legacy fact 'domain' on line 4 (check: legacy_facts)") }
+  end
+
+  context 'when passed a hiera.yaml file with issues and --fix' do
+    let(:args) { ['--fix', 'spec/fixtures/test/hiera.yaml'] }
+
+    its(:exitstatus) { is_expected.to eq(0) }
+    its(:stdout) { is_expected.to eq("WARNING: legacy fact 'domain' on line 4 (check: legacy_facts)") }
   end
 
   context 'when passed ignore paths option' do
