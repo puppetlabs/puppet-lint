@@ -1,0 +1,4 @@
+---
+version: 5
+
+sample_key: host.%{::domain}
