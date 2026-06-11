@@ -2,6 +2,12 @@ source 'https://rubygems.org'
 
 gemspec
 
+gemsource_puppetcore = if ENV['PUPPET_FORGE_TOKEN']
+  'https://rubygems-puppetcore.puppet.com'
+else
+  ENV['GEM_SOURCE_PUPPETCORE'] || 'https://rubygems.org'
+end
+
 group :test do
   gem 'rake'
   gem 'rspec-its', '~> 1.0'
@@ -18,6 +24,7 @@ group :acceptance do
   gem 'serverspec'
   gem 'puppetlabs_spec_helper'
   gem 'puppet_litmus'
+  gem 'bolt', ENV.fetch('BOLT_GEM_VERSION', nil), source: gemsource_puppetcore
 end
 
 group :development do
