@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'arrow_alignment' do
@@ -6,7 +8,7 @@ describe 'arrow_alignment' do
   context 'with fix disabled' do
     context 'selectors inside a resource' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { 'foo':
             ensure  => $ensure,
             require => $ensure ? {
@@ -15,7 +17,7 @@ describe 'arrow_alignment' do
             },
             foo     => bar,
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -25,7 +27,7 @@ describe 'arrow_alignment' do
 
     context 'selectors in the middle of a resource' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { 'foo':
             ensure => $ensure ? {
               present => directory,
@@ -33,7 +35,7 @@ describe 'arrow_alignment' do
             },
             owner  => 'tomcat6',
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -43,7 +45,7 @@ describe 'arrow_alignment' do
 
     context 'selector inside a resource' do
       let(:code) do
-        <<-END
+        <<-CODE
           ensure => $ensure ? {
             present => directory,
             absent  => undef,
@@ -51,28 +53,7 @@ describe 'arrow_alignment' do
           owner  => 'foo4',
           group  => 'foo4',
           mode   => '0755',
-        END
-      end
-
-      it 'does not detect any problems' do
-        expect(problems).to be_empty
-      end
-    end
-
-    context 'selector inside a hash inside a resource' do
-      let(:code) do
-        <<-END
-          server => {
-            ensure => ensure => $ensure ? {
-              present => directory,
-              absent  => undef,
-            },
-            ip     => '192.168.1.1'
-          },
-          owner  => 'foo4',
-          group  => 'foo4',
-          mode   => '0755',
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -82,7 +63,7 @@ describe 'arrow_alignment' do
 
     context 'nested hashes with correct indentation' do
       let(:code) do
-        <<-END
+        <<-CODE
           class { 'lvs::base':
             virtualeservers => {
               '192.168.2.13' => {
@@ -107,7 +88,7 @@ describe 'arrow_alignment' do
               }
             }
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -117,7 +98,7 @@ describe 'arrow_alignment' do
 
     context 'single resource with a misaligned =>' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             foo => 1,
             bar => 2,
@@ -125,7 +106,7 @@ describe 'arrow_alignment' do
             baz  => 4,
             meh => 5,
           }
-        END
+        CODE
       end
 
       it 'detects four problems' do
@@ -142,7 +123,7 @@ describe 'arrow_alignment' do
 
     context 'single resource with a misaligned => and semicolon at the end' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { '/tmp/bar':
             foo => 1,
             bar => 2,
@@ -150,7 +131,7 @@ describe 'arrow_alignment' do
             baz  => 4,
             meh => 5;
           }
-        END
+        CODE
       end
 
       it 'detects four problems' do
@@ -167,7 +148,7 @@ describe 'arrow_alignment' do
 
     context 'complex resource with a misaligned =>' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             foo => 1,
             bar  => $baz ? {
@@ -177,7 +158,7 @@ describe 'arrow_alignment' do
             meep => 4,
             bah => 5,
           }
-        END
+        CODE
       end
 
       it 'detects three problems' do
@@ -193,7 +174,7 @@ describe 'arrow_alignment' do
 
     context 'multi-resource with a misaligned =>' do
       let(:code) do
-        <<-END
+        <<-CODE
           file {
             '/tmp/foo': ;
             '/tmp/bar':
@@ -202,7 +183,7 @@ describe 'arrow_alignment' do
               gronk => 'bah',
               meh => 'no'
           }
-        END
+        CODE
       end
 
       it 'only detects a single problem' do
@@ -216,7 +197,7 @@ describe 'arrow_alignment' do
 
     context 'multi-resource with a misaligned => and semicolons' do
       let(:code) do
-        <<-END
+        <<-CODE
           file {
             '/tmp/foo':
               ensure => 'directory',
@@ -229,7 +210,7 @@ describe 'arrow_alignment' do
               owner => 'root',
               mode => '0755';
           }
-        END
+        CODE
       end
 
       it 'only detects a single problem' do
@@ -246,10 +227,10 @@ describe 'arrow_alignment' do
 
     context 'multiple single line resources' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { 'foo': ensure => file }
           package { 'bar': ensure => present }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -259,12 +240,12 @@ describe 'arrow_alignment' do
 
     context 'resource with unaligned => in commented line' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { 'foo':
             ensure => directory,
             # purge => true,
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -274,11 +255,11 @@ describe 'arrow_alignment' do
 
     context 'single line resource spread out on multiple lines' do
       let(:code) do
-        <<-END
+        <<-CODE
           file {
             'foo': ensure => present,
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -288,11 +269,11 @@ describe 'arrow_alignment' do
 
     context 'multiline resource with a single line of params' do
       let(:code) do
-        <<-END
+        <<-CODE
           mymodule::do_thing { 'some thing':
             whatever => { foo => 'bar', one => 'two' },
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -302,12 +283,12 @@ describe 'arrow_alignment' do
 
     context 'resource with aligned => too far out' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             ensure  => file,
             mode    => '0444',
           }
-        END
+        CODE
       end
 
       it 'detects 2 problems' do
@@ -322,13 +303,13 @@ describe 'arrow_alignment' do
 
     context 'resource with multiple params where one is an empty hash' do
       let(:code) do
-        <<-END
+        <<-CODE
           foo { 'foo':
             a => true,
             b => {
             }
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -338,12 +319,12 @@ describe 'arrow_alignment' do
 
     context 'multiline resource with multiple params on a line' do
       let(:code) do
-        <<-END
+        <<-CODE
           user { 'test':
             a => 'foo', bb => 'bar',
             ccc => 'baz',
           }
-        END
+        CODE
       end
 
       it 'detects 2 problems' do
@@ -358,12 +339,12 @@ describe 'arrow_alignment' do
 
     context 'resource param containing a single-element same-line hash' do
       let(:code) do
-        <<-END
+        <<-CODE
           foo { 'foo':
             a => true,
             b => { 'a' => 'b' }
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -373,14 +354,14 @@ describe 'arrow_alignment' do
 
     context 'multiline hash with opening brace on same line as first pair' do
       let(:code) do
-        <<-END
+        <<-CODE
           foo { 'foo':
             bar => [
               { aa => bb,
                 c  => d},
             ],
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -390,14 +371,14 @@ describe 'arrow_alignment' do
 
     context 'unaligned multiline hash with opening brace on the same line as the first pair' do
       let(:code) do
-        <<-END
+        <<-CODE
           foo { 'foo':
             bar => [
               { aa => bb,
                 c => d},
             ],
           }
-        END
+        CODE
       end
 
       it 'detects one problem' do
@@ -411,7 +392,7 @@ describe 'arrow_alignment' do
 
     context 'hash with strings containing variables as keys properly aligned' do
       let(:code) do
-        <<-END
+        <<-CODE
           foo { foo:
             param => {
               a         => 1
@@ -419,7 +400,7 @@ describe 'arrow_alignment' do
               b         => 3,
             },
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -429,7 +410,7 @@ describe 'arrow_alignment' do
 
     context 'hash with strings containing variables as keys incorrectly aligned' do
       let(:code) do
-        <<-END
+        <<-CODE
           foo { foo:
             param => {
               a => 1
@@ -437,7 +418,7 @@ describe 'arrow_alignment' do
               b     => 3,
             },
           }
-        END
+        CODE
       end
 
       it 'detects 2 problems' do
@@ -452,7 +433,7 @@ describe 'arrow_alignment' do
 
     context 'complex data structure with different indentation levels at the same depth' do
       let(:code) do
-        <<-END
+        <<-CODE
           class { 'some_class':
             config_hash => {
               'a_hash'   => {
@@ -466,7 +447,7 @@ describe 'arrow_alignment' do
               ],
             },
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
@@ -476,7 +457,7 @@ describe 'arrow_alignment' do
 
     context 'where the top level of the block has no parameters' do
       let(:code) do
-        <<-END
+        <<-CODE
           case $facts['os']['family'] {
             'RedHat': {
               $datadir = $::operatingsystem ? {
@@ -485,11 +466,49 @@ describe 'arrow_alignment' do
               }
             }
           }
-        END
+        CODE
       end
 
       it 'does not detect any problems' do
         expect(problems).to be_empty
+      end
+    end
+
+    context 'with misaligned hash' do
+      let(:code) do
+        <<~CODE
+          $x = {
+            present => directory,
+            absent   => undef,
+          },
+        CODE
+      end
+
+      it 'detects one problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'creates 1 warning' do
+        expect(problems).to contain_warning(msg % [11, 12]).on_line(3).in_column(12)
+      end
+    end
+
+    context 'with misaligned selector' do
+      let(:code) do
+        <<~CODE
+          $x = $y ? {
+            'a' => 1,
+            default => 3,
+          }
+        CODE
+      end
+
+      it 'detects one problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'creates 1 warning' do
+        expect(problems).to contain_warning(msg % [11, 7]).on_line(2).in_column(7)
       end
     end
   end
@@ -505,7 +524,7 @@ describe 'arrow_alignment' do
 
     context 'single resource with a misaligned =>' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             foo => 1,
             bar => 2,
@@ -513,11 +532,11 @@ describe 'arrow_alignment' do
             baz  => 4,
             meh => 5,
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             foo   => 1,
             bar   => 2,
@@ -525,7 +544,7 @@ describe 'arrow_alignment' do
             baz   => 4,
             meh   => 5,
           }
-        END
+        CODE
       end
 
       it 'detects four problems' do
@@ -546,7 +565,7 @@ describe 'arrow_alignment' do
 
     context 'complex resource with a misaligned =>' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             foo => 1,
             bar  => $baz ? {
@@ -556,11 +575,11 @@ describe 'arrow_alignment' do
             meep => 4,
             bah => 5,
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             foo  => 1,
             bar  => $baz ? {
@@ -570,7 +589,7 @@ describe 'arrow_alignment' do
             meep => 4,
             bah  => 5,
           }
-        END
+        CODE
       end
 
       it 'detects three problems' do
@@ -590,7 +609,7 @@ describe 'arrow_alignment' do
 
     context 'multi-resource with a misaligned =>' do
       let(:code) do
-        <<-END
+        <<-CODE
           file {
             '/tmp/foo': ;
             '/tmp/bar':
@@ -599,11 +618,11 @@ describe 'arrow_alignment' do
               gronk => 'bah',
               meh => 'no'
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           file {
             '/tmp/foo': ;
             '/tmp/bar':
@@ -612,7 +631,7 @@ describe 'arrow_alignment' do
               gronk => 'bah',
               meh   => 'no'
           }
-        END
+        CODE
       end
 
       it 'only detects a single problem' do
@@ -630,21 +649,21 @@ describe 'arrow_alignment' do
 
     context 'resource with aligned => too far out' do
       let(:code) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             ensure  => file,
             mode    => '0444',
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           file { '/tmp/foo':
             ensure => file,
             mode   => '0444',
           }
-        END
+        CODE
       end
 
       it 'detects 2 problems' do
@@ -663,21 +682,21 @@ describe 'arrow_alignment' do
 
     context 'resource with unaligned => and no whitespace between param and =>' do
       let(:code) do
-        <<-END
+        <<-CODE
           user { 'test':
             param1 => 'foo',
             param2=> 'bar',
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           user { 'test':
             param1 => 'foo',
             param2 => 'bar',
           }
-        END
+        CODE
       end
 
       it 'detects 1 problem' do
@@ -695,22 +714,22 @@ describe 'arrow_alignment' do
 
     context 'multiline resource with multiple params on a line' do
       let(:code) do
-        <<-END
+        <<-CODE
           user { 'test':
             a => 'foo', bb => 'bar',
             ccc => 'baz',
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           user { 'test':
             a   => 'foo',
             bb  => 'bar',
             ccc => 'baz',
           }
-        END
+        CODE
       end
 
       it 'detects 2 problems' do
@@ -729,22 +748,22 @@ describe 'arrow_alignment' do
 
     context 'multiline resource with multiple params on a line, extra one longer' do
       let(:code) do
-        <<-END
+        <<-CODE
           user { 'test':
             a => 'foo', bbccc => 'bar',
             ccc => 'baz',
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           user { 'test':
             a     => 'foo',
             bbccc => 'bar',
             ccc   => 'baz',
           }
-        END
+        CODE
       end
 
       it 'detects 2 problems' do
@@ -764,7 +783,7 @@ describe 'arrow_alignment' do
 
     context 'hash with strings containing variables as keys incorrectly aligned' do
       let(:code) do
-        <<-END
+        <<-CODE
           foo { foo:
             param => {
               a => 1
@@ -772,11 +791,11 @@ describe 'arrow_alignment' do
               b     => 3,
             },
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           foo { foo:
             param => {
               a         => 1
@@ -784,7 +803,7 @@ describe 'arrow_alignment' do
               b         => 3,
             },
           }
-        END
+        CODE
       end
 
       it 'detects 2 problems' do
@@ -803,7 +822,7 @@ describe 'arrow_alignment' do
 
     context 'complex data structure with different indentation levels at the same depth' do
       let(:code) do
-        <<-END
+        <<-CODE
           class { 'some_class':
             config_hash => {
               'a_hash'   => {
@@ -817,11 +836,11 @@ describe 'arrow_alignment' do
               ],
             },
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END
+        <<-CODE
           class { 'some_class':
             config_hash => {
               'a_hash'   => {
@@ -835,7 +854,7 @@ describe 'arrow_alignment' do
               ],
             },
           }
-        END
+        CODE
       end
 
       it 'detects 1 problem' do
@@ -853,7 +872,7 @@ describe 'arrow_alignment' do
 
     context 'complex data structure with multiple token keys' do
       let(:code) do
-        <<-END.gsub(%r{^ {10}}, '')
+        <<-CODE.gsub(%r{^ {10}}, '')
           class example (
             $external_ip_base,
           ) {
@@ -871,11 +890,11 @@ describe 'arrow_alignment' do
               },
             }
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END.gsub(%r{^ {10}}, '')
+        <<-CODE.gsub(%r{^ {10}}, '')
           class example (
             $external_ip_base,
           ) {
@@ -893,7 +912,7 @@ describe 'arrow_alignment' do
               },
             }
           }
-        END
+        CODE
       end
 
       it 'detects 5 problems' do
@@ -915,7 +934,7 @@ describe 'arrow_alignment' do
 
     context 'realignment of resource with an inline single line hash' do
       let(:code) do
-        <<-END.gsub(%r{^ {10}}, '')
+        <<-CODE.gsub(%r{^ {10}}, '')
           class { 'puppetdb':
             database                => 'embedded',
             #database                => 'postgres',
@@ -928,11 +947,11 @@ describe 'arrow_alignment' do
             open_listen_port        => false,
             open_ssl_listen_port    => false;
           }
-        END
+        CODE
       end
 
       let(:fixed) do
-        <<-END.gsub(%r{^ {10}}, '')
+        <<-CODE.gsub(%r{^ {10}}, '')
           class { 'puppetdb':
             database             => 'embedded',
             #database                => 'postgres',
@@ -945,7 +964,7 @@ describe 'arrow_alignment' do
             open_listen_port     => false,
             open_ssl_listen_port => false;
           }
-        END
+        CODE
       end
 
       it 'detects 8 problems' do
@@ -970,26 +989,26 @@ describe 'arrow_alignment' do
 
     context 'negative argument' do
       let(:code) do
-        <<-END
+        <<-CODE
           res { 'a':
             x => { 'a' => '',
               'ab' => '',
             }
           }
-        END
+        CODE
       end
 
       # TODO: This is not the desired behaviour, but adjusting the check to
       # properly format the hashes will need to wait until a major version
       # bump.
       let(:fixed) do
-        <<-END
+        <<-CODE
           res { 'a':
             x => { 'a' => '',
               'ab'     => '',
             }
           }
-        END
+        CODE
       end
 
       it 'detects a problem' do
@@ -998,6 +1017,70 @@ describe 'arrow_alignment' do
 
       it 'fixes the problems' do
         expect(problems).to contain_fixed(msg % [24, 20]).on_line(3).in_column(20)
+      end
+
+      it 'realigns the arrows' do
+        expect(manifest).to eq(fixed)
+      end
+    end
+
+    context 'with misaligned hash' do
+      let(:code) do
+        <<~CODE
+          $x = {
+            present => directory,
+            absent   => undef,
+          },
+        CODE
+      end
+
+      let(:fixed) do
+        <<~CODE
+          $x = {
+            present => directory,
+            absent  => undef,
+          },
+        CODE
+      end
+
+      it 'detects one problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'fixes the problems' do
+        expect(problems).to contain_fixed(msg % [11, 12]).on_line(3).in_column(12)
+      end
+
+      it 'realigns the arrows' do
+        expect(manifest).to eq(fixed)
+      end
+    end
+
+    context 'with misaligned selector' do
+      let(:code) do
+        <<~CODE
+          $x = $y ? {
+            'a' => 1,
+            default => 3,
+          }
+        CODE
+      end
+
+      let(:fixed) do
+        <<~CODE
+          $x = $y ? {
+            'a'     => 1,
+            default => 3,
+          }
+        CODE
+      end
+
+      it 'detects one problem' do
+        expect(problems.size).to eq(1)
+      end
+
+      it 'fixes the problems' do
+        expect(problems).to contain_fixed(msg % [11, 7]).on_line(2).in_column(7)
       end
 
       it 'realigns the arrows' do
